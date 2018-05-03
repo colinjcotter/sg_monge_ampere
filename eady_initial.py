@@ -1,16 +1,34 @@
 import numpy as np
-npts = 100
-dx = 1./npts
-s = np.arange(dx*0.5,1.,dx)
-s1 = np.arange(-1. + dx*0.5,1.,dx)
+from periodic_densities import Periodic_density_in_x, sample_rectangle
+import MongeAmpere as ma
+
+RegularMesh = False
+
 H = 1.e4
 L = 1.e6
-x,z = np.meshgrid(s1*L,s*H)
-nx = x.size
-x = np.reshape(x,(nx,))
-z = np.reshape(z,(nx,))
-Y = np.array([x,z]).T
 
+if RegularMesh:
+    npts = 100
+    dx = 1./npts
+    s = np.arange(dx*0.5,1.,dx)
+    s1 = np.arange(-1. + dx*0.5,1.,dx)
+    x,z = np.meshgrid(s1*L,s*H)
+    nx = x.size
+    x = np.reshape(x,(nx,))
+    z = np.reshape(z,(nx,))
+    Y = np.array([x,z]).T
+else:
+    N = 1000
+    bbox = np.array([0., -0.5, 2., 0.5])
+    Xdens = sample_rectangle(bbox);
+    f = np.ones(4);
+    w = np.zeros(Xdens.shape[0]); 
+    T = ma.delaunay_2(Xdens,w);
+    dens = Periodic_density_in_x(Xdens,f,T,bbox)
+    X = ma.optimized_sampling_2(dens,N,niter=2)
+    x = X[:,0]*L - L
+    z = (X[:,1]+0.5)*H
+    
 Nsq = 2.5e-5
 g = 10.
 f = 1.e-4
