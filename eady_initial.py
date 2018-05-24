@@ -42,7 +42,18 @@ vg = B*g*H/L/f*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f*np.cos(np.pi*x/L)
 X = vg/f + x
 Z = g*thetap/f/f/theta0
 
-from matplotlib import pyplot
-pyplot.plot(X,Z,'.')
+#from matplotlib import pyplot
+#pyplot.plot(X,Z,'.')
+#pyplot.show()
 
-pyplot.show()
+Y = np.array([X,Z]).T
+bbox = np.array([-L, 0., L, H])
+Xdens = sample_rectangle(bbox)
+f = np.ones(4)
+w = np.zeros(Xdens.shape[0])
+T = ma.delaunay_2(Xdens,w)
+dens = Periodic_density_in_x(Xdens,f,T,bbox)
+nx = X.size
+nu = np.ones(nx)
+nu = (dens.mass() / np.sum(nu)) * nu;
+w = ma.optimal_transport_2(dens,Y,nu, eps_g=1.0e-2,verbose=True)
