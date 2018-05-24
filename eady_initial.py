@@ -18,13 +18,13 @@ if RegularMesh:
     z = np.reshape(z,(nx,))
     Y = np.array([x,z]).T
 else:
-    N = 1000
+    N = 10000
     bbox = np.array([0., -0.5, 2., 0.5])
     Xdens = sample_rectangle(bbox);
-    f = np.ones(4);
+    f0 = np.ones(4);
     w = np.zeros(Xdens.shape[0]); 
     T = ma.delaunay_2(Xdens,w);
-    dens = Periodic_density_in_x(Xdens,f,T,bbox)
+    dens = Periodic_density_in_x(Xdens,f0,T,bbox)
     X = ma.optimized_sampling_2(dens,N,niter=2)
     x = X[:,0]*L - L
     z = (X[:,1]+0.5)*H
@@ -49,11 +49,19 @@ Z = g*thetap/f/f/theta0
 Y = np.array([X,Z]).T
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
-f = np.ones(4)
+f0 = np.ones(4)
 w = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,w)
-dens = Periodic_density_in_x(Xdens,f,T,bbox)
+dens = Periodic_density_in_x(Xdens,f0,T,bbox)
 nx = X.size
 nu = np.ones(nx)
 nu = (dens.mass() / np.sum(nu)) * nu;
 w = ma.optimal_transport_2(dens,Y,nu, eps_g=1.0e-2,verbose=True)
+Y0, m = dens.lloyd(Y, w)
+print("computed moments")
+
+import matplotlib.pyplot as plt
+import matplotlib.tri as tri
+triang = tri.Triangulation(Y0[:,0], Y0[:,1])
+plt.tripcolor(triang, Z*theta0*f**2/g, shading='flat')
+plt.show()

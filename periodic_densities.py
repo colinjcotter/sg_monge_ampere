@@ -52,28 +52,6 @@ class Periodic_density_in_x (ma.ma.Density_2):
         H = sp.sparse.csr_matrix(h,shape=(N,N))
         return f,m,g,H;
 
-    def moments(self,Y,w=None):
-        if w is None:
-            w = np.zeros(Y.shape[0]);
-        N = Y.shape[0];
-        Y0 = self.to_fundamental_domain(Y)
-
-        # create copies of the points, so as to cover the neighborhood
-        # of the fundamental domain.
-        x = self.u[0]
-        y = self.u[1]
-        v = np.array([[0,0], [x,0], [-x,0]]);
-        Yf = np.zeros((3*N,2))
-        wf = np.hstack((w,w,w));
-        for i in xrange(0,3):
-            Nb = N*i; Ne = N*(i+1)
-            Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
-
-        # sum the moments and masses of each "piece" of the Voronoi
-        # cells
-        [mf,Yf,If] = ma.ma.moments_2(self, Yf, wf);
-        return mf, Yf, If
-        
     def lloyd(self,Y,w=None):
         if w is None:
             w = np.zeros(Y.shape[0]);
