@@ -8,7 +8,7 @@ H = 1.e4
 L = 1.e6
 
 if RegularMesh:
-    npts = 100
+    npts = 20
     dx = 1./npts
     s = np.arange(dx*0.5,1.,dx)
     s1 = np.arange(-1. + dx*0.5,1.,dx)
@@ -37,7 +37,7 @@ C = 3e-6
 B = 1.0e-3* Nsq * theta0 * H / g
 
 thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-vg = B*g*H/L/f*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f*np.cos(np.pi*x/L)
+vg = B*g*H/L/f*np.sin(np.pi*(x/L + z/H)) #- 2*B*g*H/np.pi/L/f*np.cos(np.pi*x/L)
 
 X = vg/f + x
 Z = g*thetap/f/f/theta0
@@ -50,13 +50,24 @@ Y = np.array([X,Z]).T
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
 f0 = np.ones(4)
-w = np.zeros(Xdens.shape[0])
-T = ma.delaunay_2(Xdens,w)
+rho = np.zeros(Xdens.shape[0])
+T = ma.delaunay_2(Xdens,rho)
 dens = Periodic_density_in_x(Xdens,f0,T,bbox)
 nx = X.size
 nu = np.ones(nx)
 nu = (dens.mass() / np.sum(nu)) * nu;
-w = ma.optimal_transport_2(dens,Y,nu, eps_g=1.0e-2,verbose=True)
+w = 0.*Y[:,0]
+
+mask = Z>0.9*H
+w[mask] = (Z[mask] - 0.9*H)**2
+mask = Z<0.1*H
+w[mask] = (0.1*H - Z[mask])**2
+print(w)
+
+[f,m,g,H] = dens.kantorovich(Y, nu, w)
+print(m.min())
+
+w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-2,verbose=True)
 Y0, m = dens.lloyd(Y, w)
 print("computed moments")
 
