@@ -2,6 +2,7 @@ import MongeAmpere as ma
 import numpy as np
 import scipy as sp
 import pylab
+import pdb
 
 class Periodic_density_in_x (ma.ma.Density_2):
     def __init__(self, X, f, T, bbox): 
@@ -12,15 +13,14 @@ class Periodic_density_in_x (ma.ma.Density_2):
 
     def to_fundamental_domain(self,Y):
         N = Y.shape[0];
-        Y = (Y - np.tile(self.x0,(N,1))) / np.tile(self.u,(N,1)); 
-        Y = Y - np.floor(Y);
-        Y = np.tile(self.x0,(N,1)) + Y * np.tile(self.u,(N,1));
+        Y[:,0] = (Y[:,0] - np.tile(self.x0,(N,1))[:,0]) / np.tile(self.u,(N,1))[:,0]; 
+        Y[:,0] = Y[:,0] - np.floor(Y[:,0]);
+        Y[:,0] = np.tile(self.x0,(N,1))[:,0] + Y[:,0] * np.tile(self.u,(N,1))[:,0];
         return Y;
 
     # FIXME
     def kantorovich(self,Y,nu,w):
         N = len(nu);
-
         # create copies of the points, so as to cover the neighborhood
         # of the fundamental domain.
         Y0 = self.to_fundamental_domain(Y)
@@ -34,6 +34,8 @@ class Periodic_density_in_x (ma.ma.Density_2):
             Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
 
         # sum the masses of each "piece" of the Voronoi cells
+        #segmentation fault for regular mesh
+        #pdb.set_trace()
         [f,mf,hf] = ma.ma.kantorovich_2(self, Yf, wf);
 
         m = np.zeros(N);
