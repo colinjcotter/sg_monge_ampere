@@ -1,0 +1,113 @@
+\documentclass[]{article}
+
+%%%PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper}
+
+%%%GRAPHICS
+\usepackage{graphicx} 
+
+%%% PACKAGES
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{color}
+
+
+%%% HEADERS & FOOTER
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{Numerical Solution of Ordinary Differential Equations M5N7}
+\lfoot{Chloe Raymont}\cfoot{\thepage}\rfoot{00733439}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+
+%%TITLE
+\title{Project Notes}
+\author{Chloe Raymont}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Notes on Optimal Transport}
+	\begin{itemize}
+		\item Given domain $X \subseteq \mathbb{R}^2$ and discrete set of points $Y = \left\lbrace y_i, \quad 1\leq i \leq N \right\rbrace  \subset \mathbb{R}^2$ 
+		\item Source measure $\mu(A) = \int_A \rho(x)dx$, $\rho$ a probability density
+		\item Target measure $\nu = \sum_{1\leq i \leq N}\nu_i \delta_{y_i}$ 
+		\item Pushforward of a measure $\mu$ by a map $T: X \rightarrow Y$ is $T_{\#}\mu = \sum_{y \in Y} \mu \left( T^{-1}(y) \right) \delta_{y}$ (ie) the sum of the measures of the pre-images of the points $y \in Y$ under the mapping $T$
+		\item Voronoi cells defined by $\text{Vor}_y := \left\lbrace x \in K \; \text{st} \; \forall z \in Y \; c(x,y) \leq c(x,z) \right\rbrace$
+		\item Laguerre cells defined by $\text{Lag}_y(\psi) := \left\lbrace x \in K \; \text{st} \; \forall z \in Y \; c(x,y) + \psi(y) \leq c(x,z) + \psi(z) \right\rbrace$
+		\item The cost function used is the normal Euclidean distance on $\mathbb{R}^2$, $c(x,y) = \| x-y\|^2$
+		\item A map $T: X \rightarrow Y$ between $\mu$ and the probability measure on $Y$, $\mu$ is a Transport Map $T$ if $T_{\#}\mu = \nu$
+		\item The weights represent an additional cost parameter, for example in the analogy to bakeries in Paris the $\psi_i$ represents the price of a loaf at the bakery at position $y_i$. A greater value for $\psi$ would reduce the area of the Laguerre cell associated with $y_i$.
+		\item It is shown by M\'{e}rigot, Meyron and Thibert (2017) (proposition 13) that the transport map given by $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i = \psi(y_i)$ is a family of weights on $Y$
+		
+		\item The problem is then finding the weights $\psi_i$ associated to the points $y_i$ such that $G_i(\psi) := \mu (\text{Lag}_{y_i}(\psi)) = \nu_i$. The Damped Newton's Algorithm from M\'{e}rigot, Meyron and Thibert (2017) finds such $\psi_i$
+		
+	\end{itemize}
+\section{Applying Optimal Transport Method to solve the Semi-Geostrophic Equations}
+	\subsection{Description of the Problem}
+	Starting from the Eady Model for baroclinic instability given in Cullen [2006]
+	\begin{align}
+	-fv_g + \frac{\partial \varphi}{\partial x} = 0,\\
+	\frac{Dv_g}{Dt} + fu -\frac{Cg}{\theta _0}\left(z-H/2\right) = 0,\\
+	\frac{D\theta'}{Dt} - Cv_g = 0,\\
+	\frac{\partial \varphi}{\partial z} - g\frac{\theta'}{\theta_0} = 0,\\
+	\nabla \cdot \bm{u} = 0.
+	\end{align}
+	with periodic boundary conditions in $x$ \color{red} $x(L) = x(-L), \; u(L) = u(-L)$, \color{black} and rigid-lid boundary conditions in $z$ (ie) $w = 0$ on $z = 0, H$
+	\begin{itemize}
+		\item Cullen [2006] shows that the solution of equations (1) - (5) can be reformulated as an optimal transport problem where the energy integral represents the cost to be minimised.
+		\begin{equation}
+		E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left(x - \tilde{X}\right)^2 +\left(y - \tilde{Y}\right)^2\right) - z\tilde{Z}\right)dxdydz
+		\end{equation}
+	\end{itemize}
+	\begin{itemize}
+	\item Initialise a set of $N$ points in physical space $(x_i,z_i) \; i = 1\,...\,N$, on domain $\Gamma = [-L,L] \times [0,H]$
+	\item Using given form of $\theta ' = N_0^2 \theta_0 z /g + B\sin(\pi(x/L +z/H))$ we find $v_g$ using equations (1) and (4) from the SG Equations. Integrate (4) in $z$ and use (1) to find 
+	\begin{equation}
+		v_g = \frac{BgH}{Lf}\sin\left( \pi \left( \frac{x}{L} + \frac{z}{H}\right)\right) - \frac{2BgH}{\pi Lf}\cos\left(\frac{\pi x}{L}\right)
+	\end{equation}
+	\item We use $v_g$ to apply the Hoskins transformation
+	\begin{equation*}
+	X = f^{-1}v_g + x,\qquad \left(Y = -f^{-1}u_g + y\right), \qquad Z = \frac{g\theta'}{f^2\theta_0}
+	\end{equation*}
+	to find a corresponding set of points $(X_i,Z_i) \; i = 1 \,...\,N$ in Transformed \color{red} Geostrophic?\color{black} Space satisfying
+	\begin{align*}
+	\frac{DX}{Dt} -\frac{Cg}{f\theta _0}\left(z-H/2\right) = 0,\\
+	\frac{DZ}{Dt} - \frac{Cg}{f\theta _0}\left(X-x\right) = 0,\\
+	P = \frac{1}{2}x^2 + f^{-2}\varphi,\\
+	\nabla P = \left( X, Z\right),\\
+	\nabla \cdot \bm{u} = 0.
+	\end{align*}
+	\item Due to the range of scales in the parameters used we found that a number of points are mapped outside the domain $\Gamma$. In this case, as suggested by M\'{e}rigot, Meyron and Thibert (2017) the initial choice of weights as $\psi_i^0 = \color{red}(-)\color{black}d(Z_i,\Gamma)^2$. Additionally we perturb the distance slightly to ensure the mass/area of each cell within the domain $\Gamma$ is positive \color{red} choice of positive sign due to the convention?? used in defining the Voronoi Cells/Laguerre Cells in the code.\color{black} 
+	\item The Damped Newton Algorithm is applied to find the set of weights so that the transport map $T_\psi$ is optimal 
+	\item Given the points $\left\lbrace X_i,Z_i\right\rbrace $ and weights $\left\lbrace \psi_i \right\rbrace $ we compute the centroids of the Laguerre cells
+	\item Transform back to physical co-ordinates and time-step with Euler's method
+	 \end{itemize}
+	\section{Queries}
+	\begin{itemize}
+		\item Physical interpretation of the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
+		\item pg 68 - 70 Cullen (2006) transformed energy
+		 \begin{equation}
+		 E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left( \tilde{x} - X\right)^2 +\left(\tilde{y} - Y\right)^2\right) - \tilde{z}Z\right)\sigma dXdYdZ
+		 \end{equation}
+	\end{itemize}
+
+\end{document}
