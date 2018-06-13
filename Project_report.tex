@@ -56,7 +56,7 @@
 		\item The cost function used is the normal Euclidean distance on $\mathbb{R}^2$, $c(x,y) = \| x-y\|^2$
 		\item A map $T: X \rightarrow Y$ between $\mu$ and the probability measure on $Y$, $\mu$ is a Transport Map $T$ if $T_{\#}\mu = \nu$
 		\item The weights represent an additional cost parameter, for example in the analogy to bakeries in Paris the $\psi_i$ represents the price of a loaf at the bakery at position $y_i$. A greater value for $\psi$ would reduce the area of the Laguerre cell associated with $y_i$.
-		\item It is shown by M\'{e}rigot, Meyron and Thibert (2017) (proposition 13) that the transport map given by $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i = \psi(y_i)$ is a family of weights on $Y$
+		\item It is shown by M\'{e}rigot, Meyron and Thibert \cite{Merigot2017} (proposition 13) that the transport map given by $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i = \psi(y_i)$ is a family of weights on $Y$
 		
 		\item The problem is then finding the weights $\psi_i$ associated to the points $y_i$ such that $G_i(\psi) := \mu (\text{Lag}_{y_i}(\psi)) = \nu_i$. The Damped Newton's Algorithm from M\'{e}rigot, Meyron and Thibert (2017) finds such $\psi_i$
 		
@@ -73,7 +73,7 @@
 	\end{align}
 	with periodic boundary conditions in $x$ \color{red} $x(L) = x(-L), \; u(L) = u(-L)$, \color{black} and rigid-lid boundary conditions in $z$ (ie) $w = 0$ on $z = 0, H$
 	\begin{itemize}
-		\item Cullen [2006] shows that the solution of equations (1) - (5) can be reformulated as an optimal transport problem where the energy integral represents the cost to be minimised.
+		\item Cullen \cite{Cullen2008} shows that the solution of equations (1) - (5) can be reformulated as an optimal transport problem where the energy integral represents the cost to be minimised.
 		\begin{equation}
 		E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left(x - \tilde{X}\right)^2 +\left(y - \tilde{Y}\right)^2\right) - z\tilde{Z}\right)dxdydz
 		\end{equation}
@@ -84,7 +84,7 @@
 	\begin{equation}
 		v_g = \frac{BgH}{Lf}\sin\left( \pi \left( \frac{x}{L} + \frac{z}{H}\right)\right) - \frac{2BgH}{\pi Lf}\cos\left(\frac{\pi x}{L}\right)
 	\end{equation}
-	\item We use $v_g$ to apply the Hoskins transformation
+	\item We use $v_g$ to apply the Hoskin's transformation \cite{Hoskins1975}
 	\begin{equation*}
 	X = f^{-1}v_g + x,\qquad \left(Y = -f^{-1}u_g + y\right), \qquad Z = \frac{g\theta'}{f^2\theta_0}
 	\end{equation*}
@@ -96,18 +96,22 @@
 	\nabla P = \left( X, Z\right),\\
 	\nabla \cdot \bm{u} = 0.
 	\end{align*}
-	\item Due to the range of scales in the parameters used we found that a number of points are mapped outside the domain $\Gamma$. In this case, as suggested by M\'{e}rigot, Meyron and Thibert (2017) the initial choice of weights as $\psi_i^0 = \color{red}(-)\color{black}d(Z_i,\Gamma)^2$. Additionally we perturb the distance slightly to ensure the mass/area of each cell within the domain $\Gamma$ is positive \color{red} choice of positive sign due to the convention?? used in defining the Voronoi Cells/Laguerre Cells in the code.\color{black} 
+	\item Due to the range of scales in the parameters used we found that a number of points are mapped outside the domain $\Gamma$. In this case, as suggested by M\'{e}rigot \cite{Merigot2017} the initial choice of weights as $\psi_i^0 = \color{red}(-)\color{black}d(Z_i,\Gamma)^2$. Additionally we perturb the distance slightly to ensure the mass/area of each cell within the domain $\Gamma$ is positive \color{red} choice of positive sign due to the convention?? used in defining the Voronoi Cells/Laguerre Cells in the code.\color{black} 
 	\item The Damped Newton Algorithm is applied to find the set of weights so that the transport map $T_\psi$ is optimal 
 	\item Given the points $\left\lbrace X_i,Z_i\right\rbrace $ and weights $\left\lbrace \psi_i \right\rbrace $ we compute the centroids of the Laguerre cells
 	\item Transform back to physical co-ordinates and time-step with Euler's method
 	 \end{itemize}
-	\section{Queries}
+	\section{Queries/ideas}
 	\begin{itemize}
 		\item Physical interpretation of the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
-		\item pg 68 - 70 Cullen (2006) transformed energy
+		\item pg 68 - 70 Cullen \cite{Cullen2008} transformed energy
 		 \begin{equation}
 		 E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left( \tilde{x} - X\right)^2 +\left(\tilde{y} - Y\right)^2\right) - \tilde{z}Z\right)\sigma dXdYdZ
 		 \end{equation}
+		 \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying "$f0$" in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
 	\end{itemize}
 
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{Project_bib}
 \end{document}
