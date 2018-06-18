@@ -99,3 +99,32 @@ def sample_rectangle(bbox):
     y = [y0, y0, y1, y1]
     X = np.vstack((x,y)).T
     return X
+
+def periodicinx_draw_laguerre_cells_2(pxdens,Y,w):
+    # draw laguerre cells when boundary is periodic in
+    # x direction
+    N = Y.shape[0]
+    Y0 = pxdens.to_fundamental_domain(Y)
+    x = pxdens.u[0]
+    y = pxdens.u[1]
+    v = np.array([[0,0], [x,0], [-x,0]])
+    Yf = np.zeros((3*N,2))
+    wf = np.hstack((w,w,w))
+    for i in xrange(0,3):
+        Nb = N*i
+        Ne = N*(i+1)
+        Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
+    E = pxdens.restricted_laguerre_edges(Yf,wf)
+    nan = float('nan')
+    N = E.shape[0]
+    x = np.zeros(3*N)
+    y = np.zeros(3*N)
+    a = np.array(range(0,N))
+    x[3*a] = E[:,0]
+    x[3*a+1] = E[:,2]
+    x[3*a+2] = nan
+    y[3*a] = E[:,1]
+    y[3*a+1] = E[:,3]
+    y[3*a+2] = nan
+    plt.plot(Y[:,0],Y[:,1],'.')
+    plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)

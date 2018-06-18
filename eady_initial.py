@@ -1,5 +1,5 @@
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 
 import numpy as np
 from periodic_densities import Periodic_density_in_x, sample_rectangle
@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
 
-RegularMesh = False
+RegularMesh = True
 
 H = 1.e4
 L = 1.e6
@@ -46,14 +46,19 @@ B = 1.0e-3* Nsq * theta0 * H / g
 thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
 vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
 
-triang = tri.Triangulation(Y[:,0], Y[:,1])
-plt.figure()
-plt.tripcolor(triang, thetap, shading='flat')
-plt.savefig('eady1.png')
+#plt.scatter(x,z,c=thetap,cmap="plasma")
+#plt.show()
+#plt.savefig('eady1.png')
 
 X = vg/f + x
 Z = g*thetap/f/f/theta0
 Y = np.array([X,Z]).T
+
+thetap = Z*theta0*f**2/g
+sc = plt.scatter(X,Z,c=thetap,cmap="plasma")
+print(thetap.max())
+plt.colorbar(sc)
+plt.show()
 
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
@@ -75,14 +80,15 @@ w[mask] = (Z[mask] - 0.9*H)**2
 mask = Z<0.1*H
 w[mask] = (Z[mask] - 0.1*H)**2
 
-[f,m,g,H] = dens.kantorovich(Y, nu, w)
+[f0,m,g0,H] = dens.kantorovich(Y, nu, w)
 print(m.min())
 
 w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-7,verbose=True)
 Y0, m = dens.lloyd(Y, w)
 print("computed moments")
 
-triang = tri.Triangulation(Y0[:,0], Y0[:,1])
-plt.figure()
-plt.tripcolor(triang, Z*theta0*f**2/g, shading='flat')
-plt.savefig('eady2.png')
+thetap = Z*theta0*f**2/g
+print(thetap.max())
+sc = plt.scatter(Y0[:,0],Y0[:,1],c=thetap,cmap="plasma")
+plt.colorbar(sc)
+plt.show()
