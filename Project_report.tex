@@ -82,7 +82,7 @@
 	\item Initialise a set of $N$ points in physical space $(x_i,z_i) \; i = 1\,...\,N$, on domain $\Gamma = [-L,L] \times [0,H]$
 	\item Using given form of $\theta ' = N_0^2 \theta_0 z /g + B\sin(\pi(x/L +z/H))$ we find $v_g$ using equations (1) and (4) from the SG Equations. Integrate (4) in $z$ and use (1) to find 
 	\begin{equation}
-		v_g = \frac{BgH}{Lf}\sin\left( \pi \left( \frac{x}{L} + \frac{z}{H}\right)\right) - \frac{2BgH}{\pi Lf}\cos\left(\frac{\pi x}{L}\right)
+		v_g = \frac{BgH}{\theta_0 Lf}\sin\left( \pi \left( \frac{x}{L} + \frac{z}{H}\right)\right) - \frac{2BgH}{\pi \theta_0 Lf}\cos\left(\frac{\pi x}{L}\right)
 	\end{equation}
 	\item We use $v_g$ to apply the Hoskin's transformation \cite{Hoskins1975}
 	\begin{equation*}
@@ -103,12 +103,14 @@
 	 \end{itemize}
 	\section{Queries/ideas}
 	\begin{itemize}
-		\item Physical interpretation of the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
+		\item Physical interpretation of 
+		the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
 		\item pg 68 - 70 Cullen \cite{Cullen2008} transformed energy
 		 \begin{equation}
 		 E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left( \tilde{x} - X\right)^2 +\left(\tilde{y} - Y\right)^2\right) - \tilde{z}Z\right)\sigma dXdYdZ
 		 \end{equation}
-		 \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying "$f0$" in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
+		 \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying \textquoteleft$f_0$\textquoteright in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
+		 \item scaling to unit mass - improved convergence but 'area of cells' is small - causes numerical instabilities
 	\end{itemize}
 
 \newpage
