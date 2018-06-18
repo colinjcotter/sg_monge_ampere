@@ -5,14 +5,16 @@ import numpy as np
 from periodic_densities import Periodic_density_in_x, sample_rectangle
 import MongeAmpere as ma
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import matplotlib.tri as tri
 
-RegularMesh = True
+RegularMesh = False
 
 H = 1.e4
 L = 1.e6
 
 if RegularMesh:
-    npts = 40
+    npts = 60
     dx = 1./npts
     s = np.arange(dx*0.5,1.,dx)
     s1 = np.arange(-1. + dx*0.5,1.,dx)
@@ -22,16 +24,17 @@ if RegularMesh:
     z = np.reshape(z,(nx,))
     Y = np.array([x,z]).T
 else:
-    N = 10000
+    N = 500
     bbox = np.array([0., -0.5, 2., 0.5])
     Xdens = sample_rectangle(bbox);
-    f0 = np.ones(4);
+    f0 = np.ones(4)/2;
     w = np.zeros(Xdens.shape[0]); 
     T = ma.delaunay_2(Xdens,w);
     dens = Periodic_density_in_x(Xdens,f0,T,bbox)
     X = ma.optimized_sampling_2(dens,N,niter=2)
     x = X[:,0]*L - L
     z = (X[:,1]+0.5)*H
+    Y = np.array([x,z]).T
 
 Nsq = 2.5e-5
 g = 10.
@@ -41,15 +44,21 @@ C = 3e-6
 #B = 0.255
 B = 1.0e-3* Nsq * theta0 * H / g
 thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/theta0/L/f/theta0*np.cos(np.pi*x/L)
+vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+
+triang = tri.Triangulation(Y[:,0], Y[:,1])
+plt.figure()
+plt.tripcolor(triang, thetap, shading='flat')
+plt.savefig('eady1.png')
 
 X = vg/f + x
 Z = g*thetap/f/f/theta0
-
 Y = np.array([X,Z]).T
+
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
-f0 = np.ones(4)
+#f0 = f*f*np.ones(4)/(H*2*L)
+f0 = np.ones(4)/(H*2*L)
 rho = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,rho)
 dens = Periodic_density_in_x(Xdens,f0,T,bbox)
@@ -57,6 +66,9 @@ nx = X.size
 nu = np.ones(nx)
 nu = (dens.mass() / np.sum(nu)) * nu
 w = 0.*Y[:,0]
+
+print "mass(nu) = %f" % sum(nu)
+print "mass(mu) = %f" % dens.mass()
 
 mask = Z>0.9*H
 w[mask] = (Z[mask] - 0.9*H)**2
@@ -66,13 +78,11 @@ w[mask] = (Z[mask] - 0.1*H)**2
 [f,m,g,H] = dens.kantorovich(Y, nu, w)
 print(m.min())
 
-w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=5.0e-2,verbose=True)
+w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-7,verbose=True)
 Y0, m = dens.lloyd(Y, w)
 print("computed moments")
 
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
 triang = tri.Triangulation(Y0[:,0], Y0[:,1])
 plt.figure()
 plt.tripcolor(triang, Z*theta0*f**2/g, shading='flat')
-plt.savefig('eady_init.png')
+plt.savefig('eady2.png')
