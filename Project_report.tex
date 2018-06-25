@@ -33,6 +33,8 @@
 \usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
 \usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
 
+\newcommand{\comments}[2]{{\bfseries #1 says: #2}}
+
 %%TITLE
 \title{Project Notes}
 \author{Chloe Raymont}
@@ -53,7 +55,7 @@
 		\item Pushforward of a measure $\mu$ by a map $T: X \rightarrow Y$ is $T_{\#}\mu = \sum_{y \in Y} \mu \left( T^{-1}(y) \right) \delta_{y}$ (ie) the sum of the measures of the pre-images of the points $y \in Y$ under the mapping $T$
 		\item Voronoi cells defined by $\text{Vor}_y := \left\lbrace x \in K \; \text{st} \; \forall z \in Y \; c(x,y) \leq c(x,z) \right\rbrace$
 		\item Laguerre cells defined by $\text{Lag}_y(\psi) := \left\lbrace x \in K \; \text{st} \; \forall z \in Y \; c(x,y) + \psi(y) \leq c(x,z) + \psi(z) \right\rbrace$
-		\item The cost function used is the normal Euclidean distance on $\mathbb{R}^2$, $c(x,y) = \| x-y\|^2$
+		\item The cost function used is the normal Euclidean distance \comments{Colin}{squared} on $\mathbb{R}^2$, $c(x,y) = \| x-y\|^2$
 		\item A map $T: X \rightarrow Y$ between $\mu$ and the probability measure on $Y$, $\mu$ is a Transport Map $T$ if $T_{\#}\mu = \nu$
 		\item The weights represent an additional cost parameter, for example in the analogy to bakeries in Paris the $\psi_i$ represents the price of a loaf at the bakery at position $y_i$. A greater value for $\psi$ would reduce the area of the Laguerre cell associated with $y_i$.
 		\item It is shown by M\'{e}rigot, Meyron and Thibert \cite{Merigot2017} (proposition 13) that the transport map given by $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i = \psi(y_i)$ is a family of weights on $Y$
@@ -71,7 +73,8 @@
 	\frac{\partial \varphi}{\partial z} - g\frac{\theta'}{\theta_0} = 0,\\
 	\nabla \cdot \bm{u} = 0.
 	\end{align}
-	with periodic boundary conditions in $x$ \color{red} $x(L) = x(-L), \; u(L) = u(-L)$, \color{black} and rigid-lid boundary conditions in $z$ (ie) $w = 0$ on $z = 0, H$
+	with periodic boundary conditions in $x$ \color{red} $x(L) = x(-L), \; u(L) = u(-L)$, \color{black} \comments{Colin}{This doesn't make sense: $x(L)=x(-L)$, this bc just applies to all fields ($v_g,u,\theta',\phi$)}
+        and rigid-lid boundary conditions in $z$ (ie) $w = 0$ on $z = 0, H$
 	\begin{itemize}
 		\item Cullen \cite{Cullen2008} shows that the solution of equations (1) - (5) can be reformulated as an optimal transport problem where the energy integral represents the cost to be minimised.
 		\begin{equation}
@@ -109,7 +112,8 @@
 		 \begin{equation}
 		 E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left( \tilde{x} - X\right)^2 +\left(\tilde{y} - Y\right)^2\right) - \tilde{z}Z\right)\sigma dXdYdZ
 		 \end{equation}
-		 \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying \textquoteleft$f_0$\textquoteright in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
+	       \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying \textquoteleft$f_0$\textquoteright in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
+                 \comments{Colin}{$f$ is just a constant, so minimising $E$ is the same mathematically as minimising $E/f^2$. This factor will influence convergence criteria, though.}
 		 \item scaling to unit mass - improved convergence but 'area of cells' is small - causes numerical instabilities
 	\end{itemize}
 
