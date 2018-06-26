@@ -1,5 +1,5 @@
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 
 import numpy as np
 from periodic_densities import Periodic_density_in_x, sample_rectangle
@@ -22,7 +22,7 @@ if RegularMesh:
     nx = x.size
     x = np.reshape(x,(nx,))
     z = np.reshape(z,(nx,))
-    Y = np.array([x,z]).T
+    y = np.array([x,z]).T
 else:
     N = 500
     bbox = np.array([0., -0.5, 2., 0.5])
@@ -34,7 +34,7 @@ else:
     X = ma.optimized_sampling_2(dens,N,niter=2)
     x = X[:,0]*L - L
     z = (X[:,1]+0.5)*H
-    Y = np.array([x,z]).T
+    y = np.array([x,z]).T
 
 Nsq = 2.5e-5
 g = 10.
@@ -58,37 +58,94 @@ thetap = Z*theta0*f**2/g
 sc = plt.scatter(X,Z,c=thetap,cmap="plasma")
 print(thetap.max())
 plt.colorbar(sc)
-plt.show()
+plt.savefig('initial.png')
+#plt.show()
 
+def eady_OT(Y, dens, eps_g = 1.e-7,verbose = True):    
+    nx = Y[:,0].size
+    nu = np.ones(nx)
+    nu = (dens.mass() / np.sum(nu)) * nu
+
+    print "mass(nu) = %f" % sum(nu)
+    print "mass(mu) = %f" % dens.mass()
+    
+    w = 0.*Y[:,0]
+    Z = Y[:,1]
+    mask = Z>0.9*H
+    w[mask] = (Z[mask] - 0.9*H)**2
+    mask = Z<0.1*H
+    w[mask] = (Z[mask] - 0.1*H)**2
+
+    #[f0,m,g0,H] = dens.kantorovich(Y, nu, w)
+    #print(m.min())
+
+    w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-7,verbose=True)
+    [Yc, m] = dens.lloyd(Y,w)
+    return Yc, w
+    
+#FIX
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
-#f0 = f*f*np.ones(4)/(H*2*L)
 f0 = np.ones(4)/(H*2*L)
 rho = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,rho)
 dens = Periodic_density_in_x(Xdens,f0,T,bbox)
-nx = X.size
-nu = np.ones(nx)
-nu = (dens.mass() / np.sum(nu)) * nu
-w = 0.*Y[:,0]
-
-print "mass(nu) = %f" % sum(nu)
-print "mass(mu) = %f" % dens.mass()
-
-mask = Z>0.9*H
-w[mask] = (Z[mask] - 0.9*H)**2
-mask = Z<0.1*H
-w[mask] = (Z[mask] - 0.1*H)**2
-
-[f0,m,g0,H] = dens.kantorovich(Y, nu, w)
-print(m.min())
-
-w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-7,verbose=True)
-Y0, m = dens.lloyd(Y, w)
-print("computed moments")
-
-thetap = Z*theta0*f**2/g
+[Yc, w] = eady_OT(Y,dens)
 print(thetap.max())
-sc = plt.scatter(Y0[:,0],Y0[:,1],c=thetap,cmap="plasma")
+sc = plt.scatter(Yc[:,0],Yc[:,1],c=thetap,cmap="plasma")
 plt.colorbar(sc)
-plt.show()
+plt.savefig('final.png')
+#plt.show()
+
+def forward_euler_sg(y0_p, tf, bbox, h=1, t0=0.):
+    '''
+    Function that finds time evolution of semi-geostrophic equations
+    using forward Euler method
+    
+    args:
+    
+    Y0_g initial data in geostrophic co--ordinates
+    y0_p initial data in physical co-ordinates
+    h time step size
+    
+    returns:
+    
+    Y solution in geostrophic co-ordinates at time tf
+    '''
+    H = bbox[2]
+    L = bbox[3]
+    Nsq = 2.5e-5
+    g = 10.
+    f = 1.e-4
+    theta0 = 300
+    C = 3e-6
+    #B = 0.255
+    B = 1.0e-3* Nsq * theta0 * H / g
+
+    x = y0_p[:,0]
+    z = y0_p[:,1]
+    
+    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
+    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+    
+    X = vg/f + x
+    Z = g*thetap/f/f/theta0
+    Y = np.array([X,Z]).T
+
+    N = np.ceil((tf-t0)/h)
+    t = np.array([t0 + n*h for n in range(N+1)])
+
+    Xdens = sample_rectangle(bbox)
+    f0 = np.ones(4)/(H*2*L)
+    rho = np.zeros(Xdens.shape[0])
+    T = ma.delaunay_2(Xdens,rho)
+    dens = Periodic_density_in_x(Xdens,f0,T,bbox)
+    
+    for n in range(1,N+1):
+        w = eady_OT(Y, dens)
+        Ya = dens.averages(Y,w)
+        Z = Z + h*C*g/f/theta0*Ya[:,0]
+        X = X + h*C*g/f/theta0*Ya[:,1]
+        Y = np.array([X,Z]).T
+        
+    return Y
