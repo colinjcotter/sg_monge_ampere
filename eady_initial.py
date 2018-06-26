@@ -83,7 +83,6 @@ def eady_OT(Y, dens, eps_g = 1.e-7,verbose = True):
     [Yc, m] = dens.lloyd(Y,w)
     return Yc, w
     
-#FIX
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
 f0 = np.ones(4)/(H*2*L)
@@ -104,7 +103,6 @@ def forward_euler_sg(y0_p, tf, bbox, h=1, t0=0.):
     
     args:
     
-    Y0_g initial data in geostrophic co--ordinates
     y0_p initial data in physical co-ordinates
     h time step size
     
