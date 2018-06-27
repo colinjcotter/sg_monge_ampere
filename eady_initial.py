@@ -61,6 +61,63 @@ plt.colorbar(sc)
 plt.savefig('initial.png')
 #plt.show()
 
+def initialise_points(N, RegularMesh = False):
+    '''Function to initialise a mesh over the domain [-L,L]x[0,H]
+    and transform to geostrophic coordinates
+
+    args:
+    N: number of grid points in z direct, total number of points
+      will be 2*N*N
+
+    RegularMesh: controls whether the mesh is regular or an optimised
+                 sample of random points in the domain 
+
+    returns:
+    
+    A numpy array of coordinates of points in geostrophic space
+    '''
+    H = 1.e4
+    L = 1.e6
+
+    if RegularMesh:
+        npts = N
+        dx = 1./npts
+        s = np.arange(dx*0.5,1.,dx)
+        s1 = np.arange(-1. + dx*0.5,1.,dx)
+        x,z = np.meshgrid(s1*L,s*H)
+        nx = x.size
+        x = np.reshape(x,(nx,))
+        z = np.reshape(z,(nx,))
+        y = np.array([x,z]).T
+    else:
+        npts = 2*N*N
+        bbox = np.array([0., -0.5, 2., 0.5])
+        Xdens = sample_rectangle(bbox);
+        f0 = np.ones(4)/2;
+        w = np.zeros(Xdens.shape[0]); 
+        T = ma.delaunay_2(Xdens,w);
+        dens = Periodic_density_in_x(Xdens,f0,T,bbox)
+        X = ma.optimized_sampling_2(dens,npts,niter=2)
+        x = X[:,0]*L - L
+        z = (X[:,1]+0.5)*H
+        y = np.array([x,z]).T
+
+    Nsq = 2.5e-5
+    g = 10.
+    f = 1.e-4
+    theta0 = 300
+    C = 3e-6
+    #B = 0.255
+    B = 1.0e-3* Nsq * theta0 * H / g
+    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
+    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+
+    X = vg/f + x
+    Z = g*thetap/f/f/theta0
+    Y = np.array([X,Z]).T
+
+    return Y
+    
 def eady_OT(Y, dens, eps_g = 1.e-7,verbose = True):    
     nx = Y[:,0].size
     nu = np.ones(nx)
@@ -80,8 +137,7 @@ def eady_OT(Y, dens, eps_g = 1.e-7,verbose = True):
     #print(m.min())
 
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-7,verbose=True)
-    [Yc, m] = dens.lloyd(Y,w)
-    return Yc, w
+    return w
     
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
