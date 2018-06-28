@@ -87,7 +87,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=1, t0=0.):
+def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -120,5 +120,6 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1, t0=0.):
         Z = Z + h*C*g/f/theta0*(X - Ya[:,0])
         X = X + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
         Y = np.array([X,Z]).T
+        Y = dens.to_fundamental_domain(Y)
         
     return Y
