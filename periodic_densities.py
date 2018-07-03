@@ -175,6 +175,7 @@ def periodicinx_draw_laguerre_cells_2(pxdens,Y,w):
         Ne = N*(i+1)
         Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
     E = pxdens.restricted_laguerre_edges(Yf,wf)
+    print(E)
     nan = float('nan')
     N = E.shape[0]
     x = np.zeros(3*N)
@@ -186,7 +187,9 @@ def periodicinx_draw_laguerre_cells_2(pxdens,Y,w):
     y[3*a] = E[:,1]
     y[3*a+1] = E[:,3]
     y[3*a+2] = nan
-    return x,y
+    #print(x)
+    #print(y)
+    return E,x,y
     #plt.plot(Y[:,0],Y[:,1],'.')
     #plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
     #plt.savefig('periodic_plot.png')
