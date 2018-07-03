@@ -17,7 +17,7 @@ dens = Periodic_density_in_x(Xdens,f0,T,bbox)
 print "mass=%g"%dens.mass()
 
 # target is a random set of points, with random weights
-N = 4;
+N = 6;
 Y = np.random.rand(N,2);
 nu = np.ones(N);
 nu = (dens.mass() / np.sum(nu)) * nu;
@@ -27,18 +27,27 @@ print "mass(mu) = %f" % dens.mass()
  
 w = ma.optimal_transport_2(dens,Y,nu)
 
-x,y = periodicinx_draw_laguerre_cells_2(dens,Y,w)
+#x,y = periodicinx_draw_laguerre_cells_2(dens,Y,w)
 
-[mf,Yf,If] = dens.moments(Y,w)
-Yf /= np.tile(mf,(2,1)).T
+#[mf,Yf,If] = dens.moments(Y,w)
+#Yf /= np.tile(mf,(2,1)).T
 [Yc,m] = dens.lloyd(Y,w)
-print(Yc)
-print(mf)
-print(m)
+[E,x,y] = periodicinx_draw_laguerre_cells_2(dens,Y,w)
+print(E.shape)
+print(x.shape)
+print(y.shape)
+#print(Yc)
+#print(mf)
+#print(m)
+x.tofile('x_data.txt',sep=" ",format="%s")
+y.tofile('y_data.txt',sep=" ",format="%s")
+E.tofile('E_data.txt',sep=" ",format="%s")
+Y.tofile('Y1_data.txt',sep=" ",format="%s")
+Yc.tofile('Yc_data.txt',sep=" ",format="%s")
+
 
 plt.plot(Y[:,0],Y[:,1],'.')
 plt.plot(Yc[:,0],Yc[:,1],'.')
-plt.plot(Yf[:,0],Yf[:,1],'.')
 plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
 plt.savefig('periodic_plot.png')
 
