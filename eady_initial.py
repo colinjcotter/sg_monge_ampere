@@ -54,8 +54,8 @@ def initialise_points(N, bbox, RegularMesh = False):
     f = 1.e-4
     theta0 = 300
     C = 3e-6
-    #B = 0.255
-    B = 1.0e-3* Nsq * theta0 * H / g
+    B = 0.255
+    #B = 1.0e-3* Nsq * theta0 * H / g
     thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
     vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
 
@@ -64,7 +64,7 @@ def initialise_points(N, bbox, RegularMesh = False):
     X = vg/f + x
     Z = g*thetap/f/f/theta0
     Y = np.array([X,Z]).T
-
+    #Y = dens.to_fundamental_domain(Y)
     return Y, thetap
     
 def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
@@ -89,7 +89,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=900, t0=0.):
+def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -101,7 +101,7 @@ def forward_euler_sg(Y, dens, tf, bbox, h=900, t0=0.):
     
     returns:
     
-    Y solution in geostrophic co-ordinates at time tf
+    Y numpy array solution in geostrophic co-ordinates at time tf
     '''
     H = bbox[3]
     L = bbox[2]
@@ -111,7 +111,6 @@ def forward_euler_sg(Y, dens, tf, bbox, h=900, t0=0.):
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-    #print(N)
     
     t = np.array([t0 + n*h for n in range(N+1)])
     
@@ -125,4 +124,5 @@ def forward_euler_sg(Y, dens, tf, bbox, h=900, t0=0.):
 
     w = eady_OT(Y, bbox, dens)
     [Y, m] = dens.lloyd(Y,w)
+    Y = dens.to_fundamental_domain(Y)
     return Y
