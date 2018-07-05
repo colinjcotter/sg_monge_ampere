@@ -90,7 +90,7 @@ class Periodic_density_in_x (ma.ma.Density_2):
 
         # rescale the moments to get centroids
         Y /= np.tile(m,(2,1)).T
-        Y = self.to_fundamental_domain(Y);
+        #Y = self.to_fundamental_domain(Y);
         return (Y,m)
 
     def moments(self,Y,w=None):
