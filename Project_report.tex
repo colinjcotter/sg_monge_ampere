@@ -64,8 +64,8 @@
 		
 	\end{itemize}
 \section{Applying Optimal Transport Method to solve the Semi-Geostrophic Equations}
-	\subsection{Description of the Problem}
-	Starting from the Eady Model for baroclinic instability given in Cullen [2006]
+	\subsection{Setting up initial condition}
+	Starting from the Eady Model for baroclinic instability given in \cite{Cullen2008}
 	\begin{align}
 	-fv_g + \frac{\partial \varphi}{\partial x} = 0,\\
 	\frac{Dv_g}{Dt} + fu -\frac{Cg}{\theta _0}\left(z-H/2\right) = 0,\\
@@ -101,22 +101,49 @@
 	\end{align*}
 	\item Due to the range of scales in the parameters used we found that a number of points are mapped outside the domain $\Gamma$. In this case, as suggested by M\'{e}rigot \cite{Merigot2017} the initial choice of weights as $\psi_i^0 = \color{red}(-)\color{black}d(Z_i,\Gamma)^2$. Additionally we perturb the distance slightly to ensure the mass/area of each cell within the domain $\Gamma$ is positive \color{red} choice of positive sign due to the convention?? used in defining the Voronoi Cells/Laguerre Cells in the code.\color{black} 
 	\item The Damped Newton Algorithm is applied to find the set of weights so that the transport map $T_\psi$ is optimal 
-	\item Given the points $\left\lbrace X_i,Z_i\right\rbrace $ and weights $\left\lbrace \psi_i \right\rbrace $ we compute the centroids of the Laguerre cells
-	\item Transform back to physical co-ordinates and time-step with Euler's method
+	\item Given the points $\left\lbrace X_i,Z_i\right\rbrace $ and weights $\left\lbrace \psi_i \right\rbrace $ given by the Damped Newton Algorithm we proceed to time stepping the algorithm
 	 \end{itemize}
+ 	\subsection{Time-Stepping}
+ 	\begin{itemize}
+ 		\item We time step the re-written equations for the Eady Model \cite{Cullen2008}
+ 		\begin{align*}
+ 		\frac{\textrm{D}X}{\textrm{D}t} - \frac{Cg}{f\theta_0}\left(z-H/2\right) = 0,
+ 		\\
+ 		\frac{\textrm{D}Z}{\textrm{D}t} - \frac{Cg}{f\theta_0}\left(X-x\right) = 0,
+ 		\\
+ 		P = \frac{1}{2}x^2 + f^{-2}\varphi,
+ 		\\
+ 		\nabla P = (X,Z)
+ 		\\
+ 		\nabla \cdot \bm{u} =0.
+ 		\end{align*}
+ 	where $x$ and $z$ are the centroids of the Laguerre cells given by the points $\left\lbrace X,Z\right\rbrace $ and weights $\left\lbrace \psi \right\rbrace $ at the current time step factoring in the periodic boundary conditions \color{red} Expand/Explain more \color{black}
+ 	\item The forward Euler scheme is given by 
+ 	\begin{align*}
+ 		t_{n+1} &= t_n + h\\
+ 		Z_{n+1} &= Z_n + \frac{hCg}{f\theta_0}\left(X_n-x_n\right)\\
+ 		X_{n+1} &= X_n + \frac{hCg}{f\theta_0}\left(z_n-H/2\right)
+ 	\end{align*}
+ 	\item After each time step the points are mapped back to the fundamental domain because of the periodic boundary conditions
+ 	\item Once the time stepping is complete the optimal transport map is called a final time and the centroids of the resulting cells found, to transform back to physical co-ordinates
+ 	\item \color{red} Need to better understand how to implement the periodic boundary conditions. At the moment the output looks best if the initial condition and centroids from Lloyds function are not mapped back to the fundamental domain but the points calculated for the time step  
+ 	\begin{align*}
+ 	Z_n + \frac{hCg}{f\theta_0}\left(X_n-x_n\right)\\
+ 	X_n + \frac{hCg}{f\theta_0}\left(z_n-H/2\right)
+ 	\end{align*}
+ 	are mapped to the fundamental domain
+ 	\end{itemize}
+ 	\section{Plotting and visualising output}
+ 	\begin{itemize}
+ 		\item Python's scipy.spatial module has an inbuilt voronoi calculator, however the output from this is different to the laguerre cells from Quentin's code - so this might not be the way to go
+ 		\item Identify how to extract polygons from laguerre cells add boundary points and colourize - python modules exist to define polygons and colourize them 
+ 	\end{itemize}
 	\section{Queries/ideas}
 	\begin{itemize}
 		\item Physical interpretation of 
 		the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
-		\item pg 68 - 70 Cullen \cite{Cullen2008} transformed energy
-		 \begin{equation}
-		 E = \int_ \Gamma f^2 \left(\frac{1}{2}\left(\left( \tilde{x} - X\right)^2 +\left(\tilde{y} - Y\right)^2\right) - \tilde{z}Z\right)\sigma dXdYdZ
-		 \end{equation}
-	       \item what is f in the code? is it the density $\rho$, to overcome scaling issue include $f^2$ factor in cost/density - not completely sure how to do this but tried by multiplying \textquoteleft$f_0$\textquoteright in code by $f^2$ - convergence is a lot better $\epsilon_g = 5.44 e^{-7}$
-                 \comments{Colin}{$f$ is just a constant, so minimising $E$ is the same mathematically as minimising $E/f^2$. This factor will influence convergence criteria, though.}
-		 \item scaling to unit mass - improved convergence but 'area of cells' is small - causes numerical instabilities
+		 \item scaling to unit mass - improved convergence but 'area of cells' is small - causes numerical instabilities according to \cite{Merigot2017}
 	\end{itemize}
-
 \newpage
 \bibliographystyle{unsrt}
 \bibliography{Project_bib}
