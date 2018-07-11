@@ -43,8 +43,8 @@ def initialise_points(N, bbox, RegularMesh = False):
         f0 = np.ones(4)/2;
         w = np.zeros(Xdens.shape[0]); 
         T = ma.delaunay_2(Xdens,w);
-        dens = Periodic_density_in_x(Xdens,f0,T,bbox)
-        X = ma.optimized_sampling_2(dens,npts,niter=2)
+        Sdens = Periodic_density_in_x(Xdens,f0,T,bbox)
+        X = ma.optimized_sampling_2(Sdens,npts,niter=5)
         x = X[:,0]*L - L
         z = (X[:,1]+0.5)*H
         y = np.array([x,z]).T
@@ -64,7 +64,6 @@ def initialise_points(N, bbox, RegularMesh = False):
     X = vg/f + x
     Z = g*thetap/f/f/theta0
     Y = np.array([X,Z]).T
-    #Y = dens.to_fundamental_domain(Y)
     return Y, thetap
     
 def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
@@ -125,4 +124,49 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     w = eady_OT(Y, bbox, dens)
     [Y, m] = dens.lloyd(Y,w)
     Y = dens.to_fundamental_domain(Y)
-    return Y
+    return Y, w
+
+def heun_sg(Y, dens, tf, bbox, h=1800, t0=0.):
+    '''
+    Function that finds time evolution of semi-geostrophic equations
+    using Heun's order 2 method
+    
+    args:
+    
+    y0_p initial data in physical co-ordinates
+    h time step size
+    
+    returns:
+    
+    Y numpy array solution in geostrophic co-ordinates at time tf
+    '''
+    H = bbox[3]
+    L = bbox[2]
+    g = 10.
+    f = 1.e-4
+    theta0 = 300
+    C = 3e-6
+
+    N = int(np.ceil((tf-t0)/h))
+    
+    t = np.array([t0 + n*h for n in range(N+1)])
+
+    ny = Y[:,0].size
+    Yn = np.zeros((ny,2))
+    
+    for n in range(1,N+1):
+        print(n)
+        w = eady_OT(Y, bbox, dens)
+        [Ya, m] = dens.lloyd(Y,w)
+        Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
+        Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
+        w = eady_OT(Yn, bbox, dens)
+        [Yb, m] = dens.lloyd(Yn,w)
+        Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Ya[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Yb[:,0])
+        Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Yb[:,1] - H*np.ones(Yb[:,1].size)/2.)
+        Y = dens.to_fundamental_domain(Y)
+
+    w = eady_OT(Y, bbox, dens)
+    [Y, m] = dens.lloyd(Y,w)
+    Y = dens.to_fundamental_domain(Y)
+    return Y, w
