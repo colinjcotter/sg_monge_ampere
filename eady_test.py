@@ -22,10 +22,10 @@ rho = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,rho)
 dens = Periodic_density_in_x(Xdens,f0,T,bbox)
 
-[Y, thetap] = initialise_points(N, bbox, RegularMesh = False)
+[Y, thetap] = initialise_points(N, bbox, RegularMesh = True)
 Y = dens.to_fundamental_domain(Y)
 print(thetap.shape)
-thetap.tofile('thetap_5h.txt',sep=" ",format="%s")
+thetap.tofile('thetap.txt',sep=" ",format="%s")
 
 if not timestep:
     w = eady_OT(Y, bbox, dens, verbose = True)
@@ -39,12 +39,11 @@ if not timestep:
 
 else:
     tf = 60*60*24*5
-    #[Y, w] = forward_euler_sg(Y, dens, tf, bbox)
-    [Y, w] = heun_sg(Y, dens, tf, bbox)
+    [Y, w] = forward_euler_sg(Y, dens, tf, bbox)
+    #[Y, w] = heun_sg(Y, dens, tf, bbox)
     #print(Y[:,0].min())
     #print(Y[:,0].max())
-    Y.tofile('eady_data_5h.txt',sep=" ",format="%s")
-    w.tofile('eady_weights_5h.txt',sep=" ",format="%s")
+    Y.tofile('eady_final_physical_points.txt',sep=" ",format="%s")
     #sc = plt.scatter(Y[:,0],Y[:,1],c=thetap,cmap="plasma")
     #plt.colorbar(sc)
     #plt.savefig('eady_image.png')
