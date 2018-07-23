@@ -183,4 +183,5 @@ def periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,ww,hh):
         Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
 
     img = ma.laguerre_diagram_to_image(dens,Yf,wf,Cf,bbox,ww,hh)
+    print(img)
     return(img)
