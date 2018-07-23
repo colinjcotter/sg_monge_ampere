@@ -120,8 +120,10 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
         Y[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
         Y[:,0] = Y[:,0] + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
         Y = dens.to_fundamental_domain(Y)
-
+        
+    Y.tofile('Gpoints_'+str(n)+'.txt',sep=" ",format="%s")
     w = eady_OT(Y, bbox, dens)
+    w.tofile('weights_'+str(n)+'.txt',sep=" ",format="%s")
     [Y, m] = dens.lloyd(Y,w)
     Y = dens.to_fundamental_domain(Y)
     return Y, w
@@ -166,7 +168,9 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0.):
         Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Yb[:,1] - H*np.ones(Yb[:,1].size)/2.)
         Y = dens.to_fundamental_domain(Y)
 
+    Y.tofile('Gpoints_'+str(n)+'.txt',sep=" ",format="%s")
     w = eady_OT(Y, bbox, dens)
+    w.tofile('weights_'+str(n)+'.txt',sep=" ",format="%s")
     [Y, m] = dens.lloyd(Y,w)
     Y = dens.to_fundamental_domain(Y)
     return Y, w
