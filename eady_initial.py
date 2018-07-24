@@ -58,8 +58,6 @@ def initialise_points(N, bbox, RegularMesh = False):
     #B = 1.0e-3* Nsq * theta0 * H / g
     thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
     vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
-
-    #print(thetap.shape)
     
     X = vg/f + x
     Z = g*thetap/f/f/theta0
@@ -71,9 +69,6 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     nx = Y[:,0].size
     nu = np.ones(nx)
     nu = (dens.mass() / np.sum(nu)) * nu
-
-    #print "mass(nu) = %f" % sum(nu)
-    #print "mass(mu) = %f" % dens.mass()
     
     w = 0.*Y[:,0]
     Z = Y[:,1]
@@ -81,9 +76,6 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w[mask] = (Z[mask] - 0.9*H)**2
     mask = Z<0.1*H
     w[mask] = (Z[mask] - 0.1*H)**2
-
-    #[f0,m,g0,H] = dens.kantorovich(Y, nu, w)
-    #print(m.min())
 
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
@@ -95,12 +87,12 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     
     args:
     
-    y0_p initial data in physical co-ordinates
+    Y initial data in Geostrophic co-ordinates
     h time step size
     
     returns:
     
-    Y numpy array solution in geostrophic co-ordinates at time tf
+    Y numpy array solution in physical co-ordinates at time tf
     '''
     H = bbox[3]
     L = bbox[2]
@@ -114,7 +106,7 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     t = np.array([t0 + n*h for n in range(N+1)])
     
     for n in range(1,N+1):
-        print(n)
+        #print(n)
         w = eady_OT(Y, bbox, dens)
         [Ya, m] = dens.lloyd(Y,w)
         Y[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
