@@ -5,9 +5,7 @@ import MongeAmpere as ma
 import numpy as np
 import scipy as sp
 import pylab
-import pdb
 import matplotlib.pyplot as plt
-import matplotlib.tri as tri
 
 class Periodic_density_in_x (ma.ma.Density_2):
     def __init__(self, X, f, T, bbox): 
@@ -93,7 +91,7 @@ class Periodic_density_in_x (ma.ma.Density_2):
         #Y = self.to_fundamental_domain(Y);
         return (Y,m)
 
-    def second_moments(self,Y,w=None):
+    def second_moment(self,Y,w=None):
         if w is None:
             w = np.zeros(Y.shape[0]);
         N = Y.shape[0];
@@ -114,14 +112,14 @@ class Periodic_density_in_x (ma.ma.Density_2):
         # cells
         [mf,Yf,If] = ma.ma.moments_2(self, Yf, wf)
 
-        Y = np.zeros((N,2));
+        I = np.zeros((N,2));
         m = np.zeros(N);
         
         for i in xrange(0,3):
             Nb = N*i; Ne = N*(i+1);
             m += mf[Nb:Ne]
             ww = np.tile(mf[Nb:Ne],(2,1)).T
-            I += If[Nb:Ne,:] - ww * np.tile(v[i,:],(N,1))
+            I += If[Nb:Ne,[0,1]] - 2 * np.tile(v[i,:],(N,1))*Yf[Nb:Ne,:] + ww*np.tile(v[i,:],(N,1))**2
             
         return I
 
@@ -183,5 +181,4 @@ def periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,ww,hh):
         Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
 
     img = ma.laguerre_diagram_to_image(dens,Yf,wf,Cf,bbox,ww,hh)
-    print(img)
     return(img)
