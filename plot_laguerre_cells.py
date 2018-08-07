@@ -1,19 +1,21 @@
 import matplotlib
 matplotlib.use('Agg')
 
+import os, sys
+parentpath = os.path.abspath("..")
+if parentpath not in sys.path:
+    sys.path.insert(0, parentpath)
 import numpy as np
-import periodic_densities as pdx
 import MongeAmpere as ma
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
-from eady_initial import initialise_points, eady_OT
+import periodic_densities as pdx
 from PIL import Image
 
-N = 50
 H = 1.e4
 L = 1.e6
 
-colour = False
+colour = True
 
 bbox = np.array([-L, 0., L, H])
 Xdens = pdx.sample_rectangle(bbox)
@@ -22,8 +24,8 @@ rho = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,rho)
 dens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
 
-Y = np.fromfile('Gpoints_336.txt',sep = " ")
-w = np.fromfile('weights_336.txt',sep=" ")
+Y = np.fromfile('Gpoints_1728000.txt',sep = " ")
+w = np.fromfile('weights_1728000.txt',sep=" ")
 C = np.fromfile('thetap.txt',sep= " ")
 
 l = int(Y.size/2)
