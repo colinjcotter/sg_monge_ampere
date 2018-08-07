@@ -124,7 +124,7 @@
  		Z_{n+1} &= Z_n + \frac{hCg}{f\theta_0}\left(X_n-x_n\right)\\
  		X_{n+1} &= X_n + \frac{hCg}{f\theta_0}\left(z_n-H/2\right)
  	\end{align*}
- 	\item After each time step the points are mapped back to the fundamental domain because of the periodic boundary conditions
+ 	\item After each time step the points are mapped back to the fundamental domain to satisfy the periodic boundary conditions
  	\item Once the time stepping is complete the optimal transport map is called a final time and the centroids of the resulting cells found, to transform back to physical co-ordinates
  	\item \color{red} Need to better understand how to implement the periodic boundary conditions. At the moment the output looks best if the initial condition and centroids from Lloyds function are not mapped back to the fundamental domain but the points calculated for the time step  
  	\begin{align*}
@@ -135,15 +135,10 @@
  	\end{itemize}
  	\section{Plotting and visualising output}
  	\begin{itemize}
- 		\item Python's scipy.spatial module has an inbuilt voronoi calculator, however the output from this is different to the laguerre cells from Quentin's code - so this might not be the way to go
- 		\item Identify how to extract polygons from laguerre cells add boundary points and colourize - python modules exist to define polygons and colourize them 
+ 		\item The inbuilt function laguerre\_diagram\_to\_image rasterises (transorms a diagram described by vectors/polygons to a diagram described by pixels) the Laguerre diagram and shades each Laguerre cell according to the value of $\theta '$ corresponding to the point associated with that Laguerre cell. 
  	\end{itemize}
+ 	\section{Baroclinic Stability Analysis}
 	\section{Queries/ideas}
-	\begin{itemize}
-		\item Physical interpretation of 
-		the "weights" in SG model- are they a just a mechanism for finding points that would have zero weights (ie) the Voronoi diagram that satifies the constraints?
-		 \item scaling to unit mass - improved convergence but 'area of cells' is small - causes numerical instabilities according to \cite{Merigot2017}
-	\end{itemize}
 \newpage
 \bibliographystyle{unsrt}
 \bibliography{Project_bib}
