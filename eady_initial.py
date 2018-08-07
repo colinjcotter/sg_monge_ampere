@@ -7,6 +7,7 @@ import MongeAmpere as ma
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
+import os
 
 def initialise_points(N, bbox, RegularMesh = False):
     '''Function to initialise a mesh over the domain [-L,L]x[0,H]
@@ -80,7 +81,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
+def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data=False):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -94,28 +95,59 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     
     Y numpy array solution in physical co-ordinates at time tf
     '''
+    os.mkdir('timestep_results_9D')
     H = bbox[3]
     L = bbox[2]
+    Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
+    B = 0.255
     theta0 = 300
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
     
-    t = np.array([t0 + n*h for n in range(N+1)])
-    
+    if add_data:
+        vg = np.zeros(N)
+        thetap = np.zeros(N+1)
+        energy = np.zeros(N+1)
+        t = np.array([t0 + n*h for n in range(N+1)])
+        t.tofile('timestep_results_9D/time.txt',sep=" ",format="%s")
+        
     for n in range(1,N+1):
-        #print(n)
         w = eady_OT(Y, bbox, dens)
-        [Ya, m] = dens.lloyd(Y,w)
+        [Ya, m] = dens.lloyd(Y, w)
+        
+        if add_data:
+            #calculate second moments to find energy and RMSV
+            I = dens.second_moment(Y, w)
+            thetap = Y[:,1]*f*f*theta0/g  
+            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Ya[:,0] + I[:,0])
+            E = 0.5*rmsv - f*f*Y[:,1]*Ya[:,1] + 0.5*f*f*H*Y[:,1]*m
+            energy[n-1] = np.sum(E)
+            vg[n-1] = np.amax(rmsv)
+
+        #timestep using euler method
         Y[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
         Y[:,0] = Y[:,0] + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
         Y = dens.to_fundamental_domain(Y)
         
-    Y.tofile('Gpoints_'+str(n)+'.txt',sep=" ",format="%s")
+    Y.tofile('timestep_results_9D/Gpoints_'+str(int(t[N]))+'.txt',sep=" ",format="%s")
     w = eady_OT(Y, bbox, dens)
-    w.tofile('weights_'+str(n)+'.txt',sep=" ",format="%s")
+    w.tofile('timestep_results_9D/weights_'+str(int(t[N]))+'.txt',sep=" ",format="%s")
+
+    if add_data:
+        I = dens.second_moment(Y,w)
+        thetap = Y[:,1]*f*f*theta0/g
+        thetap.tofile('timestep_results_9D/thetap.txt',sep = " ",format="%s")
+        rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Ya[:,0] + I[:,0])
+        E = 0.5*rmsv - f*f*Y[:,1]*Ya[:,1] + 0.5*f*f*H*Y[:,1]*m
+        energy[N] = np.sum(E)
+        vg[N] = np.amax(rmsv)
+        energy.tofile('timestep_results_9D/energy.txt',sep = " ",format="%s")
+        vg.tofile('timestep_results_9D/vg.txt',sep = " ",format="%s")
+
+    #find centroids of the cells (physical points)   
     [Y, m] = dens.lloyd(Y,w)
     Y = dens.to_fundamental_domain(Y)
     return Y, w
