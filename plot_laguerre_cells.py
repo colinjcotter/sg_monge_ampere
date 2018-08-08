@@ -36,9 +36,9 @@ C = (C - np.ones((C.size,1))*min(C))/(max(C)-min(C))
 if colour:
     C = np.hstack((C,0.*C,1-C))
     img = pdx.periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,1000,1000)
-    img.tofile("eady_laguerre_diagram.txt",sep=" ",format="%s")
+    img.tofile("laguerre_diagram.txt",sep=" ",format="%s")
 
 else:
     img = pdx.periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,1000,1000)
-    img.tofile("eady_laguerre_diagram.txt",sep=" ",format="%s")
+    img.tofile("laguerre_diagram.txt",sep=" ",format="%s")
 
