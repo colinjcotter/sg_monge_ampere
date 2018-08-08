@@ -7,13 +7,23 @@ import MongeAmpere as ma
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
+import os
 from eady_initial import initialise_points, eady_OT, forward_euler_sg, heun_sg
 
-timestep = True
+add_data = True
+days = 5
 
-N = 70
+N = 40
 H = 1.e4
 L = 1.e6
+tf = 60*60*24*days
+
+g = 10.
+f = 1.e-4
+theta0 = 300
+
+newdir = "Results_"+str(days)+"D"
+os.mkdir(newdir)
 
 bbox = np.array([-L, 0., L, H])
 Xdens = sample_rectangle(bbox)
@@ -22,26 +32,24 @@ rho = np.zeros(Xdens.shape[0])
 T = ma.delaunay_2(Xdens,rho)
 dens = Periodic_density_in_x(Xdens,f0,T,bbox)
 
-[Y, thetap] = initialise_points(N, bbox, RegularMesh = False)
+[Y, thetap] = initialise_points(N, bbox, RegularMesh = True)
 Y = dens.to_fundamental_domain(Y)
-#thetap.tofile('thetap.txt',sep=" ",format="%s")
+thetap.tofile(newdir+'/thetap_init.txt',sep=" ",format="%s")
 
-if not timestep:
-    w = eady_OT(Y, bbox, dens, verbose = True)
-    #[Y, m] = dens.lloyd(Y,w)
-    Y.tofile('eady_data.txt',sep=" ",format="%s")
-    w.tofile('eady_weights.txt',sep=" ",format="%s")
-    #sc = plt.scatter(Y[:,0],Y[:,1],c=thetap,cmap="plasma")
-    #plt.colorbar(sc)
-    #plt.savefig('final.png')
-    #plt.show()
-
+if add_data:
+    [Y, w, E, vg, t] = forward_euler_sg(Y, dens, tf, bbox, add_data = True)
+    Y.tofile(newdir+'/Gpoints.txt',sep=" ",format="%s")
+    w.tofile(newdir+'/weights.txt',sep=" ",format="%s")
+    E.tofile(newdir+'/energy.txt',sep=" ",format="%s")
+    vg.tofile(newdir+'/vg.txt',sep=" ",format="%s")
+    t.tofile(newdir+'/time.txt',sep=" ",format="%s")
+    thetap = Y[:,1]*f*f*theta0/g
+    thetap.tofile(newdir+'/thetap_final.txt',sep=" ",format="%s")
+    
 else:
-    tf = 60*60*24*9
-    [Y, w] = forward_euler_sg(Y, dens, tf, bbox,add_data = True)
-    #[Y, w] = heun_sg(Y, dens, tf, bbox)
-    #Y.tofile('eady_final_physical_points.txt',sep=" ",format="%s")
-    #sc = plt.scatter(Y[:,0],Y[:,1],c=thetap,cmap="plasma")
-    #plt.colorbar(sc)
-    #plt.savefig('eady_image.png')
-    #plt.show()
+    [Y, w] = forward_euler_sg(Y, dens, tf, bbox)
+    Y.tofile(newdir+'/Gpoints.txt',sep=" ",format="%s")
+    w.tofile(newdir+'/weights.txt',sep=" ",format="%s")
+    thetap = Y[:,1]*f*f*theta0/g
+    thetap.tofile(newdir+'/thetap_final.txt',sep=" ",format="%s")
+    
