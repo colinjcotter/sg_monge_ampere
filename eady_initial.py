@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.tri as tri
 import os
 
-def initialise_points(N, bbox, RegularMesh = False):
+def initialise_points(N, bbox, RegularMesh = None):
     '''Function to initialise a mesh over the domain [-L,L]x[0,H]
     and transform to geostrophic coordinates
 
@@ -37,6 +37,7 @@ def initialise_points(N, bbox, RegularMesh = False):
         x = np.reshape(x,(nx,))
         z = np.reshape(z,(nx,))
         y = np.array([x,z]).T
+        
     else:
         npts = 2*N*N
         bbox = np.array([0., -0.5, 2., 0.5])
@@ -81,7 +82,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data=False):
+def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -95,7 +96,7 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data=False):
     
     Y numpy array solution in physical co-ordinates at time tf
     '''
-    os.mkdir('timestep_results_9D')
+    
     H = bbox[3]
     L = bbox[2]
     Nsq = 2.5e-5
@@ -108,63 +109,55 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data=False):
     N = int(np.ceil((tf-t0)/h))
     
     if add_data:
-        vg = np.zeros(N)
+        vg = np.zeros(N+1)
         thetap = np.zeros(N+1)
         energy = np.zeros(N+1)
         t = np.array([t0 + n*h for n in range(N+1)])
-        t.tofile('timestep_results_9D/time.txt',sep=" ",format="%s")
         
-    for n in range(1,N+1):
+    for n in range(0,N+1):
         w = eady_OT(Y, bbox, dens)
-        [Ya, m] = dens.lloyd(Y, w)
+        [Yc, m] = dens.lloyd(Y, w)
         
         if add_data:
             #calculate second moments to find energy and RMSV
-            I = dens.second_moment(Y, w)
-            thetap = Y[:,1]*f*f*theta0/g  
-            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Ya[:,0] + I[:,0])
-            E = 0.5*rmsv - f*f*Y[:,1]*Ya[:,1] + 0.5*f*f*H*Y[:,1]*m
-            energy[n-1] = np.sum(E)
-            vg[n-1] = np.amax(rmsv)
+            I = dens.second_moment(Y, w)  
+            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Yc[:,0] + I[:,0])
+            E = 0.5*rmsv - f*f*Y[:,1]*Yc[:,1] + 0.5*f*f*H*Y[:,1]*m
+            energy[n] = np.sum(E)
+            vg[n] = np.amax(rmsv)
 
-        #timestep using euler method
-        Y[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
-        Y[:,0] = Y[:,0] + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
-        Y = dens.to_fundamental_domain(Y)
+        if n == N:
+            break
         
-    Y.tofile('timestep_results_9D/Gpoints_'+str(int(t[N]))+'.txt',sep=" ",format="%s")
-    w = eady_OT(Y, bbox, dens)
-    w.tofile('timestep_results_9D/weights_'+str(int(t[N]))+'.txt',sep=" ",format="%s")
+        #timestep using euler method
+        Y[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Yc[:,0])
+        Y[:,0] = Y[:,0] + h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.)
+
+        #bring particles back to fundamental domain
+        Y = dens.to_fundamental_domain(Y)
 
     if add_data:
-        I = dens.second_moment(Y,w)
-        thetap = Y[:,1]*f*f*theta0/g
-        thetap.tofile('timestep_results_9D/thetap.txt',sep = " ",format="%s")
-        rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Ya[:,0] + I[:,0])
-        E = 0.5*rmsv - f*f*Y[:,1]*Ya[:,1] + 0.5*f*f*H*Y[:,1]*m
-        energy[N] = np.sum(E)
-        vg[N] = np.amax(rmsv)
-        energy.tofile('timestep_results_9D/energy.txt',sep = " ",format="%s")
-        vg.tofile('timestep_results_9D/vg.txt',sep = " ",format="%s")
+        return Y, w, energy, vg, t
+    else:
+        return Y, w
 
-    #find centroids of the cells (physical points)   
-    [Y, m] = dens.lloyd(Y,w)
-    Y = dens.to_fundamental_domain(Y)
-    return Y, w
-
-def heun_sg(Y, dens, tf, bbox, h=1800, t0=0.):
+def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using Heun's order 2 method
     
     args:
     
-    y0_p initial data in physical co-ordinates
+    Y initial data in Geostrophic co-ordinates
+    dens 
+    tf final time (seconds)
+    bbox domain over which equations are being solved
     h time step size
     
     returns:
     
     Y numpy array solution in geostrophic co-ordinates at time tf
+    w numpy array of weights associated with Y
     '''
     H = bbox[3]
     L = bbox[2]
@@ -174,27 +167,44 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0.):
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-    
-    t = np.array([t0 + n*h for n in range(N+1)])
 
-    ny = Y[:,0].size
-    Yn = np.zeros((ny,2))
+    #create dummy array to store intermediate point values
+    Yn = np.zeros(Y.shape)
+
+    if add_data:
+        vg = np.zeros(N+1)
+        thetap = np.zeros(N+1)
+        energy = np.zeros(N+1)
+        t = np.array([t0 + n*h for n in range(N+1)])
     
-    for n in range(1,N+1):
-        print(n)
+    for n in range(0,N+1):
         w = eady_OT(Y, bbox, dens)
-        [Ya, m] = dens.lloyd(Y,w)
-        Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Ya[:,0])
-        Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.)
-        w = eady_OT(Yn, bbox, dens)
-        [Yb, m] = dens.lloyd(Yn,w)
-        Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Ya[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Yb[:,0])
-        Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Ya[:,1] - H*np.ones(Ya[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Yb[:,1] - H*np.ones(Yb[:,1].size)/2.)
-        Y = dens.to_fundamental_domain(Y)
+        [Yc, m] = dens.lloyd(Y,w)
 
-    Y.tofile('Gpoints_'+str(n)+'.txt',sep=" ",format="%s")
-    w = eady_OT(Y, bbox, dens)
-    w.tofile('weights_'+str(n)+'.txt',sep=" ",format="%s")
-    [Y, m] = dens.lloyd(Y,w)
-    Y = dens.to_fundamental_domain(Y)
-    return Y, w
+        if add_data:
+            #calculate second moments to find energy and RMSV
+            I = dens.second_moment(Y, w)
+            thetap = Y[:,1]*f*f*theta0/g  
+            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Yc[:,0] + I[:,0])
+            E = 0.5*rmsv - f*f*Y[:,1]*Yc[:,1] + 0.5*f*f*H*Y[:,1]*m
+            energy[n] = np.sum(E)
+            vg[n] = np.amax(rmsv)
+
+        if n == N:
+            break
+        
+        #timestep using heun's method
+        Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Yc[:,0])
+        Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.)
+        w = eady_OT(Yn, bbox, dens)
+        [Ycent, m] = dens.lloyd(Yn, w)
+        Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Yc[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Ycent[:,0])
+        Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Ya[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Ycent[:,1] - H*np.ones(Ycent[:,1].size)/2.)
+
+        #bring back into bounding box
+        Y = dens.to_fundamental_domain(Y)
+        
+    if add_data:
+        return Y, w, energy, vg, t
+    else:
+        return Y, w
