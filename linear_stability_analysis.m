@@ -8,14 +8,14 @@ f = 10^-4;
 theta0 = 300;
 C = 3*10^-6;
 H = 10^4;
-k = linspace(0.1,10,50)*10^-6;
+k = linspace(0.1,40,50)*10^-6;
 N = 100;
 w = zeros(1,50);
 z = zeros(1,N-2);
-for i=1:N-2
-    z(i) = i*h;
-end
 h = H/(N-1);
+for j=1:N-2
+    z(j) = j*h;
+end
 U = C*g*(z - H/2)/f/theta0;
 
 for j=1:50
@@ -32,7 +32,8 @@ for j=1:50
 
     B = diag(d1,-1) + diag(d) + diag(d1,1);
     [V,e] = eig(A,B,'vector');
-    w(j) = max(e);
+    Eimag = imag(e);
+    w(j) = max(Eimag);
 end
 
 plot(k,w)
