@@ -91,7 +91,7 @@ class Periodic_density_in_x (ma.ma.Density_2):
         #Y = self.to_fundamental_domain(Y);
         return (Y,m)
 
-    def second_moment(self,Y,w=None):
+    def moments(self,Y,w=None):
         if w is None:
             w = np.zeros(Y.shape[0]);
         N = Y.shape[0];
@@ -112,16 +112,18 @@ class Periodic_density_in_x (ma.ma.Density_2):
         # cells
         [mf,Yf,If] = ma.ma.moments_2(self, Yf, wf)
 
-        I = np.zeros((N,2));
+        m2 = np.zeros((N,2));
+        m1 = np.zeros((N,2));
         m = np.zeros(N);
         
         for i in xrange(0,3):
             Nb = N*i; Ne = N*(i+1);
             m += mf[Nb:Ne]
             ww = np.tile(mf[Nb:Ne],(2,1)).T
-            I += If[Nb:Ne,[0,1]] - 2 * np.tile(v[i,:],(N,1))*Yf[Nb:Ne,:] + ww*np.tile(v[i,:],(N,1))**2
+            m1 += Yf[Nb:Ne,:] - ww * np.tile(v[i,:],(N,1))
+            m2 += If[Nb:Ne,[0,1]] - 2 * np.tile(v[i,:],(N,1))*Yf[Nb:Ne,:] + ww*np.tile(v[i,:],(N,1))**2
             
-        return I
+        return m1, m2
 
 # generate density
 def sample_rectangle(bbox):

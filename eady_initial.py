@@ -107,24 +107,31 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
+
+    os.mkdir('points_results')
+    os.mkdir('weights_results')
     
     if add_data:
-        vg = np.zeros(N+1)
+        KEmean = np.zeros(N+1)
         thetap = np.zeros(N+1)
         energy = np.zeros(N+1)
+        vgmax = np.zeros(N+1)
         t = np.array([t0 + n*h for n in range(N+1)])
         
     for n in range(0,N+1):
         w = eady_OT(Y, bbox, dens)
+        w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
         [Yc, m] = dens.lloyd(Y, w)
         
         if add_data:
-            #calculate second moments to find energy and RMSV
-            I = dens.second_moment(Y, w)  
-            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Yc[:,0] + I[:,0])
-            E = 0.5*rmsv - f*f*Y[:,1]*Yc[:,1] + 0.5*f*f*H*Y[:,1]*m
+            #calculate second moments to find KE and maximum of Vg
+            [m1, I] = dens.moments(Y, w)  
+            ke = f*f*0.5*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
+            vg = f*(Y[:,0] - Yc[:,0])
+            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
             energy[n] = np.sum(E)
-            vg[n] = np.amax(rmsv)
+            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
+            vgmax[n] = np.amax(vg) 
 
         if n == N:
             break
@@ -135,9 +142,10 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
 
         #bring particles back to fundamental domain
         Y = dens.to_fundamental_domain(Y)
+        Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
     if add_data:
-        return Y, w, energy, vg, t
+        return Y, w, energy, vgmax, KEmean, t
     else:
         return Y, w
 
@@ -172,9 +180,10 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     Yn = np.zeros(Y.shape)
 
     if add_data:
-        vg = np.zeros(N+1)
+        KEmean = np.zeros(N+1)
         thetap = np.zeros(N+1)
         energy = np.zeros(N+1)
+        vgmax = np.zeros(N+1)
         t = np.array([t0 + n*h for n in range(N+1)])
     
     for n in range(0,N+1):
@@ -182,13 +191,14 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         [Yc, m] = dens.lloyd(Y,w)
 
         if add_data:
-            #calculate second moments to find energy and RMSV
-            I = dens.second_moment(Y, w)
-            thetap = Y[:,1]*f*f*theta0/g  
-            rmsv = f**2*(m*Y[:,0]**2 - 2*Y[:,0]*Yc[:,0] + I[:,0])
-            E = 0.5*rmsv - f*f*Y[:,1]*Yc[:,1] + 0.5*f*f*H*Y[:,1]*m
+            #calculate second moments to find KE and maximum of vg
+            [m1, I] = dens.moments(Y, w)  
+            ke = 0.5*f*f*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
+            vg = f*(Y[:,0] - Yc[:,0])
+            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
             energy[n] = np.sum(E)
-            vg[n] = np.amax(rmsv)
+            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
+            vgmax[n] = np.amax(vg)
 
         if n == N:
             break
@@ -199,12 +209,12 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         w = eady_OT(Yn, bbox, dens)
         [Ycent, m] = dens.lloyd(Yn, w)
         Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Yc[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Ycent[:,0])
-        Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Ya[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Ycent[:,1] - H*np.ones(Ycent[:,1].size)/2.)
+        Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Ycent[:,1] - H*np.ones(Ycent[:,1].size)/2.)
 
         #bring back into bounding box
         Y = dens.to_fundamental_domain(Y)
         
     if add_data:
-        return Y, w, energy, vg, t
+        return Y, w, energy, vgmax, KEmean, t
     else:
         return Y, w
