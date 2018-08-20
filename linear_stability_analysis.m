@@ -8,9 +8,9 @@ f = 10^-4;
 theta0 = 300;
 C = 3*10^-6;
 H = 10^4;
-k = linspace(0.1,40,50)*10^-6;
+k = linspace(0.1,40,100)*10^-6;
 N = 100;
-w = zeros(1,50);
+w = zeros(1,length(k));
 z = zeros(1,N-2);
 h = H/(N-1);
 for j=1:N-2
@@ -18,7 +18,7 @@ for j=1:N-2
 end
 U = C*g*(z - H/2)/f/theta0;
 
-for j=1:50
+for j=1:length(k)
     %Matrix A
     d = (f*f*theta0*g/h/h + k(j)*k(j)*Nsq*theta0)*U;
     dn1 = -f*f*theta0*g*U(1:N-3)/(h^2) - (C*f*g/h)*ones(1,N-3);

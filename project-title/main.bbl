@@ -1,0 +1,43 @@
+\begin{thebibliography}{1}
+
+\bibitem{Eliassen1962}
+A.~Eliassen.
+\newblock {On the vertical circulation in the frontal zones}, 1962.
+
+\bibitem{Cullen2006a}
+Michael J~P Cullen.
+\newblock {\em {A Mathematical Theory of Large-scale Atmosphere/ocean Flow}}.
+\newblock Imperial College Press, jan 2006.
+
+\bibitem{Hoskins1975}
+Brian~J. Hoskins.
+\newblock {The Geostrophic Momentum Approximation and the Semi-Geostrophic
+  Equations}.
+\newblock {\em Journal of the Atmospheric Sciences}, 32(2):233--242, 1975.
+
+\bibitem{Hoskins1972}
+B.~J. Hoskins and F.~P. Bretherton.
+\newblock {Atmospheric Frontogenesis Models: Mathematical Formulation and
+  Solution}.
+\newblock {\em Journal of the Atmospheric Sciences}, 29(1):11--37, jan 1972.
+
+\bibitem{Yamazaki2017}
+Hiroe Yamazaki, Jemma Shipton, Michael~J.P. Cullen, Lawrence Mitchell, and
+  Colin~J. Cotter.
+\newblock {Vertical slice modelling of nonlinear Eady waves using a compatible
+  finite element method}.
+\newblock {\em Journal of Computational Physics}, 343:130--149, aug 2017.
+
+\bibitem{Merigot2017}
+Quentin M{\'{e}}rigot, Jocelyn Meyron, and Boris Thibert.
+\newblock {An algorithm for optimal transport between a simplex soup and a
+  point cloud}.
+\newblock 2017.
+
+\bibitem{Kitagawa2016}
+Jun Kitagawa, Quentin M{\'{e}}rigot, and Boris Thibert.
+\newblock {Convergence of a Newton algorithm for semi-discrete optimal
+  transport}.
+\newblock 2016.
+
+\end{thebibliography}
