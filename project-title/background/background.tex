@@ -1,4 +1,4 @@
-\chapter{The Governing Equations}
+\chapter{The Governing Equations \label{governingequations}}
 The semi-geostrophic equations first introduced by \cite{Eliassen1962}
 form the basis of our model for frontogenesis. Widely noted to be more rigorous than the classical quasi-geostrophic equations in their description of the formation of weather fronts 
 \cite{Cullen2006a, Hoskins1975}. 
@@ -90,7 +90,7 @@ By neglecting $\partial/\partial y$ terms in perturbation variables after rearra
 \label{VerticalSlice}
 \end{equation}
 \comments{$w\frac{N^2\theta_0}{g}$ shouldn't be there !}
-\subsection{The Geostrophic Momentum Approximation}
+\subsection{The Geostrophic Momentum Approximation \label{Geostrophic}}
 To reach the final semi-geostrophic Eady model for frontogenesis the Geostrophic Momentum approximation is made. Developed by Hoskins, 1975 \cite{Hoskins1975}, where further detail can be found, the following section gives a brief summary of the key arguments.\\
 \linebreak
 Going back to equations \ref{3DBousPT}. We consider an expansion in the Rossby number $\epsilon = U/fL$ where $U$ and $L$ are horizontal velocity and length scaled respectively. Expanding the momentum equations in \ref{3DBousPT} in leading-order (geostrophic) and first order (ageostrophic) terms in $\epsilon$, so that,
@@ -178,9 +178,11 @@ Putting together equations \ref{P}, \ref{gradP}, \ref{Gmom} the Eady Model in ge
 The corresponding energy integral is,
 \begin{equation}
 E = f^2 \iint \frac{1}{2}\left(X-x\right)^2 - Z\left(z - H/2\right)\textrm{d}x\textrm{d}z
+\label{energy}
 \end{equation}
 It is shown by Cullen \cite{Cullen2006a} that the system of equations above can be recast as an optimal transport problem satisfying energy minimisation with a quadratic cost,
 \comments{show that the energy minimisation is equaivalent to the equation below}
 \begin{equation}
 E = f^2 \iint \frac{1}{2}\left(\left(X-x\right)^2 + \left(Z - z\right)^2\right)\textrm{d}x\textrm{d}z
+\label{energy1}
 \end{equation}

@@ -54,15 +54,38 @@ $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i =
  The problem is then finding the weights $\psi_i$ associated to the points $y_i$ such that $G_i(\psi) := \mu (\text{Lag}_{y_i}(\psi)) = \nu_i$. The Damped Newton's Algorithm from M\'{e}rigot, Meyron and Thibert (2017) \cite{Merigot2017} finds such $\psi_i$.
  \\
  \linebreak 
- Supposing that both the source density and target density are uniform, the Laguerre cells as found by the code developed in \cite{Merigot2017} are show in figure \ref{fig:laguerrediagramotw}
+ Supposing that both the source density and target density are uniform, the Laguerre cells as found by the code developed in \cite{Merigot2017} are show in figure \ref{fig:laguerrediagramotw}. The cells in this case are the Laguerre cells defined above, and the optimal transport map was found by \cite{Merigot2017} as
+ \begin{equation*}
+ T(x) = \arg\min_{y\in Y}\left(c(x,y) + \psi_i(y)\right)
+ \end{equation*}
+For the remainder of this report we will consider cases where both the source density and target density are uniform and the quadratic cost function
+\begin{equation*}
+	c(x,y) = \| x - y \|^2
+\end{equation*}
 \subsection{Applying semi-discrete optimal transport to solving the semi-geostrophic equations}
+As shown in \cite{Cullen2006a} equations \ref{EadyModel} can be recast as an optimal transport problem using the transformation to geostrophic co-ordinates introduced by Hoskins \cite{Hoskins1975}. In this section we outline how the damped newton algorithm is applied to equations \ref{EadyModel}.
+\\
+\linebreak
+The optimal transport problem considered in the frontogenesis problem is the minimisation of the energy, restated from equation \ref{energy}
+\begin{equation}
+E = f^2 \iint \frac{1}{2}\left(X-x\right)^2 - Z\left(z - H/2\right)\textrm{d}x\textrm{d}z
+\end{equation}
+as show in section \ref{Geostrophic} this is equivalent to minimising \ref{energy1}
+\begin{equation}
+E = \frac{f^2}{2} \iint \left(\left(X-x\right)^2 + \left(Z - z\right)^2\right)\textrm{d}x\textrm{d}z
+\end{equation}
+Considering the geostrophic co-ordinates as the target set of finite set of points for the optimal transport problem from the domain $\Gamma = [-L,L] \times [0,H]$. The Damped Newton Algorithm finds the weights such that the area of each Laguerre cell is preserved.
 \section{Extension for Periodic Boundary Conditions}
-
+As stated in Chapter \ref{governingequations} in the model for frontogenesis boundary conditions consider periodicity in $x$. This must be accounted for in the implementation of the Damped Newton Algorithm.
+\\
+\linebreak
+To mimic the effect of periodic boundary conditions in the code \comments{bleurgh}. Copies \comments{...}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{A Numerical Solution to the Eady Model for Frontogenesis \label{algorithm}}
 \section{Initialisation of Points}
 \section{Choice of initial weights}
 \section{Time Stepping}
+\section{Visualising the Output}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Unsorted}
 \section{Linear Stability Analysis}
@@ -140,20 +163,50 @@ Substituting this expression with \ref{stab2.1} into \ref{stab3.1}, noting that,
 	\frac{f\theta_0}{kg}\left(if\frac{\text{d}^2{\psi}}{\text{d}z^2} + \frac{fk}{i(k\bar{U}-\omega)}\frac{\text{d}\bar{U}}{\text{d}z}\frac{\text{d}\hat{\psi}}{\text{d}z}\right) - \frac{ik N_0^2\theta_0\hat{\psi}}{g} + \frac{Cf}{i(k\bar{U}-\omega)}\frac{\text{d}\psi}{\text{d}z} =0
 \end{equation*}
 Rearranging gives,
-\begin{equation}
-	-\frac{f^2\theta_0}{kg}(k\bar{U}-\omega)\frac{\text{d}^2{\psi}}{\text{d}z^2}+\left(Cf+\frac{f^2\theta_0}{g}\frac{\text{d}\bar{U}}{\text{d}z}\right)\frac{\text{d}\hat{\psi}}{\text{d}z}+\frac{ik N_0^2\theta_0}{g}(k\bar{U}-\omega)\hat{\psi}=0
-\end{equation}
-\begin{equation}
--\frac{f^2\theta_0}{kg}(k\bar{U}-\omega)\frac{\text{d}^2{\psi}}{\text{d}z^2}+2Cf\frac{\text{d}\hat{\psi}}{\text{d}z}+\frac{k N_0^2\theta_0}{g}(k\bar{U}-\omega)\hat{\psi}=0
-\end{equation}
+\begin{equation*}
+	-\frac{f^2\theta_0}{kg}(k\bar{U}-\omega)\frac{\text{d}^2{\psi}}{\text{d}z^2}+\left(Cf+\frac{f^2\theta_0}{g}\frac{\text{d}\bar{U}}{\text{d}z}\right)\frac{\text{d}\hat{\psi}}{\text{d}z}+\frac{k N_0^2\theta_0}{g}(k\bar{U}-\omega)\hat{\psi}=0
+\end{equation*}
+\begin{equation*}
+-f^2\theta_0(k\bar{U}-\omega)\frac{\text{d}^2{\psi}}{\text{d}z^2}+2Cfkg\frac{\text{d}\hat{\psi}}{\text{d}z}+k^2 N_0^2\theta_0(k\bar{U}-\omega)\hat{\psi}=0
+\end{equation*}
 We reformulate this as a matrix eigenvalue problem for $\omega$
 \begin{equation}
--f^2\theta_0\bar{U}\frac{\text{d}^2{\psi}}{\text{d}z^2}+2Cfg\frac{\text{d}\hat{\psi}}{\text{d}z}+k^2 N_0^2\theta_0k^2\bar{U}\hat{\psi}=\omega \left(kN_0^2\theta_0\hat{\psi}-\frac{f^2\theta_0 g}{k}\frac{\text{d}^2{\psi}}{\text{d}z^2}\right)
+-f^2\theta_0\bar{U}\frac{\text{d}^2{\psi}}{\text{d}z^2}+2Cfkg\frac{\text{d}\hat{\psi}}{\text{d}z}+k^2 N_0^2\theta_0\bar{U}\hat{\psi}=\omega \left(k^2N_0^2\theta_0\hat{\psi}-f^2\theta_0 \frac{\text{d}^2{\psi}}{\text{d}z^2}\right)
+\label{stabanalysis}
 \end{equation}
 Introducing a second order finite difference scheme for $\psi$
+\begin{equation*}
+	\begin{aligned}
+	\frac{\text{d}^2{\hat{\psi}}}{\text{d}z^2} = \frac{\psi_{i-1} - 2\psi_i + \psi_{i+1}}{h^2}\\
+	\frac{\text{d}\hat{\psi}}{\text{d}z} = \frac{\psi_{i-1} - \psi_{i+1}}{2h}
+	\end{aligned}
+\end{equation*}
+Equation \ref{stabanalysis} becomes
 \begin{equation}
 	\begin{aligned}
-	\frac{\text{d}^2{\psi}}{\text{d}z^2} = \frac{\psi_{i-1} - \psi_i + \psi_{i+1}}{h^2}
-	\frac{\text{d}\hat{\psi}}{\text{d}z} = \frac{\psi{i-1} - \psi_{i+1}}{2h}
+	-f^2\theta_0\bar{U}_i\left(\frac{\psi_{i-1} - 2\psi_i + \psi_{i+1}}{h^2}\right)+2Cfkg\left(\frac{\psi_{i-1} -f \psi_{i+1}}{2h}\right)+k^3 N_0^2\theta_0\bar{U}_i\psi_i= \\
+	\omega\left(k^2N_0^2\theta_0\psi_i-f^2\theta_0\left(\frac{\psi_{i-1} - 2\psi_i + \psi_{i+1}}{h^2}\right)\right)
 	\end{aligned}
 \end{equation}
+Discretising the interval $[0,H]$ into $N$ points with step size $h$ we can recast this as an eigenvalue problem,
+\begin{equation*}
+	A\bm{\psi} = \omega B\bm{\psi}
+\end{equation*}
+to find eigenvalues $\omega$ with corresponding eigenvectors $\bm{\psi} = \left(\psi_1, ... , \psi_{N-2}\right)$. Since the boundary condition gives $\psi = 0$ on $z = 0, H$, $\psi_0 = \psi_N = 0$ so these are omitted from the $\hat{\phi}$ vector but considered in the finite difference schemes for $\psi_1$ and $\psi_{N-1}$
+The coefficients matrix $A$ are given by
+\begin{equation}
+	\begin{aligned}
+		\psi_{i-1}:& \quad -\frac{-f^2\theta_0k\bar{U}_i}{h^2} - \frac{Cfkg}{h}\\
+		\psi_i:& \quad \frac{2f^2\theta_0k\bar{U}_i}{h^2} + k^3N_0^2\theta_0\bar{U}_i\\
+		\psi_{i+1}:& \quad \frac{-f^2\theta_0k\bar{U}_i}{h^2} + \frac{Cfkg}{h}\\
+	\end{aligned}
+\end{equation}
+$i: 1 \rightarrow N-2$ with $\psi_0 = \psi_{N}$
+and the coefficients of matrix $B$ are given by,
+\begin{equation*}
+		\begin{aligned}
+	\psi_{i-1}:& \quad -\frac{f^2\theta_0}{h^2}\\
+	\psi_i:& \quad k^2N_0^2\theta_0 + \frac{2f^2\theta_0}{h^2}\\
+	\psi_{i+1}:& \quad -\frac{f^2\theta_0}{h^2}\\
+	\end{aligned}
+\end{equation*}
