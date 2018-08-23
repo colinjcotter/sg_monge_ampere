@@ -8,17 +8,20 @@
 \contentsline {section}{\numberline {2.2}Transformation to Geostrophic Co-ordinates }{10}{section.2.2}
 \contentsline {chapter}{\numberline {3}Formulation as an Optimal Transport Problem}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Semi-discrete Optimal Transport}{13}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Laguerre Cells and the Inclusion of weights}{15}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{16}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Extension for Periodic Boundary Conditions}{16}{section.3.2}
+\contentsline {section}{\numberline {3.2}Laguerre Cells and the Inclusion of weights}{15}{section.3.2}
+\contentsline {section}{\numberline {3.3}Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{16}{section.3.3}
+\contentsline {section}{\numberline {3.4}Extension for Periodic Boundary Conditions}{17}{section.3.4}
 \contentsline {chapter}{\numberline {4}A Numerical Solution to the Eady Model for Frontogenesis }{18}{chapter.4}
-\contentsline {section}{\numberline {4.1}Initialisation of Points}{18}{section.4.1}
-\contentsline {section}{\numberline {4.2}Choice of initial weights}{18}{section.4.2}
-\contentsline {section}{\numberline {4.3}Time Stepping}{18}{section.4.3}
-\contentsline {section}{\numberline {4.4}Visualising the Output}{18}{section.4.4}
-\contentsline {chapter}{\numberline {5}Unsorted}{19}{chapter.5}
-\contentsline {section}{\numberline {5.1}Linear Stability Analysis}{19}{section.5.1}
-\contentsline {chapter}{\numberline {6}Numerical Simulations and Results}{23}{chapter.6}
-\contentsline {section}{\numberline {6.1}Evolution of Average Kinetic Energy}{23}{section.6.1}
-\contentsline {chapter}{\numberline {7}Conclusion}{24}{chapter.7}
-\contentsline {chapter}{\numberline {A}First Appendix}{25}{appendix.A}
+\contentsline {section}{\numberline {4.1}Initialisation of Points in Geostrophic Space }{19}{section.4.1}
+\contentsline {section}{\numberline {4.2}Choice of Initial Weights }{20}{section.4.2}
+\contentsline {section}{\numberline {4.3}Time Stepping }{21}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Forward-Euler Scheme}{21}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Heun's Method}{22}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Visualising the Output }{22}{section.4.4}
+\contentsline {chapter}{\numberline {5}Unsorted}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}Linear Stability Analysis}{23}{section.5.1}
+\contentsline {section}{\numberline {5.2}Calculation of Moments applying periodic boundary conditions}{26}{section.5.2}
+\contentsline {chapter}{\numberline {6}Numerical Simulations and Results}{27}{chapter.6}
+\contentsline {section}{\numberline {6.1}Evolution of Average Kinetic Energy}{27}{section.6.1}
+\contentsline {chapter}{\numberline {7}Conclusion}{28}{chapter.7}
+\contentsline {chapter}{\numberline {A}First Appendix}{29}{appendix.A}

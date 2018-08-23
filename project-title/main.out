@@ -7,17 +7,20 @@
 \BOOKMARK [1][-]{section.2.2}{Transformation to Geostrophic Co-ordinates }{chapter.2}% 7
 \BOOKMARK [0][-]{chapter.3}{Formulation as an Optimal Transport Problem}{}% 8
 \BOOKMARK [1][-]{section.3.1}{Semi-discrete Optimal Transport}{chapter.3}% 9
-\BOOKMARK [2][-]{subsection.3.1.1}{Laguerre Cells and the Inclusion of weights}{section.3.1}% 10
-\BOOKMARK [2][-]{subsection.3.1.2}{Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{section.3.1}% 11
-\BOOKMARK [1][-]{section.3.2}{Extension for Periodic Boundary Conditions}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Laguerre Cells and the Inclusion of weights}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Extension for Periodic Boundary Conditions}{chapter.3}% 12
 \BOOKMARK [0][-]{chapter.4}{A Numerical Solution to the Eady Model for Frontogenesis }{}% 13
-\BOOKMARK [1][-]{section.4.1}{Initialisation of Points}{chapter.4}% 14
-\BOOKMARK [1][-]{section.4.2}{Choice of initial weights}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.3}{Time Stepping}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.4}{Visualising the Output}{chapter.4}% 17
-\BOOKMARK [0][-]{chapter.5}{Unsorted}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Linear Stability Analysis}{chapter.5}% 19
-\BOOKMARK [0][-]{chapter.6}{Numerical Simulations and Results}{}% 20
-\BOOKMARK [1][-]{section.6.1}{Evolution of Average Kinetic Energy}{chapter.6}% 21
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 22
-\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Initialisation of Points in Geostrophic Space }{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.2}{Choice of Initial Weights }{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.3}{Time Stepping }{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.3.1}{Forward-Euler Scheme}{section.4.3}% 17
+\BOOKMARK [2][-]{subsection.4.3.2}{Heun's Method}{section.4.3}% 18
+\BOOKMARK [1][-]{section.4.4}{Visualising the Output }{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{Unsorted}{}% 20
+\BOOKMARK [1][-]{section.5.1}{Linear Stability Analysis}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.2}{Calculation of Moments applying periodic boundary conditions}{chapter.5}% 22
+\BOOKMARK [0][-]{chapter.6}{Numerical Simulations and Results}{}% 23
+\BOOKMARK [1][-]{section.6.1}{Evolution of Average Kinetic Energy}{chapter.6}% 24
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 25
+\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 26
