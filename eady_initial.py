@@ -56,7 +56,8 @@ def initialise_points(N, bbox, RegularMesh = None):
     f = 1.e-4
     theta0 = 300
     C = 3e-6
-    B = 0.255
+    B = 1.
+    #B = 0.255
     #B = 1.0e-3* Nsq * theta0 * H / g
     thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
     vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
@@ -102,36 +103,25 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
-    B = 0.255
     theta0 = 300
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-
-    os.mkdir('points_results')
-    os.mkdir('weights_results')
+    t = np.array([t0 + n*h for n in range(N+1)])
     
     if add_data:
-        KEmean = np.zeros(N+1)
-        thetap = np.zeros(N+1)
-        energy = np.zeros(N+1)
-        vgmax = np.zeros(N+1)
-        t = np.array([t0 + n*h for n in range(N+1)])
+        os.mkdir('points_results')
+        os.mkdir('weights_results')
         
     for n in range(0,N+1):
+        #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-        w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
-        [Yc, m] = dens.lloyd(Y, w)
         
         if add_data:
-            #calculate second moments to find KE and maximum of Vg
-            [m1, I] = dens.moments(Y, w)  
-            ke = f*f*0.5*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
-            vg = f*(Y[:,0] - Yc[:,0])
-            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
-            energy[n] = np.sum(E)
-            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
-            vgmax[n] = np.amax(vg) 
+            w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+
+        #find centroids of laguerre cells for use in time-stepping
+        [Yc, m] = dens.lloyd(Y, w)
 
         if n == N:
             break
@@ -142,12 +132,11 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
 
         #bring particles back to fundamental domain
         Y = dens.to_fundamental_domain(Y)
-        Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
-    if add_data:
-        return Y, w, energy, vgmax, KEmean, t
-    else:
-        return Y, w
+        if add_data:
+            Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+
+    return Y, w, t
 
 def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     '''
@@ -175,30 +164,25 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-
+    t = np.array([t0 + n*h for n in range(N+1)])
+    
     #create dummy array to store intermediate point values
     Yn = np.zeros(Y.shape)
 
     if add_data:
-        KEmean = np.zeros(N+1)
-        thetap = np.zeros(N+1)
-        energy = np.zeros(N+1)
-        vgmax = np.zeros(N+1)
-        t = np.array([t0 + n*h for n in range(N+1)])
+        os.mkdir('points_results')
+        os.mkdir('weights_results')
+        
     
     for n in range(0,N+1):
+        #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-        [Yc, m] = dens.lloyd(Y,w)
+
+        #find centroids of laguerre cells for use in time-stepping
+        [Yc, m] = dens.lloyd(Y, w)
 
         if add_data:
-            #calculate second moments to find KE and maximum of vg
-            [m1, I] = dens.moments(Y, w)  
-            ke = 0.5*f*f*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
-            vg = f*(Y[:,0] - Yc[:,0])
-            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
-            energy[n] = np.sum(E)
-            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
-            vgmax[n] = np.amax(vg)
+            w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         if n == N:
             break
@@ -213,8 +197,8 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
 
         #bring back into bounding box
         Y = dens.to_fundamental_domain(Y)
-        
-    if add_data:
-        return Y, w, energy, vgmax, KEmean, t
-    else:
-        return Y, w
+
+        if add_data:
+            Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+
+    return Y, w, t
