@@ -17,8 +17,14 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{color}
 \usepackage{bm}
+\usepackage{amsthm}
 
 \onehalfspacing
+
+%Theorem environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \title{Advanced Numerical Algorithms for the Simulation of Weather Fronts}
 \author{Chloe Raymont}
