@@ -51,20 +51,40 @@ def initialise_points(N, bbox, RegularMesh = None):
         z = (X[:,1]+0.5)*H
         y = np.array([x,z]).T
 
+
+    # Nsq = 2.5e-5
+    # g = 10.
+    # f = 1.e-4
+    # theta0 = 300.
+    # C = 3e-6
+    # #B = 1.
+    # B = 0.255
+    # #B = 1.0e-3* Nsq * theta0 * H / g
+    # thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
+    # vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+    
+    # X = vg/f + x
+    # Z = g*thetap/f/f/theta0
+
+    #INITIAL CONDITION GIVEN BY M.CULLEN
+    
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
-    theta0 = 300
-    C = 3e-6
-    B = 1.
-    #B = 0.255
-    #B = 1.0e-3* Nsq * theta0 * H / g
-    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
-    
-    X = vg/f + x
-    Z = g*thetap/f/f/theta0
+    theta0 = 300.
+    thetapp = 285.
+    B = 40.
+    C = 8.
+
+    aspect = (g*H)/(4*f*f*L*L)
+    z = z/H
+
+    X=x
+    Z = (thetapp + B*z + C*2.*np.sin(np.pi*(X + z)))*aspect/theta0
+
     Y = np.array([X,Z]).T
+    thetap = f*f*theta0*Z/g
+    
     return Y, thetap
     
 def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
