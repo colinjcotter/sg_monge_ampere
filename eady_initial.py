@@ -103,7 +103,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
+def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -130,15 +130,15 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     t = np.array([t0 + n*h for n in range(N+1)])
     
     if add_data:
-        os.mkdir('points_results')
-        os.mkdir('weights_results')
+        os.mkdir(newdir+'points_results')
+        os.mkdir(newdir+'weights_results')
         
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
         
         if add_data:
-            w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         #find centroids of laguerre cells for use in time-stepping
         [Yc, m] = dens.lloyd(Y, w)
@@ -154,11 +154,11 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         Y = dens.to_fundamental_domain(Y)
 
         if add_data:
-            Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
     return Y, w, t
 
-def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
+def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using Heun's order 2 method
@@ -190,8 +190,8 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     Yn = np.zeros(Y.shape)
 
     if add_data:
-        os.mkdir('points_results')
-        os.mkdir('weights_results')
+        os.mkdir(newdir+'points_results')
+        os.mkdir(newdir+'weights_results')
         
     
     for n in range(0,N+1):
@@ -202,7 +202,7 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         [Yc, m] = dens.lloyd(Y, w)
 
         if add_data:
-            w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         if n == N:
             break
@@ -210,6 +210,7 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         #timestep using heun's method
         Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Yc[:,0])
         Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.)
+        Yn = dens.to_fundamental_domain(Yn)
         w = eady_OT(Yn, bbox, dens)
         [Ycent, m] = dens.lloyd(Yn, w)
         Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Yc[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Ycent[:,0])
@@ -219,6 +220,6 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         Y = dens.to_fundamental_domain(Y)
 
         if add_data:
-            Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
     return Y, w, t
