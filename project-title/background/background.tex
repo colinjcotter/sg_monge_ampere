@@ -167,9 +167,10 @@ The front formation seen later in the report is a consequence of a baroclinic in
 	It is worth noting that Eady's original model for baroclinic instability was developed under a quasi-geostrophic model, where $\epsilon = Fr \ll 1$ in contrast semi-geostrophic theory the assumes, $\epsilon \ll 1$ with $\epsilon < Fr$.
 \end{itemize}
 \chapter{The Frontogenesis Model as an Optimal Transport Problem}
-The semi-geostrophic equations have previously been rigorously analysed \cite{Hoskins1975,Bannon1988,Cullen1993} and models subsequently developed to include momentum diffusion \cite{Blumen1990, Nakamura1994}. The existence of smooth solutions for the Eady Model for frontogenesis \ref{EadyModel} is shown in \cite{Brenier2009}. Perhaps one of the most exciting developments in the study of frontogenesis was the reformulation of the semi-geostrophic equations into a Monge-Amp\`{e}re equation for mass transportation \cite{Benamou1998} \comments{CHECK!}. It is shown in \cite{Cullen2006a} that a through a transformation to geostrophic co-ordinates as described in section \ref{Geostrophic} the energy integral can be viewed as the 'cost' in a moss transportation problem. This reformulation has allowed a deeper insight into the behaviour of the equations through numerical solutions developed from methods in computational geometry. In this chapter the arguments given in \cite{Cullen2006a} are summarised to highlight the application of optimal transport theory to the Eady Model \ref{EadyModel}.
+The semi-geostrophic equations have previously been rigorously analysed \cite{Hoskins1975,Bannon1988,Cullen1993} and models subsequently developed to include momentum diffusion \cite{Blumen1990, Nakamura1994}. The existence of smooth solutions for the Eady Model for frontogenesis \ref{EadyModel} is shown in \cite{Brenier2009}. Perhaps one of the most exciting developments in the study of frontogenesis was the reformulation of the semi-geostrophic equations into a Monge-Amp\`{e}re equation for mass transportation \cite{Benamou1998} \comments{CHECK!}. It is shown in \cite{Cullen2006a} that a through a transformation to geostrophic co-ordinates as described in section \ref{Geostrophic} the energy integral can be viewed as the 'cost' in a moss transportation problem. This reformulation has allowed a deeper insight into the behaviour of the equations through numerical solutions developed from methods in computational geometry. In this chapter the arguments given in \cite{Cullen2006a} are summarised to highlight the application of optimal transport theory to the Eady Model for frontogenesis \ref{EadyModel}.
+\comments{smooth solutions only in geostrophic co-ordinates}
 \section{Transformation to Geostrophic Co-ordinates \label{transformation}}
-To facilitate the implementation of the numerical scheme we will subsequently use to solve equations \ref{EadyModel} we transform to geostrophic co-ordinate system first introduced by Hoskins \cite{Hoskins1975} in the horizontal directions $(x,y)$. The geostrophic co-ordinates describe the position of particles had they evolved under their geostrophic velocity. This transformation was later developed by Cullen \cite{Cullen2006a} to include a transformation in terms of $\theta '$ in the vertical direction.
+To facilitate the implementation of the numerical scheme we will subsequently use to solve equations \ref{EadyModel} we transform to geostrophic co-ordinate system first introduced by Hoskins \cite{Hoskins1975} in the horizontal directions $(x,y)$. The geostrophic co-ordinates describe the position of particles had they evolved under their geostrophic velocity. This transformation was later developed by Cullen \cite{Cullen2006a} to include a transformation in terms of $\theta '$ in the vertical direction. The geostrophic transformation $\Phi: (x,z) \rightarrow (X,Z)$
 \begin{equation}
 X = x + \frac{v_g}{f}, \qquad Z = \frac{g\theta'}{f^2\theta_0}
 \end{equation}
@@ -217,7 +218,93 @@ The corresponding energy integral given by transforming the Energy \ref{energy} 
 E = f^2 \iint \frac{1}{2}\left(X-x\right)^2 - Z\left(z - H/2\right)\textrm{d}x\textrm{d}z
 \label{energy}
 \end{equation}
-
+\section{Energy Minimisation as an Optimal Transportation Problem}
+It is shown in \cite{Cullen2006a} and references therein that the hydrostatic and geostrophic balances in the Semi-geostrophic equations characterise the solution as an Energy minimisation problem. In geostrophic co-ordinates, Theorem 3.3 from \cite{Cullen2006a} the condition to minimise the energy \ref{energy} is that the function $P$ is convex. In this section we show that this can be reformulated to take the form of an optimal transport problem with quadratic cost. This amounts to the solution of \ref{EadyGC} as finding $\left(X, Z\right)$ which minimise the energy and subsequently finding their time evolution using \ref{EadyGC}.
+\subsection{Finding an Inverse Transformation}
+Consider an initial set of points in geostrophic space $(X,Z)$. To find the trajectory of points in geostrophic space and consequently to solve \ref{EadyGC} requires the corresponding values $\left(x,z\right)$. This requires the existence of a unique inverse to the transform \ref{transformation}. Following \cite{Cullen2006a}, the function $R(X,Z)$ is defined as,
+\begin{equation*}
+	R(X,Z) = x(X,Z)X+z(X,Z)Z - P(x,y,z)
+\end{equation*}
+To rewrite the energy integral \ref{energy} in geostrophic co-ordinates requires the jacobian of the inverse transformation $\Phi ^{-1}: (X,Z) \rightarrow (x,z)$, 
+\begin{equation}
+	\sigma(X,Z) = \frac{\partial x}{\partial X}\frac{\partial z}{\partial Z} - \frac{\partial z}{\partial X}\frac{\partial x}{\partial Z}
+\label{sigma defn}
+\end{equation}
+Noting that,
+\begin{equation*}
+	\frac{\partial R}{\partial X} = x + X\frac{\partial x}{\partial X} + Z\frac{\partial z}{\partial X} -\frac{\partial P}{\partial x}\frac{\partial x}{\partial X} - \frac{\partial P}{\partial x}\frac{\partial z}{\partial X}
+\end{equation*}
+Similarly,
+\begin{equation*}
+\frac{\partial R}{\partial Z} = X\frac{\partial x}{\partial Z} + z + Z\frac{\partial z}{\partial Z} -\frac{\partial P}{\partial Z}\frac{\partial x}{\partial Z} - \frac{\partial P}{\partial Z}\frac{\partial z}{\partial Z}
+\end{equation*}
+Using $\nabla P = (X,Z)$, we find,
+\begin{equation}
+	\nabla_{(X,Z)} R = \left(\frac{\partial R}{\partial X},\frac{\partial R}{\partial Z}\right) = (x,z)
+\end{equation}
+This is convenient as it allows us to rewrite \ref{sigma defn} as,
+\begin{equation}
+\sigma(X,Z) = \frac{\partial^2 R}{\partial X^2}\frac{\partial^2 R}{\partial Z^2} -\frac{\partial^2 R}{\partial XZ}\frac{\partial^2 R}{\partial ZX} = \textrm{det}(Hess \ R)
+\label{Monge Ampere}
+\end{equation}
+As stated in \cite{Cullen2006a} this is a form of the classical \textbf{Monge Amp\`{e}re equation} for a given $\sigma(X,Z)$. Paired with the boundary condition that the fluid in physical co-ordinates stays within the domain,$\Gamma$, (ie) $(x,z) = \nabla_{(X,Z)}R \in \Gamma$. This can be expressed as,
+\begin{equation}
+	\iint_{\mathbb{R}^2} \sigma\left(X,Z\right) \ dXdZ = \iint_\Gamma \ dxdz
+\label{equivalent measures}
+\end{equation}
+Physically this is equivalent to conservation of volume for all time so that in a similar statement the mass continuity equation in classical fluid mechanics, with $\nabla \cdot U =0$,
+\begin{equation}
+	\frac{\textrm{D}_{(X,Z)}\sigma}{\textrm{D}t} = \frac{\partial \sigma}{\partial t} + \frac{\partial U}{\partial X}\frac{\partial \sigma}{\partial X}+ \frac{\partial W}{\partial Z}\frac{\partial \sigma}{\partial Z}
+\end{equation}
+This gives a prognostic equation for $\sigma(X ,Z)$
+\comments{include full system of equations?}
+\subsection{The Monge Amp\`{e}re equation and Optimal Transportation}
+Again giving an overview of the arguments in \cite{Cullen2006a} we show how the Monge Amp\`{e}re equation \ref{Monge Ampere} can be solved as an optimal transport problem.
+\\
+\comments{definition of measure?}
+\linebreak
+The density $\sigma$ can be seen to define a measure on $\mathbb{R}^2$, where the measure of a set $A \subseteq \mathbb{R}^2$ is defined to be $\nu(A) = \iint_{A} \sigma \ dXdZ$. On the domain $\gamma$ in physical co-ordinates $(x,z)$ we consider the scaled Lebesgue measure $\mu(\gamma) = \textrm{Area}(\Gamma)^{-1}\iint_{\gamma} \ dxdz$, where $\gamma \subseteq \Gamma$ and $\textrm{Area}(\Gamma)=\iint_{\Gamma} \ dxdz$. Considering mappings $s: \mathbb{R}^2 \rightarrow \Gamma$ that preserve measure so that if $\gamma = s(A)$, we have $\nu(A) = \mu(\gamma)$.
+\\
+\linebreak
+With this in mind, given the mapping $s: \mathbb{R}^2 \rightarrow \Gamma$ the energy is defined in \cite{Cullen2006a} as the following,
+\begin{equation}
+E = f^2 \iint \frac{1}{2}\left(X-\tilde{x}\right)^2 - Z\left(\tilde{z} - H/2\right)\sigma \ \textrm{d}X\textrm{d}Z
+\end{equation}
+where $\left(\tilde{x},\tilde{z}\right) = s(X,Z)$. The solution for equations \ref{EadyGC} is then encapsulated in Theorem (3.4) of \cite{Cullen2006a} which says that the condition for the energy to be minimised is that,
+\begin{equation}
+	s(X,Z) = \nabla R
+\end{equation}
+with condition \ref{equivalent measures} as above.
+\comments{Convexity of R?}
+\\
+\linebreak
+We now put this into the context of the discrete problem which will be susequently solved in the implementation of the optimal transport solver from \cite{Merigot2017}.
+In this case we consider $\Gamma$ to be a partition into $N$ {\textquoteleft fluid parcels\textquoteright} of equal volume. For convenience we consider the case where the total volume of $\Gamma$ is $\iint_{\Gamma} \ dxdz = 1$.
+\\
+\linebreak
+The density $\sigma$ is defined discretely for $N$ points $\bm{Y}_i = \left(X_i,Z_i\right)$ in geostrophic space as $\sigma(X,Y) = \sum_{i=1}^{N}\frac{1}{N}\delta\left(\bm{Y}-\bm{Y}_i\right)$. Note, this also gives $	\iint_{\mathbb{R}^2} \sigma\left(X,Z\right) \ dXdZ = 1$. The problem in this case becomes finding a map $s: \mathbb{R}^2 \rightarrow \Gamma$ such that the energy,
+\begin{equation}
+E = f^2 \iint \frac{1}{2}\left(X_i-\tilde{x}\right)^2 - Z_i\left(\tilde{z} - H/2\right)\sigma \ \textrm{d}X\textrm{d}Z
+\end{equation}
+is minimised and such that the volume of the associated 'fluid parcels', (ie) the sets $A_i = s^{-1}(X_i,Z_i)$ is preserved. Figure $???$ illustrates such a transformation. Theorem (3.11) from \cite{Cullen2006a} proves the existence of such a map for the density $\sigma$.  
+\\
+\linebreak
+The final piece is in the formulation of the solution of the semi-geostrophic equations as an optimal transport problem uses Theorem (3.16) from \cite{Cullen2006a}. We restate this using the notation above.
+\begin{theorem}
+	Given probability measures $\sigma$, $\mu$ with bounded supports $\Sigma \subset \mathbb{R}^2$, $\Gamma \subset \mathbb{R}^2 $. There exist optimal maps $t: \Sigma \rightarrow \Gamma$ and $t^{-1}: \Gamma \rightarrow \Sigma$ which are inverses and minimise a quadratic cost function given by
+	\begin{equation*}
+		\iint_{\mathbb{R}^2} \left(\frac{1}{2}f^2|\bm{Y}-t(\bm{Y})|^2\right)\sigma \ dXdZ
+	\end{equation*}
+	Furthermore, these maps are unique up to sets of measure zero.
+\end{theorem}
+The proof is given in \cite{Cullen2006a} and is a culmination of the results stated above. $\Gamma$ is clearly bounded by definition and $\Sigma$ is a set of finite points it too is also bounded. Furthermore since $sigma$ and $\mu$ are defined so that their integrals over $\Sigma$ and $\Gamma$ are unity, they are probability measures over their respective domains.
+\\
+\linebreak
+It remains to show that the minimisation of the quadratic cost function is equivalent to minimising the energy. For this we transform the cost function to physical co-ordinates as,
+\begin{equation*}
+\iint_{\mathbb{R}^2} \left(\frac{1}{2}f^2|t^{-1}(\bm{y})-\bm{y}|^2\right) \ dxdz
+\end{equation*}
+The following Lemma proves this to be equivalent to minimising the energy given by \ref{energy}.
 \begin{lemma}
 	Minimising the Energy integral given by,
 	\begin{equation*}
@@ -242,19 +329,19 @@ E = f^2 \iint \frac{1}{2}\left(X-x\right)^2 - Z\left(z - H/2\right)\textrm{d}x\t
 	\end{equation}
 	Recalling that $Z$ is a function of $(x,z)$, the treatment of terms with this variable need to be considered carefully. As both \ref{min1} and \ref{min2} contain $\iint_{\Gamma} - Zz$, this can also be omitted from consideration.\\
 	\linebreak
-	Considering $\iint_{\Gamma} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z$ . Given a Laguerre tessellation of $\Gamma$ into $N$ cells \comments{0 measure sets?}, so that $\Gamma = \bigcup_{i=1}^N c_i$. Applying the transform $\Phi: (x,z) \rightarrow (X,Z)$, and using that the transform maps cells in physical space to points in geostrophic space
+	Considering $\iint_{\Gamma} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z$ . Given a partition of $\Gamma$ into $N$ cells \comments{0 measure sets?}, so that $\Gamma = \bigcup_{i=1}^N c_i$. Applying the transform $\Phi: (x,z) \rightarrow (X,Z)$, and using that the transform maps cells in physical space to points in geostrophic space
 	\begin{equation*}
 		\sum_{i=1}^N \iint_{c_i} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z = \sum_{i=1}^N \iint_{\Phi(c_i)} \frac{1}{2}Z^2\sigma(X,Z) \ \textrm{d}X\textrm{d}Z 
 	\end{equation*}
-	But since $\sigma(X,Z) = \sum_{i=1}^{N} \nu_i \delta(\bm{Y}-\bm{Y_i})$
+	But since $\sigma(X,Z) = \sum_{i=1}^{N} \frac{1}{N} \delta(\bm{Y}-\bm{Y_i})$
 	\begin{equation*}
-		\implies \sum_{i=1}^N \nu_i \frac{1}{2}Z_i^2
+		\implies \sum_{i=1}^N \frac{1}{N} \frac{1}{2}Z_i^2
 	\end{equation*}
 	However this is a fixed value. Similar arguments give that,
 	\begin{equation*}
-		\sum_{i=1}^N \iint_{c_i} \frac{HZ}{2}\textrm{d}x\textrm{d}z = \sum_{i=1}^N \frac{HZ_i}{2}
+		\sum_{i=1}^N \iint_{c_i} \frac{HZ}{2} \ \textrm{d}x\textrm{d}z = \sum_{i=1}^N \frac{HZ_i}{2}
 	\end{equation*}
 	Hence, the minimisation of \ref{min1} and \ref{min2} is equivalent.
 \end{proof}
-\comments{understand energy minimisation!}
-	
+To summarise the results of this Chapter, we began by transforming the semi-geostrophic equations to geostrophic co-ordinates. In this setting finding the solution to equations \ref{EadyGC} was shown to amount to an energy minimisation problem with the energy being defined by \ref{energy}. Through the use of the Jacobian for the transformation $\sigma$ and an appropriately defined function $R(X,Z)$ we were able to show this energy minimisation to be the solution of a Monge Amp\'{e}re equation. Subsequently, through the use of probability measures this was shown to be equivalent to a discrte optimal transport problem with quadratic cost. Finally by showing the equivalence of minimising energy to minimising the quadratic cost function the problem is formulated as an optimal transport problem.
+\comments{tie energy minimisation to Monge ampere equation/optimal transport}

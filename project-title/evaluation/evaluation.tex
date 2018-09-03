@@ -1,5 +1,6 @@
 \chapter{Numerical Simulations and Results \label{results}}
-\section{Evolution of Average Kinetic Energy}
+\section{Comparison with other numerical solutions to the Eady Frontogenesis Model}
+\subsection{Evolution of Average Kinetic Energy}
 The kinetic energy over the domain $\Gamma$ is defined by,
 \begin{equation}
 	E_{kin} = \int_\Gamma \ \frac{1}{2}v_g^2 \ dxdz
@@ -11,6 +12,10 @@ E_{kin} = \int_\Gamma \ \frac{f^2}{2}(X-x)^2 \ dxdz
 \label{KE2}
 \end{equation}
 The kinetic energy associated with a fluid particle is the similarly defined as the integrals \ref{KE1} and \ref{KE2} but over the Laguerre cell of the point and its associated weight given by the solution of the optimal transport problem.
+\comments{sort out domain averaged, show that solutions converge}
+\section{Error Analysis of the numerical Solution}
+\comments{discuss enery as error measurment, log-log plots for euler and heun and way to reduce error}
+\section{Computational Performance}
 \chapter{Unsorted}
 \section{Linear Stability Analysis}
 Starting from the Eady Model \ref{EadyModel} restated below
