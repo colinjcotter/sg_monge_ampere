@@ -1,5 +1,6 @@
 \chapter{Numerical Simulations and Results \label{results}}
-\section{Comparison with other numerical solutions to the Eady Frontogenesis Model}
+
+\section{Validating Results}
 \subsection{Evolution of Average Kinetic Energy}
 The kinetic energy over the domain $\Gamma$ is defined by,
 \begin{equation}
@@ -13,6 +14,37 @@ E_{kin} = \int_\Gamma \ \frac{f^2}{2}(X-x)^2 \ dxdz
 \end{equation}
 The kinetic energy associated with a fluid particle is the similarly defined as the integrals \ref{KE1} and \ref{KE2} but over the Laguerre cell of the point and its associated weight given by the solution of the optimal transport problem.
 \comments{sort out domain averaged, show that solutions converge}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{evaluation/euler_5D_energy}
+	\caption{}
+	\label{fig:euler5denergy}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{evaluation/energy_5D_heun}
+	\caption{}
+	\label{fig:euler5denergy}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{evaluation/energy_10D_euler}
+	\caption{}
+	\label{fig:euler5denergy}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{evaluation/energy_10D_heun}
+	\caption{}
+	\label{fig:euler5denergy}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{evaluation/energy_euler_heun_comparison}
+	\caption{}
+	\label{fig:euler5denergy}
+\end{figure}
+
 \section{Error Analysis of the numerical Solution}
 \comments{discuss enery as error measurment, log-log plots for euler and heun and way to reduce error}
 \section{Computational Performance}

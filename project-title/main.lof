@@ -1,14 +1,27 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Local cartesian co-ordinates $\left (x,y,z\right )$ on Earth}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Local cartesian co-ordinates $\left (x,y,z\right )$ on Earth\relax }}{6}{figure.caption.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Semi-discrete Optimal Transport}}{13}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces The partitioning of a city}}{14}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Laguerre diagram produced by finding weights using damped newton algorithm for optimal transport}}{15}{figure.3.3}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Map from geostrophic points to fluid 'parcels'}}{16}{figure.caption.5}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Semi-discrete Optimal Transport}}{19}{figure.caption.6}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The partitioning of a Domain}}{20}{figure.caption.7}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Laguerre diagram produced by finding weights using DA for optimal transport}}{21}{figure.caption.8}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Optimal Transport with Periodic Boundary Conditions}}{23}{figure.caption.9}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Periodic boundary conditions with 'ghost' points}}{24}{figure.caption.10}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Plots of a random set of points initialised in $[0,2]\times [0,2]$ before (a) and after (b) being mapped to the fundamental domain $[0,1]\times [0,1]$\relax }}{24}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{24}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{24}{subfigure.6.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Linear stability analysis results for the semi-geostrophic equations}}{26}{figure.5.1}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Plot of Points in Geostrophic Space}}{28}{figure.caption.12}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces \relax }}{33}{figure.caption.13}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces \relax }}{33}{figure.caption.14}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces \relax }}{33}{figure.caption.15}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces \relax }}{34}{figure.caption.16}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces \relax }}{34}{figure.caption.17}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Linear stability analysis results for the semi-geostrophic equations}}{38}{figure.caption.18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

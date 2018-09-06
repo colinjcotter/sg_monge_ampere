@@ -166,7 +166,7 @@ The front formation seen later in the report is a consequence of a baroclinic in
 	\item \textbf{Key Scalings}
 	It is worth noting that Eady's original model for baroclinic instability was developed under a quasi-geostrophic model, where $\epsilon = Fr \ll 1$ in contrast semi-geostrophic theory the assumes, $\epsilon \ll 1$ with $\epsilon < Fr$.
 \end{itemize}
-\chapter{The Frontogenesis Model as an Optimal Transport Problem}
+\chapter{The Frontogenesis Model as an Optimal Transport Problem \label{Chapter3}}
 The semi-geostrophic equations have previously been rigorously analysed \cite{Hoskins1975,Bannon1988,Cullen1993} and models subsequently developed to include momentum diffusion \cite{Blumen1990, Nakamura1994}. The existence of smooth solutions for the Eady Model for frontogenesis \ref{EadyModel} is shown in \cite{Brenier2009}. Perhaps one of the most exciting developments in the study of frontogenesis was the reformulation of the semi-geostrophic equations into a Monge-Amp\`{e}re equation for mass transportation \cite{Benamou1998} \comments{CHECK!}. It is shown in \cite{Cullen2006a} that a through a transformation to geostrophic co-ordinates as described in section \ref{Geostrophic} the energy integral can be viewed as the 'cost' in a moss transportation problem. This reformulation has allowed a deeper insight into the behaviour of the equations through numerical solutions developed from methods in computational geometry. In this chapter the arguments given in \cite{Cullen2006a} are summarised to highlight the application of optimal transport theory to the Eady Model for frontogenesis \ref{EadyModel}.
 \comments{smooth solutions only in geostrophic co-ordinates}
 \section{Transformation to Geostrophic Co-ordinates \label{transformation}}
@@ -261,9 +261,8 @@ This gives a prognostic equation for $\sigma(X ,Z)$
 \subsection{The Monge Amp\`{e}re equation and Optimal Transportation}
 Again giving an overview of the arguments in \cite{Cullen2006a} we show how the Monge Amp\`{e}re equation \ref{Monge Ampere} can be solved as an optimal transport problem.
 \\
-\comments{definition of measure?}
 \linebreak
-The density $\sigma$ can be seen to define a measure on $\mathbb{R}^2$, where the measure of a set $A \subseteq \mathbb{R}^2$ is defined to be $\nu(A) = \iint_{A} \sigma \ dXdZ$. On the domain $\gamma$ in physical co-ordinates $(x,z)$ we consider the scaled Lebesgue measure $\mu(\gamma) = \textrm{Area}(\Gamma)^{-1}\iint_{\gamma} \ dxdz$, where $\gamma \subseteq \Gamma$ and $\textrm{Area}(\Gamma)=\iint_{\Gamma} \ dxdz$. Considering mappings $s: \mathbb{R}^2 \rightarrow \Gamma$ that preserve measure so that if $\gamma = s(A)$, we have $\nu(A) = \mu(\gamma)$.
+The density $\sigma$ can be seen to define a measure on $\mathbb{R}^2$, where the measure of the set $A \subseteq \mathbb{R}^2$ is defined an $\nu(A) = \iint_{A} \sigma(X,Z) \ dXdZ$. On the domain $\gamma$ in physical co-ordinates $(x,z)$ we consider the scaled Lebesgue measure $\mu(\gamma) = \textrm{Area}(\Gamma)^{-1}\iint_{\gamma} \ dxdz$, where $\gamma \subseteq \Gamma$ and $\textrm{Area}(\Gamma)=\iint_{\Gamma} \ dxdz$. Considering mappings $s: \mathbb{R}^2 \rightarrow \Gamma$ that preserve measure so that if $\gamma = s(A)$, we have $\nu(A) = \mu(\gamma)$. The reader is referred to \cite{Rudin1987} for a rigorous explanation of concepts in measure theory.
 \\
 \linebreak
 With this in mind, given the mapping $s: \mathbb{R}^2 \rightarrow \Gamma$ the energy is defined in \cite{Cullen2006a} as the following,
@@ -286,9 +285,13 @@ The density $\sigma$ is defined discretely for $N$ points $\bm{Y}_i = \left(X_i,
 \begin{equation}
 E = f^2 \iint \frac{1}{2}\left(X_i-\tilde{x}\right)^2 - Z_i\left(\tilde{z} - H/2\right)\sigma \ \textrm{d}X\textrm{d}Z
 \end{equation}
-is minimised and such that the volume of the associated 'fluid parcels', (ie) the sets $A_i = s^{-1}(X_i,Z_i)$ is preserved. Figure $???$ illustrates such a transformation. Theorem (3.11) from \cite{Cullen2006a} proves the existence of such a map for the density $\sigma$.  
-\\
-\linebreak
+is minimised and such that the volume of the associated 'fluid parcels', (ie) the sets $A_i = s^{-1}(X_i,Z_i)$ is preserved. Figure \ref{fig:gpointsmapping} illustrates such a transformation. Theorem (3.11) from \cite{Cullen2006a} proves the existence of such a map for the density $\sigma$.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{background/gpoints_mapping}
+	\caption[Map from geostrophic points to fluid 'parcels']{Figure illustrating a map from geostrophic points to fluid 'parcels' that preserves volume.}
+	\label{fig:gpointsmapping}
+\end{figure}
 The final piece is in the formulation of the solution of the semi-geostrophic equations as an optimal transport problem uses Theorem (3.16) from \cite{Cullen2006a}. We restate this using the notation above.
 \begin{theorem}
 	Given probability measures $\sigma$, $\mu$ with bounded supports $\Sigma \subset \mathbb{R}^2$, $\Gamma \subset \mathbb{R}^2 $. There exist optimal maps $t: \Sigma \rightarrow \Gamma$ and $t^{-1}: \Gamma \rightarrow \Sigma$ which are inverses and minimise a quadratic cost function given by
@@ -297,6 +300,8 @@ The final piece is in the formulation of the solution of the semi-geostrophic eq
 	\end{equation*}
 	Furthermore, these maps are unique up to sets of measure zero.
 \end{theorem}
+The reader is referred to \cite{Rudin1987} for a detailed discussion of measure theory and zero measure sets.\\
+\linebreak
 The proof is given in \cite{Cullen2006a} and is a culmination of the results stated above. $\Gamma$ is clearly bounded by definition and $\Sigma$ is a set of finite points it too is also bounded. Furthermore since $sigma$ and $\mu$ are defined so that their integrals over $\Sigma$ and $\Gamma$ are unity, they are probability measures over their respective domains.
 \\
 \linebreak
@@ -329,7 +334,7 @@ The following Lemma proves this to be equivalent to minimising the energy given 
 	\end{equation}
 	Recalling that $Z$ is a function of $(x,z)$, the treatment of terms with this variable need to be considered carefully. As both \ref{min1} and \ref{min2} contain $\iint_{\Gamma} - Zz$, this can also be omitted from consideration.\\
 	\linebreak
-	Considering $\iint_{\Gamma} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z$ . Given a partition of $\Gamma$ into $N$ cells \comments{0 measure sets?}, so that $\Gamma = \bigcup_{i=1}^N c_i$. Applying the transform $\Phi: (x,z) \rightarrow (X,Z)$, and using that the transform maps cells in physical space to points in geostrophic space
+	Considering $\iint_{\Gamma} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z$ . Given a partition of $\Gamma$ into $N$ cells up to zero measure sets, so that $\Gamma = \bigcup_{i=1}^N c_i$. Applying the transform $\Phi: (x,z) \rightarrow (X,Z)$, and using that the transform maps cells in physical space to points in geostrophic space
 	\begin{equation*}
 		\sum_{i=1}^N \iint_{c_i} \frac{1}{2}Z^2\textrm{d}x\textrm{d}z = \sum_{i=1}^N \iint_{\Phi(c_i)} \frac{1}{2}Z^2\sigma(X,Z) \ \textrm{d}X\textrm{d}Z 
 	\end{equation*}
