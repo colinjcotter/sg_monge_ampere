@@ -51,19 +51,40 @@ def initialise_points(N, bbox, RegularMesh = None):
         z = (X[:,1]+0.5)*H
         y = np.array([x,z]).T
 
+
+    # Nsq = 2.5e-5
+    # g = 10.
+    # f = 1.e-4
+    # theta0 = 300.
+    # C = 3e-6
+    # #B = 1.
+    # B = 0.255
+    # #B = 1.0e-3* Nsq * theta0 * H / g
+    # thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
+    # vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+    
+    # X = vg/f + x
+    # Z = g*thetap/f/f/theta0
+
+    #INITIAL CONDITION GIVEN BY M.CULLEN
+    
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
-    theta0 = 300
-    C = 3e-6
-    B = 0.255
-    #B = 1.0e-3* Nsq * theta0 * H / g
-    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
-    
-    X = vg/f + x
-    Z = g*thetap/f/f/theta0
+    theta0 = 300.
+    thetapp = 285.
+    B = 40.
+    C = 8.
+
+    aspect = (g*H)/(4*f*f*L*L)
+    z = z/H
+
+    X=x
+    Z = (thetapp + B*z + C*2.*np.sin(np.pi*(X + z)))*aspect/theta0
+
     Y = np.array([X,Z]).T
+    thetap = f*f*theta0*Z/g
+    
     return Y, thetap
     
 def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
@@ -82,7 +103,7 @@ def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
     w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
+def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -102,36 +123,25 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
-    B = 0.255
     theta0 = 300
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-
-    os.mkdir('points_results')
-    os.mkdir('weights_results')
+    t = np.array([t0 + n*h for n in range(N+1)])
     
     if add_data:
-        KEmean = np.zeros(N+1)
-        thetap = np.zeros(N+1)
-        energy = np.zeros(N+1)
-        vgmax = np.zeros(N+1)
-        t = np.array([t0 + n*h for n in range(N+1)])
+        os.mkdir(newdir+'points_results')
+        os.mkdir(newdir+'weights_results')
         
     for n in range(0,N+1):
+        #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-        w.tofile('weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
-        [Yc, m] = dens.lloyd(Y, w)
         
         if add_data:
-            #calculate second moments to find KE and maximum of Vg
-            [m1, I] = dens.moments(Y, w)  
-            ke = f*f*0.5*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
-            vg = f*(Y[:,0] - Yc[:,0])
-            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
-            energy[n] = np.sum(E)
-            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
-            vgmax[n] = np.amax(vg) 
+            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+
+        #find centroids of laguerre cells for use in time-stepping
+        [Yc, m] = dens.lloyd(Y, w)
 
         if n == N:
             break
@@ -142,14 +152,13 @@ def forward_euler_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
 
         #bring particles back to fundamental domain
         Y = dens.to_fundamental_domain(Y)
-        Y.tofile('points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
-    if add_data:
-        return Y, w, energy, vgmax, KEmean, t
-    else:
-        return Y, w
+        if add_data:
+            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
 
-def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
+    return Y, w, t
+
+def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using Heun's order 2 method
@@ -175,30 +184,25 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
-
+    t = np.array([t0 + n*h for n in range(N+1)])
+    
     #create dummy array to store intermediate point values
     Yn = np.zeros(Y.shape)
 
     if add_data:
-        KEmean = np.zeros(N+1)
-        thetap = np.zeros(N+1)
-        energy = np.zeros(N+1)
-        vgmax = np.zeros(N+1)
-        t = np.array([t0 + n*h for n in range(N+1)])
+        os.mkdir(newdir+'points_results')
+        os.mkdir(newdir+'weights_results')
+        
     
     for n in range(0,N+1):
+        #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-        [Yc, m] = dens.lloyd(Y,w)
+
+        #find centroids of laguerre cells for use in time-stepping
+        [Yc, m] = dens.lloyd(Y, w)
 
         if add_data:
-            #calculate second moments to find KE and maximum of vg
-            [m1, I] = dens.moments(Y, w)  
-            ke = 0.5*f*f*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
-            vg = f*(Y[:,0] - Yc[:,0])
-            E = ke - f*f*Y[:,1]*m1[:,1] + 0.5*f*f*H*Y[:,1]*m
-            energy[n] = np.sum(E)
-            KEmean[n] = np.sum(ke)/float(Y[:,0].size)
-            vgmax[n] = np.amax(vg)
+            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         if n == N:
             break
@@ -206,6 +210,7 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
         #timestep using heun's method
         Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Yc[:,0])
         Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.)
+        Yn = dens.to_fundamental_domain(Yn)
         w = eady_OT(Yn, bbox, dens)
         [Ycent, m] = dens.lloyd(Yn, w)
         Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Yc[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Ycent[:,0])
@@ -213,8 +218,8 @@ def heun_sg(Y, dens, tf, bbox, h=1800, t0=0., add_data = None):
 
         #bring back into bounding box
         Y = dens.to_fundamental_domain(Y)
-        
-    if add_data:
-        return Y, w, energy, vgmax, KEmean, t
-    else:
-        return Y, w
+
+        if add_data:
+            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+
+    return Y, w, t
