@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 import MongeAmpere as ma
 import numpy as np
 import matplotlib.pyplot as plt
-
+import periodic_densities as pdx
 
 def draw_laguerre_cells(dens,Y,w):
     E = dens.restricted_laguerre_edges(Y,w)
@@ -28,8 +28,16 @@ def draw_laguerre_cells(dens,Y,w):
 #initialise source continuous density
 dens = ma.Density_2(np.array([[0.,0.],[1.,0.],[1.,1.],[0.,1.]]))
 
+#initialise periodic density in x
+bbox = np.array([0., 0., 1., 1.])
+Xdens = pdx.sample_rectangle(bbox)
+f0 = np.ones(4)
+rho = np.zeros(Xdens.shape[0])
+T = ma.delaunay_2(Xdens,rho)
+pdens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
+
 #initialise points
-N = 10
+N = 15
 Y = np.random.rand(N,2)
 
 #initialise discrete target density
@@ -54,3 +62,16 @@ plt.ylim(0,1)
 plt.plot(Y[:,0],Y[:,1],'.')
 plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
 plt.savefig('laguerre_diagram_OTw.png')
+
+
+#draw laguerre cells with periodic density in x
+w = ma.optimal_transport_2(pdens,Y,nu)
+x,y = pdx.periodicinx_draw_laguerre_cells_2(dens,Y,w)
+plt.figure()
+plt.xlim(0,1)
+plt.ylim(0,1)
+plt.plot(Y[:,0],Y[:,1],'.')
+plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
+plt.savefig('laguerre_diagram_OTPw.png')
+
+
