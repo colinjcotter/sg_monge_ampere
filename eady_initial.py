@@ -52,35 +52,18 @@ def initialise_points(N, bbox, RegularMesh = None):
         y = np.array([x,z]).T
 
 
-    # Nsq = 2.5e-5
-    # g = 10.
-    # f = 1.e-4
-    # theta0 = 300.
-    # C = 3e-6
-    # #B = 1.
-    # B = 0.255
-    # #B = 1.0e-3* Nsq * theta0 * H / g
-    # thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-    # vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
-    
-    # X = vg/f + x
-    # Z = g*thetap/f/f/theta0
-
-    #INITIAL CONDITION GIVEN BY M.CULLEN
-    
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
     theta0 = 300.
-    thetapp = 285.
-    B = 40.
-    C = 8.
-
-    aspect = (g*H)/(4*f*f*L*L)
-    z = z/H
-
-    X=x
-    Z = (thetapp + B*z + C*2.*np.sin(np.pi*(X + z)))*aspect/theta0
+    C = 3e-6
+    B = 0.25
+    #B = 1.0e-3* Nsq * theta0 * H / g
+    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
+    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
+    
+    X = vg/f + x
+    Z = g*thetap/f/f/theta0
 
     Y = np.array([X,Z]).T
     thetap = f*f*theta0*Z/g
@@ -130,15 +113,25 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     t = np.array([t0 + n*h for n in range(N+1)])
     
     if add_data:
-        os.mkdir(newdir+'points_results')
-        os.mkdir(newdir+'weights_results')
+        #create directories to store data from each timestep
+        pointsdir = newdir+'/points_results_'+str(int(h))
+        weightsdir = newdir+'/weights_results_'+str(int(h))
+        thetapdir = newdir+'/thetap_results_'+str(int(h))
+        os.mkdir(pointsdir)
+        os.mkdir(weightsdir)
+        os.mkdir(thetapdir)
+
+        #store initial point and thetap values
+        Y.tofile(pointsdir+'/points_'+str(0)+'.txt',sep = " ",format = "%s")
+        thetap = Y[:,1]*f*f*theta0/g
+        thetap.tofile(thetapdir+'/thetap_'+str(0)+'.txt',sep=" ",format="%s")
         
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
         
         if add_data:
-            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+            w.tofile(weightsdir+'/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         #find centroids of laguerre cells for use in time-stepping
         [Yc, m] = dens.lloyd(Y, w)
@@ -154,7 +147,9 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
         Y = dens.to_fundamental_domain(Y)
 
         if add_data:
-            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            Y.tofile(pointsdir+'/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            thetap = Y[:,1]*f*f*theta0/g
+            thetap.tofile(thetapdir+'/thetap_'+str(n+1)+'.txt',sep=" ",format="%s")
 
     return Y, w, t
 
@@ -190,9 +185,18 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     Yn = np.zeros(Y.shape)
 
     if add_data:
-        os.mkdir(newdir+'points_results')
-        os.mkdir(newdir+'weights_results')
-        
+        #create directories to store data from each timestep
+        pointsdir = newdir+'/points_results_'+str(int(h))
+        weightsdir = newdir+'/weights_results_'+str(int(h))
+        thetapdir = newdir+'/thetap_results_'+str(int(h))
+        os.mkdir(pointsdir)
+        os.mkdir(weightsdir)
+        os.mkdir(thetapdir)
+
+        #store initial Y and thetap values
+        Y.tofile(pointsdir+'/points_'+str(0)+'.txt',sep = " ",format = "%s")
+        thetap = Y[:,1]*f*f*theta0/g
+        thetap.tofile(thetapdir+'/thetap_'+str(0)+'.txt',sep=" ",format="%s")
     
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
@@ -202,7 +206,7 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
         [Yc, m] = dens.lloyd(Y, w)
 
         if add_data:
-            w.tofile(newdir+'weights_results/weights_'+str(n)+'.txt',sep = " ",format = "%s")
+            w.tofile(weightsdir+'/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
         if n == N:
             break
@@ -220,6 +224,8 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
         Y = dens.to_fundamental_domain(Y)
 
         if add_data:
-            Y.tofile(newdir+'points_results/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            Y.tofile(pointsdir+'/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
+            thetap = Y[:,1]*f*f*theta0/g
+            thetap.tofile(thetapdir+'/thetap_'+str(n+1)+'.txt',sep=" ",format="%s")
 
     return Y, w, t
