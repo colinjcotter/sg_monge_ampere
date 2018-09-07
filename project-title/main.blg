@@ -3,4 +3,6 @@ The style file: unsrt.bst
 Database file #1: bibs/MSc_Project.bib
 Warning--empty journal in Merigot2017
 Warning--empty journal in Kitagawa2016
-(There were 2 warnings)
+Warning--can't use both volume and number fields in Griffiths2010
+Warning--empty publisher in Griffiths2010
+(There were 4 warnings)

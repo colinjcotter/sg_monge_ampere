@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.6)  23 AUG 2018 14:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.6)  6 SEP 2018 14:14
 entering extended mode
 **./main.tex
 (main.tex
@@ -660,25 +660,108 @@ Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
 \symboldsymbols=\mathgroup8
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 207.
-) (main.aux)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks40
+\thm@bodyfont=\toks41
+\thm@headfont=\toks42
+\thm@notefont=\toks43
+\thm@headpunct=\toks44
+\thm@preskip=\skip50
+\thm@postskip=\skip51
+\thm@headsep=\skip52
+\dth@everypar=\toks45
+)
+(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\subfig\subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
+Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
+
+(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
+Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen175
+\captionmargin@=\dimen176
+\captionwidth=\dimen177
+\caption@tempdima=\dimen178
+\caption@indent=\dimen179
+\caption@parindent=\dimen180
+\caption@hangindent=\dimen181
+)
+\c@ContinuedFloat=\count140
+Package caption Info: hyperref package is loaded.
+)
+\c@KVtest=\count141
+\sf@farskip=\skip53
+\sf@captopadj=\dimen182
+\sf@capskip=\skip54
+\sf@nearskip=\skip55
+\c@subfigure=\count142
+\c@subfigure@save=\count143
+\c@lofdepth=\count144
+\c@subtable=\count145
+\c@subtable@save=\count146
+\c@lotdepth=\count147
+\sf@top=\skip56
+\sf@bottom=\skip57
+)
+(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\mathtools\mathtools.sty
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
+
+(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\mathtools\mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count148
+\l_MT_multwidth_dim=\dimen183
+\origjot=\skip58
+\l_MT_shortvdotswithinadjustabove_dim=\dimen184
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen185
+\l_MT_above_intertext_sep=\dimen186
+\l_MT_below_intertext_sep=\dimen187
+\l_MT_above_shortintertext_sep=\dimen188
+\l_MT_below_shortintertext_sep=\dimen189
+)
+\c@theorem=\count149
+\c@corollary=\count150
+\c@definition=\count151
+
+(main.aux
+
+LaTeX Warning: Label `fig:euler5denergy' multiply defined.
+
+
+LaTeX Warning: Label `fig:euler5denergy' multiply defined.
+
+
+LaTeX Warning: Label `fig:euler5denergy' multiply defined.
+
+
+LaTeX Warning: Label `fig:euler5denergy' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\ucsencs.def
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+ (C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 *geometry* driver: auto-detecting
@@ -718,17 +801,17 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 
 (C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count140
-\scratchdimen=\dimen175
+\scratchcounter=\count152
+\scratchdimen=\dimen190
 \scratchbox=\box39
-\nofMPsegments=\count141
-\nofMParguments=\count142
-\everyMPshowfont=\toks40
-\MPscratchCnt=\count143
-\MPscratchDim=\dimen176
-\MPnumerator=\count144
-\makeMPintoPDFobject=\count145
-\everyMPtoPDFconversion=\toks41
+\nofMPsegments=\count153
+\nofMParguments=\count154
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count155
+\MPscratchDim=\dimen191
+\MPnumerator=\count156
+\makeMPintoPDFobject=\count157
+\everyMPtoPDFconversion=\toks47
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -747,28 +830,31 @@ ABD: EveryShipout initializing macros
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 26.
+loading the todonotes package. on input line 39.
 
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring ON on input line 26.
+Package hyperref Info: Link coloring ON on input line 39.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count146
+\c@section@level=\count158
 )
-LaTeX Info: Redefining \ref on input line 26.
-LaTeX Info: Redefining \pageref on input line 26.
-LaTeX Info: Redefining \nameref on input line 26.
+LaTeX Info: Redefining \ref on input line 39.
+LaTeX Info: Redefining \pageref on input line 39.
+LaTeX Info: Redefining \nameref on input line 39.
 
 (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
  (title/title.tex
-<title/logo.png, id=110, 1284.8pt x 338.26375pt>
+<title/logo.png, id=154, 1284.8pt x 338.26375pt>
 File: title/logo.png Graphic file (type png)
 <use title/logo.png>
 Package pdftex.def Info: title/logo.png  used on input line 9.
@@ -793,19 +879,25 @@ o.png>])pdfTeX warning (ext4): destination with the same identifier (name{page.
 1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.31 \end{abstract}
+l.44 \end{abstract}
                     [1]pdfTeX warning (ext4): destination with the same identif
 ier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.36 \end{abstract}
-                    [1]pdfTeX warning (ext4): destination with the same identif
-ier (name{page.1}) has been already used, duplicate ignored
+l.49 \end{abstract}
+                    [1]
+<ChloeRaymont_esignature.jpg, id=176, 1624.56938pt x 1082.54437pt>
+File: ChloeRaymont_esignature.jpg Graphic file (type jpg)
+<use ChloeRaymont_esignature.jpg>
+Package pdftex.def Info: ChloeRaymont_esignature.jpg  used on input line 55.
+(pdftex.def)             Requested size: 298.75264pt x 199.06174pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.40 \end{abstract}
-                    [1] (main.toc
-Overfull \hbox (13.65657pt too wide) in paragraph at lines 12--12
+l.58 \end{abstract}
+                    [1 <./ChloeRaymont_esignature.jpg>] (main.toc
+Overfull \hbox (13.65657pt too wide) in paragraph at lines 16--16
  [][] [][][]\T1/cmr/m/n/12 Applying semi-discrete op-ti-mal trans-port to solv-
 ing the semi-geostrophic 
  []
@@ -828,7 +920,7 @@ Chapter 1.
 
 ]
 Chapter 2.
-<background/local_cartesian.png, id=200, 427.5975pt x 493.845pt>
+<background/local_cartesian.png, id=279, 427.5975pt x 493.845pt>
 File: background/local_cartesian.png Graphic file (type png)
 <use background/local_cartesian.png>
 Package pdftex.def Info: background/local_cartesian.png  used on input line 11.
@@ -837,10 +929,20 @@ Package pdftex.def Info: background/local_cartesian.png  used on input line 11.
 [6
 
  <./background/local_cartesian.png>]
-Underfull \vbox (badness 3646) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 36--42
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
-Underfull \hbox (badness 10000) in paragraph at lines 55--59
+Underfull \hbox (badness 10000) in paragraph at lines 68--72
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--84
 
  []
 
@@ -848,7 +950,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--59
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-Underfull \hbox (badness 10000) in paragraph at lines 94--97
+Underfull \hbox (badness 10000) in paragraph at lines 128--131
 
  []
 
@@ -856,153 +958,271 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--97
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Underfull \hbox (badness 10000) in paragraph at lines 115--122
+Underfull \hbox (badness 10000) in paragraph at lines 149--154
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 131.
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--160
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 166.
+
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 131.
- [10]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 166.
+ [11]
+Chapter 3.
+
+Underfull \vbox (badness 2781) has occurred while \output is active []
+
+ [12
+
+]
+Overfull \hbox (1.65906pt too wide) in paragraph at lines 221--221
+[]\T1/cmr/bx/n/17.28 Energy Min-imi-sa-tion as an Op-ti-mal Trans-porta-
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11])
-(project/project.tex [12]
-Chapter 3.
-<project/probmeasure.png, id=297, 289.08pt x 187.70125pt>
+ [13]
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 262--269
+
+ []
+
+
+Overfull \hbox (2.04883pt too wide) in paragraph at lines 262--269
+\T1/cmr/m/n/12 ordinates $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; z\OT1/cmr/m/n/12
+ )$ \T1/cmr/m/n/12 we con-sider the scaled Lebesgue mea-sure $\OML/cmm/m/it/12 
+\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 \OT1/cmr/m/n/12 ) = []( )[] [] [][]  \OML/c
+mm/m/it/12 dxdz$\T1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--269
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--285
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--285
+
+ []
+
+[15]
+<background/gpoints_mapping.png, id=432, 589.20125pt x 215.80624pt>
+File: background/gpoints_mapping.png Graphic file (type png)
+<use background/gpoints_mapping.png>
+Package pdftex.def Info: background/gpoints_mapping.png  used on input line 291
+.
+(pdftex.def)             Requested size: 426.79137pt x 156.32214pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--309
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 303--309
+
+ []
+
+[16 <./background/gpoints_mapping.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 334--338
+
+ []
+
+[17]) (project/project.tex [18]
+Chapter 4.
+<project/probmeasure.png, id=472, 289.08pt x 187.70125pt>
 File: project/probmeasure.png Graphic file (type png)
 <use project/probmeasure.png>
 Package pdftex.def Info: project/probmeasure.png  used on input line 7.
 (pdftex.def)             Requested size: 156.49014pt x 101.60919pt.
-<project/laguerre_diagram_0w.png, id=300, 462.528pt x 346.896pt>
+<project/laguerre_diagram_0w.png, id=476, 321.2pt x 240.9pt>
 File: project/laguerre_diagram_0w.png Graphic file (type png)
 <use project/laguerre_diagram_0w.png>
 Package pdftex.def Info: project/laguerre_diagram_0w.png  used on input line 16
 .
-(pdftex.def)             Requested size: 199.16928pt x 149.37938pt.
+(pdftex.def)             Requested size: 227.62204pt x 170.72038pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 11--33
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11--33
+Underfull \hbox (badness 10000) in paragraph at lines 11--22
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 11--33
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11--33
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11--33
-
- []
-
-
-Overfull \hbox (13.62564pt too wide) in paragraph at lines 11--33
-\T1/cmr/m/n/12 The \T1/cmr/bx/n/12 Push-for-ward \T1/cmr/m/n/12 of a mea-sure $
-\OML/cmm/m/it/12 $ \T1/cmr/m/n/12 by a map $\OML/cmm/m/it/12 T \OT1/cmr/m/n/12
- :   \OMS/cmsy/m/n/12 ! \OML/cmm/m/it/12 Y$ \T1/cmr/m/n/12 is $\OML/cmm/m/it/12
- T[] \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12  [] []$\T1/cmr/m/n/12 ,
- []
-
-[13
+[19
 
  <./project/probmeasure.png>]
-Underfull \vbox (badness 1824) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
- [14 <./project/laguerre_diagram_0w.png>]
-<project/laguerre_diagram_OTw.png, id=318, 462.528pt x 346.896pt>
+ []
+
+[20 <./project/laguerre_diagram_0w.png>]
+<project/laguerre_diagram_OTw.png, id=493, 321.2pt x 240.9pt>
 File: project/laguerre_diagram_OTw.png Graphic file (type png)
 <use project/laguerre_diagram_OTw.png>
 Package pdftex.def Info: project/laguerre_diagram_OTw.png  used on input line 4
 5.
-(pdftex.def)             Requested size: 199.16928pt x 149.37938pt.
+(pdftex.def)             Requested size: 227.62204pt x 170.72038pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--60
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--60
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--60
+Underfull \hbox (badness 10000) in paragraph at lines 55--62
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--60
+Underfull \hbox (badness 10000) in paragraph at lines 55--62
 
  []
 
-[15 <./project/laguerre_diagram_OTw.png>]
-Overfull \hbox (10.04607pt too wide) in paragraph at lines 67--67
+[21 <./project/laguerre_diagram_OTw.png>]
+Overfull \hbox (10.04607pt too wide) in paragraph at lines 69--69
 []\T1/cmr/bx/n/17.28 Applying semi-discrete op-ti-mal trans-port to solv-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--72
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
 
  []
 
+[22]
+<project/laguerre_diagram_OTPw.png, id=529, 321.2pt x 240.9pt>
+File: project/laguerre_diagram_OTPw.png Graphic file (type png)
+<use project/laguerre_diagram_OTPw.png>
+Package pdftex.def Info: project/laguerre_diagram_OTPw.png  used on input line 
+89.
+(pdftex.def)             Requested size: 227.62204pt x 170.72038pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--88
+Underfull \hbox (badness 10000) in paragraph at lines 83--93
 
  []
 
+<project/laguerre_diagram_OTPw_periodic.png, id=532, 498.86375pt x 134.5025pt>
+File: project/laguerre_diagram_OTPw_periodic.png Graphic file (type png)
+<use project/laguerre_diagram_OTPw_periodic.png>
+Package pdftex.def Info: project/laguerre_diagram_OTPw_periodic.png  used on in
+put line 96.
+(pdftex.def)             Requested size: 426.79137pt x 115.07469pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--88
+LaTeX Warning: `h' float specifier changed to `ht'.
 
+<project/fund_domain_out.png, id=536, 462.528pt x 338.2236pt>
+File: project/fund_domain_out.png Graphic file (type png)
+<use project/fund_domain_out.png>
+Package pdftex.def Info: project/fund_domain_out.png  used on input line 106.
+(pdftex.def)             Requested size: 199.16928pt x 145.64491pt.
+<project/fund_domain_in.png, id=537, 462.528pt x 338.2236pt>
+File: project/fund_domain_in.png Graphic file (type png)
+<use project/fund_domain_in.png>
+Package pdftex.def Info: project/fund_domain_in.png  used on input line 107.
+(pdftex.def)             Requested size: 199.16928pt x 145.64491pt.
+
+Overfull \hbox (16.7239pt too wide) in paragraph at lines 103--115
+\T1/cmr/m/n/12 Under the geostrophic trans-for-ma-tion [][]3.1[][] and also in 
+time-stepping points in geostrophic
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [16]
-[17]
-Chapter 4.
-[18
+[23 <./project/laguerre_diagram_OTPw.png>] [24 <./project/laguerre_diagram_OTPw
+_periodic.png> <./project/fund_domain_out.png> <./project/fund_domain_in.png>]
+[25]
+Chapter 5.
+[26
 
 ]
-Underfull \vbox (badness 1533) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19]
-Underfull \hbox (badness 10000) in paragraph at lines 183--186
+ [27]
+<project/gpoints.png, id=579, 428.60126pt x 321.2pt>
+File: project/gpoints.png Graphic file (type png)
+<use project/gpoints.png>
+Package pdftex.def Info: project/gpoints.png  used on input line 217.
+(pdftex.def)             Requested size: 199.16928pt x 149.25844pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--226
 
  []
 
-[20]
+[28 <./project/gpoints.png>]
+Overfull \hbox (3.21896pt too wide) in paragraph at lines 240--241
+\T1/cmr/m/n/12 Once the ini-tial points and weights have been set up, it re-mai
+ns to find the geostrophic
+ []
+
+[29]) (evaluation/evaluation.tex
+Underfull \hbox (badness 10000) in paragraph at lines 281--1
+
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [21]
-[22]
-Chapter 5.
+ [30]
+[31]
+Chapter 6.
+<evaluation/euler_5D_energy.png, id=628, 1387.584pt x 651.8754pt>
+File: evaluation/euler_5D_energy.png Graphic file (type png)
+<use evaluation/euler_5D_energy.png>
+Package pdftex.def Info: evaluation/euler_5D_energy.png  used on input line 19.
+
+(pdftex.def)             Requested size: 426.79137pt x 200.49774pt.
+<evaluation/energy_5D_heun.png, id=629, 1387.584pt x 651.8754pt>
+File: evaluation/energy_5D_heun.png Graphic file (type png)
+<use evaluation/energy_5D_heun.png>
+Package pdftex.def Info: evaluation/energy_5D_heun.png  used on input line 25.
+(pdftex.def)             Requested size: 426.79137pt x 200.49774pt.
+<evaluation/energy_10D_euler.png, id=630, 1387.584pt x 651.8754pt>
+File: evaluation/energy_10D_euler.png Graphic file (type png)
+<use evaluation/energy_10D_euler.png>
+Package pdftex.def Info: evaluation/energy_10D_euler.png  used on input line 31
+.
+(pdftex.def)             Requested size: 426.79137pt x 200.49774pt.
+<evaluation/energy_10D_heun.png, id=631, 1387.584pt x 651.8754pt>
+File: evaluation/energy_10D_heun.png Graphic file (type png)
+<use evaluation/energy_10D_heun.png>
+Package pdftex.def Info: evaluation/energy_10D_heun.png  used on input line 37.
+
+(pdftex.def)             Requested size: 426.79137pt x 200.49774pt.
+<evaluation/energy_euler_heun_comparison.png, id=632, 462.528pt x 338.2236pt>
+File: evaluation/energy_euler_heun_comparison.png Graphic file (type png)
+<use evaluation/energy_euler_heun_comparison.png>
+Package pdftex.def Info: evaluation/energy_euler_heun_comparison.png  used on i
+nput line 43.
+(pdftex.def)             Requested size: 426.79137pt x 312.10876pt.
+[32
+
+] [33 <./evaluation/euler_5D_energy.png> <./evaluation/energy_5D_heun.png> <./e
+valuation/energy_10D_euler.png>] [34 <./evaluation/energy_10D_heun.png> <./eval
+uation/energy_euler_heun_comparison.png>]
+Chapter 7.
 
 Underfull \vbox (badness 6300) has occurred while \output is active []
 
- [23
+ [35
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24]
+ [36]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
+ [37]
 Package epstopdf Info: Source file: <project/Linear_stability_analysis.eps>
 (epstopdf)                    date: 2018-08-22 09:52:28
 (epstopdf)                    size: 107365 bytes
@@ -1012,81 +1232,80 @@ erted-to.pdf>
 (epstopdf)                    size: 42482 bytes
 (epstopdf)             Command: <epstopdf --outfile=project/Linear_stability_an
 alysis-eps-converted-to.pdf project/Linear_stability_analysis.eps>
-(epstopdf)             \includegraphics on input line 352.
+(epstopdf)             \includegraphics on input line 174.
 Package epstopdf Info: Output file is already uptodate.
-<project/Linear_stability_analysis-eps-converted-to.pdf, id=431, 963.6pt x 408.
+<project/Linear_stability_analysis-eps-converted-to.pdf, id=689, 963.6pt x 408.
 52625pt>
 File: project/Linear_stability_analysis-eps-converted-to.pdf Graphic file (type
  pdf)
 <use project/Linear_stability_analysis-eps-converted-to.pdf>
 Package pdftex.def Info: project/Linear_stability_analysis-eps-converted-to.pdf
-  used on input line 352.
+  used on input line 174.
 (pdftex.def)             Requested size: 426.79137pt x 180.9365pt.
 
-Overfull \hbox (13.14828pt too wide) in paragraph at lines 356--356
-[]\T1/cmr/bx/n/17.28 Calculation of Mo-ments ap-ply-ing pe-ri-odic bound-
- []
-
-) (evaluation/evaluation.tex [26 <./project/Linear_stability_analysis-eps-conve
-rted-to.pdf>]
-Chapter 6.
-) (conclusion/conclusion.tex [27
-
-]
-Chapter 7.
-) (appendix/appendix.tex [28
+[38 <./project/Linear_stability_analysis-eps-converted-to.pdf>])
+(conclusion/conclusion.tex [39]
+Chapter 8.
+) (appendix/appendix.tex [40
 
 ]
 Appendix A.
-) (main.bbl [29
+) (main.bbl [41
 
-]) [30
+] [42
 
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 56.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 56.
+]) [43]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 74.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 74.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 56.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 56.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 74.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 74.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 57F0CE7BF2B89CB0DF6DC6EF31932272;2027.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 56.
+(rerunfilecheck)             Checksum: F41828C264092AAAA4C2BC968F5DC508;2972.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 74.
  ) 
 Here is how much of TeX's memory you used:
- 18083 strings out of 493305
- 334299 string characters out of 3138875
- 419484 words of memory out of 3000000
- 21097 multiletter control sequences out of 15000+200000
- 22831 words of font info for 57 fonts, out of 3000000 for 9000
+ 20042 strings out of 493305
+ 369840 string characters out of 3138875
+ 459104 words of memory out of 3000000
+ 22949 multiletter control sequences out of 15000+200000
+ 24967 words of font info for 60 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,56p,1089b,462s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,11n,96p,1184b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecti1200.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
-ec\dpi600\ecbx1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
-\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Chloe\AppData\Local\MiKTeX
-\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Chloe\AppData\Lo
-cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Chloe\
-AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.pk> <C:\Us
-ers\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.
+ecrm1000.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
+ec\dpi600\ecti1200.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
+\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts
+\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Chloe\AppData\Local\MiKTeX
+\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Chloe\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Chloe\
+AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Us
+ers\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.
 pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
-\eccc1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
-\ec\dpi600\eccc1728.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
-r\jknappen\ec\dpi600\eccc2074.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-mi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-symbols/msbm10.pfb>
-Output written on main.pdf (33 pages, 530025 bytes).
+\ecbx2488.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
+\ec\dpi600\eccc1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
+r\jknappen\ec\dpi600\eccc1728.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\font
+s\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/s
+ymbols/msbm10.pfb>
+Output written on main.pdf (46 pages, 1195269 bytes).
 PDF statistics:
- 960 PDF objects out of 1000 (max. 8388607)
- 114 named destinations out of 1000 (max. 500000)
- 251 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1290 PDF objects out of 1440 (max. 8388607)
+ 185 named destinations out of 1000 (max. 500000)
+ 399 words of extra memory for PDF output out of 10000 (max. 10000000)
 

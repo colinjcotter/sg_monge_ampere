@@ -17,8 +17,21 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{color}
 \usepackage{bm}
+\usepackage{amsthm}
+\usepackage{subfig}
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 \onehalfspacing
+
+%Theorem environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 
 \title{Advanced Numerical Algorithms for the Simulation of Weather Fronts}
 \author{Chloe Raymont}
@@ -37,6 +50,11 @@ Your abstract goes here
 \renewcommand{\abstractname}{Declaration}
 \begin{abstract}
 	The work contained in this thesis is my own work unless otherwise stated
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{ChloeRaymont_esignature}
+	\end{figure}
+	
 \end{abstract}
 
 \tableofcontents

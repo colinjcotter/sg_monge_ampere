@@ -1,9 +1,0 @@
-#!/bin/bash
-#PBS -N chloe1
-#PBS -m be
-#PBS -q standard
-
-export PYTHONPATH=/home/ma/c/cvr12/OptimalTransport/PyMongeAmpere-build:$PYTHONPATH
-cd /home/ma/c/cvr12/OptimalTransport/PyMongeAmpere-build/examples/sg_monge_a\
-mpere/sg_ma_test/video_test
-python plot_laguerre_cells.py > results.out
