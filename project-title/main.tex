@@ -23,8 +23,6 @@
 
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
-\onehalfspacing
-
 %Theorem environment
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -33,14 +31,14 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
-\title{Advanced Numerical Algorithms for the Simulation of Weather Fronts}
+\title{An Advanced Numerical Algorithm for the Simulation of Weather Fronts}
 \author{Chloe Raymont}
-\newcommand{\comments}[1]{{\bfseries \color{red} Comment: #1 \\}}
+\newcommand{\comments}[1]{{\bfseries \color{red} Comment: #1 }}
 \begin{document}
 \input{title/title.tex}
-
+\onehalfspacing
 \begin{abstract}
-Your abstract goes here
+This project studies the Eady Model for the formation of weather fronts in the atmosphere. Using the semi-geostrophic equations introduced by Hoskins \cite{Hoskins1975} by means of co-ordinate transform. A development to the transformation by Shutts and Cullen \cite{Shutts1987} leads to a form of the semi-geostrophic equations which can be reformulated as an optimal transport problem where the energy is the cost to be minimised \cite{Cullen2006a}. This is shown to be equivalent to an optimal transport problem minimising a quadratic cost. In this form we show that the Damped Newton Algorithm developed by Kitawaga et al. \cite{Kitagawa2016,Merigot2017a} for solving such problems can be applied. Numerical error and performance are subsequently analysed to validate results.
 \end{abstract}
 
 \renewcommand{\abstractname}{Acknowledgements}
@@ -49,7 +47,7 @@ Your abstract goes here
 \end{abstract}
 \renewcommand{\abstractname}{Declaration}
 \begin{abstract}
-	The work contained in this thesis is my own work unless otherwise stated
+	The work contained in this project is my own work unless otherwise stated.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.7\linewidth]{ChloeRaymont_esignature}
@@ -60,7 +58,6 @@ Your abstract goes here
 \tableofcontents
 \listoffigures
 %\listoftables
-
 \input{introduction/introduction.tex}
 \input{background/background.tex}
 \input{project/project.tex}

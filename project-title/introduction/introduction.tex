@@ -1,1 +1,16 @@
-\chapter{Introduction}
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+Numerical weather prediction (NWP) presents a rich area of research in geophysical fluid dynamics. With computer models continuing to provide larger range predictions \cite{Cullen2006a} questions arise as to the limit of predictability. Whilst the mathematical theory underlying NWP has been in place as early as the 1900s \cite{Golding2004}, predictions were limited by the capabilities of available technology. Of course, this is not the only limitation with chaos theory and the assimilation of observed data to be considered equally \cite{Weisheimer}. The increasing impact of extreme weather events on the world population means there is a vested interest in improving the predictability of NWP.
+\\
+\linebreak
+This report is concerned developing a numerical modelling the formation of weather fronts, termed as frontogenesis{\tiny }. We study this process under the Semi-Geostrophic (SG) Vertical Slice Eady model (SG/EM), the governing equations for which we develop in Chapter \ref{governingequations}. As discussed by Mike Cullen in \cite{Cullen2006a} SG theory provides a highly predictable, general system for the study of large-scale atmospheric flow. With no formal mathematical definition we follow \cite{Hoskins1982}, where fronts are considered as regions that have length scales comparable to the height of the domain considered, whilst exhibiting large gradients in other variables in the cross direction. Frontogenesis has been studied extensively \cite{Yamazaki2017, Cullen2008, Rotunno1994,Nakamura1988,Nakamura1994}, naturally, as it features heavily in large-scale atmosphere flow (of the order 1000km) \cite{Cullen2006a}.
+\\
+\linebreak
+Work by B. Hoskins expressed the SG equations in \textquoteleft geostrophic co-ordinates\textquoteright \ \cite{Hoskins1972}. This was subsequently developed by Shutts and Cullen \cite{Shutts1987}. In this framework the SG equations exhibit interesting geometrical properties. Namely it was shown that solutions can be sought as those of an equivalent Monge-Amp\`{e}re/Optimal Transport problem \cite{Cullen2006a}. This reformulation is discussed in chapter \ref{Chapter3}.
+\\
+\linebreak
+Our focus now shifts to the numerical solution of SG/EM through optimal transport methods. In this report following the suggestion of Dr Cotter, a solution using the Damped Newton Algorithm (DA) recently developed by M\`{e}rigot et al. \cite{Merigot2017, Merigot2017a, Kitagawa2016} is explored. This was shown to be particularly efficient in solving optimal transport problems of the Monge-Amp\`{e}re type. In Chapter \ref{OptimalTransport} we highlight the suitability of DA in solving the SG/EM equations for frontogenesis, and subsequently discuss how this is achieved in Chapter \ref{algorithm}.
+\\
+\linebreak
+Finally, in Chapter \ref{results} we aim to validate the suitability of this numerical algorithm in solving SG/EM. This will be done through suitable analysis of the error as well as comparison to results produced by other numerical models under similar conditions \cite{Nakamura1994,Cullen1993}.
+

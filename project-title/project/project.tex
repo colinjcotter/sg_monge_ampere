@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Semi-discrete Optimal Transport}
+\chapter{Semi-discrete Optimal Transport \label{OptimalTransport}}
 The Damped Newton algorithm, hereafter DA, developed by M\'{e}rigot et al. \cite{Merigot2017} solves a semi-discrete Monge-Amp\`{e}re type optimal transport problem. It's efficiency in exploiting the properties of sparse matrices and linear convergence \cite{Merigot2017} make it practical for implementation in the solution for equations \ref{EadyGC}. Further detail describing the application of the algorithm in the solution to the Eady Model is given in chapter \ref{algorithm}. In this chapter an overview of semi-discrete optimal transport is given using definitions given in \cite{Kitagawa2016, Merigot2017} as well as a comparison to the energy minimisation to which it is applied. A rigorous proof of the formulation of \ref{EadyModel} as a Monge-Amp\`{e}re type optimal transport problem is given in Cullen, 2006 \cite{Cullen2006a}.
 \section{Semi-discrete Optimal Transport}
 \begin{figure}[h]
@@ -120,6 +120,8 @@ The mapping is performed by first finding the distance of the point from the lef
 \end{equation*}
 This is implemented as:
 \comments{insert to\_fundamental\_domain code}
+\section{Validate applying DA to SG}
+\comments{sparse matrix etc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{A Numerical Solution to the Eady Model for Frontogenesis \label{algorithm}}
 In this section the numerical implementation including the use of the Damped Newton Algroithm developed by \cite{Merigot2017} is explained in detail. 
@@ -164,6 +166,7 @@ The steps involved in solving the Eady Model for frontogenesis described above a
 	Where $X_n, Z_n$ represent the geostrophic points at the current time step, and $\tilde{x}_n,\tilde{z}_n$ represent the centroids of the Laguerre cells. In this project both a Forward-Euler scheme and Heun's method have been used for time-stepping.
 	\item[Step 5] The geostrophic points are now replaced with $X_{n+1}, Z_{n+1}$ and steps 3 and 4 are repeated until the final time is reached.
 \end{description}
+For the remainder of the report this numerical solver for \ref{EadyGC} will be referred to as SG/DA.
 \section{Initialisation of Points in Geostrophic Space \label{Initpoints}}
 Given a finite set of equidistant points in the physical domain $\Gamma$, the points are transformed to geostrophic space using
 \begin{equation}
@@ -262,7 +265,7 @@ where $\tilde{x}_i^n,\tilde{z}_i^n$ represent the centroids of the Laguerre cell
 	\label{centroids}
 \end{equation}
 Before the next iteration of the time-step the points $X_i^{n+1}, Z_i^{n+1}$ are mapped back to the fundamental domain.
-\subsection{Heun's Method}
+\subsection{Heun's Method \label{Heun}}
 For comparison and to test convergence the time-stepping was also implemented using Heun's method \cite{Griffiths2010}.
 \begin{equation}
 	\begin{aligned}
@@ -279,8 +282,14 @@ Where again, $\hat{x}_i^n$ and $\hat{z}_i^n$ represent the centroids of the Lagu
 \comments{include map back to fundamental domain explanation and why this isn't done for centroids}
 A comparison of results using Heun's method and the forward-Euler scheme for timestepping is detailed in Chapter \ref{results}.
 \section{Visualising the Output \label{plotting}}
-Given the Geostrophic points and the associated weights which solve the optimal transport problem a Laguerre diagram satisfying \ref{def: laguerre cell} can be constructed. In the Monge-Amp\`{e}re library of DA \cite{Merigot2017,Merigot2017a} there is a function to rasterize a Laguerre diagram to a array of pixels of a specified size. The function \textquoteleft pcolor\textquoteright \ \\
-\linebreak
+Given the Geostrophic points and the associated weights which solve the optimal transport problem a Laguerre diagram satisfying \ref{def: laguerre cell} can be constructed. In the Monge-Amp\`{e}re library of DA \cite{Merigot2017,Merigot2017a} the function \textquoteleft rasterization\_2\textquoteright \ rasterizes a Laguerre diagram to a array of pixels of a specified size. The function \textquoteleft pcolormesh\textquoteright \ in the matplotlib is then used to visualise these results. To create this plot the periodic boundary conditions must again be considered carefully. This is done in a similar manner to the how they are treated for the application of DA. Copies of the points, weights and now colour values (in this case $\theta '$) are made and the \textquoteleft rasterization\_2\textquoteright \ function is called with these inputs as well as the boundaries of the original domain.\\
+\comments{inline code?}
 For example, in the images below the Laguerre cells are coloured according to the value of $\theta '$ given by, $\theta ' = \frac{f^2\theta_0 Z}{g}$
-\comments{make pictures small N to see cells}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{project/laguerre_diagram_colour}
+	\caption[Coloured Laguerre Diagram of Cells]{Laguerre Diagram of cells $(24\times 12)$ found by finding the weights associated with the optimal transport of points initialised in geostrophic space to cells in the physical domain under the constraint of volume conservation. The cells are coloured accoring to the value of $\theta '$ given by the $Z$ co-ordinate of the corresponding point in geostrophic space}
+	\label{fig:laguerrediagramcolour}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
