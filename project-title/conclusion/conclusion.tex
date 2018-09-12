@@ -1,1 +1,18 @@
-\chapter{Conclusion}
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+In the first part of this project we brought together the results of \cite{Hoskins1975,Shutts1987,Cullen2006a} in developing the framework for studying the process of frontogenesis through by applying the Eady model for the growth of baroclinic instability to the semi-geostrophic equations. The instability was introduced through a perturbation to the background potential temperature $\theta '$. By transforming to geostrophic co-ordinates we saw how the SG equations could be written in a form in which the ageostrophic velocity was described implicitly.
+\\
+\linebreak
+Analysing work by Cullen \cite{Cullen2006a}, the need for an inverse transformation drove the solution towards that of a Monge-Amp\`{e}re equation. This was finally shown to be an optimal transport problem minimising the energy \ref{energy}. Lemma \ref{energy lemma} showed this minimisation to be equivalent to that of minimisation of a quadratic cost function. In this form the problem was shown to be analogous to the problem solved by Kitagawa et al. in \cite{Kitagawa2016} with DA \cite{Merigot2017a}.
+\\
+\linebreak
+Using this framework we developed the equations in the form of a semi-discrete optimal transport problem finding the weights associated with the optimal transport map that takes cells in physical space to points in geostrophic space, under the constraint that the source and target domains have associated uniform probability densities. The use of continuous and discrete uniform probability densities satisfies the volume conservation condition Monge-Amp\`{e}re formulation of SG.
+\\
+\linebreak
+Initial results in the form of plots of $\theta '$ over the domain $\Gamma$ were consistent with what had been previously observed in simulations by \cite{Cullen1993, Nakamura1994}. Namely frontogenesis was clearly observable between days $5$ and $6$ and collapse of the front by day $9$. The cycle of front formation and collapse observed by other simulations also appeared.
+\\
+\linebreak 
+In the absence of analytical solutions for the model studied we undertook an analysis of error by means of studying the total energy of the system. Since the governing equations were known to be energy conservative \cite{Cullen2006a} numerical error in the algorithm could be quantified. Results were promising as they showed the rate of convergence to be consistent with what was expected for each time stepping method used, order $1$ and $2$ for the Forward Euler and Heun scheme's respectively. Moreover, the implementation of Heun's method in time stepping was shown achieve results close to conserving energy in the system. A possible extension to this work could be implementing an implicit time stepping method. This would require a way to apply Newton's algorithm to solve for geostrophic points at subsequent time steps. In particular, a way to characterise the gradient of the right hand side of the time evolution of geostrophic co-ordinates will need to be found.
+
+Finally, \comments{performance, periodicity}
+\comments{extension: develop energy conservative implicit timestepping method}
