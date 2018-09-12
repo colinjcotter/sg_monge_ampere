@@ -1,26 +1,46 @@
 \begin{thebibliography}{10}
 
-\bibitem{Eliassen1962}
-A.~Eliassen.
-\newblock {On the vertical circulation in the frontal zones}.
-\newblock {\em Geofysiske Publikasjoner}, 4(4):147--160, 1962.
-
-\bibitem{Cullen2006a}
-Michael J~P Cullen.
-\newblock {\em {A Mathematical Theory of Large-scale Atmosphere/ocean Flow}}.
-\newblock Imperial College Press, jan 2006.
-
 \bibitem{Hoskins1975}
 Brian~J. Hoskins.
 \newblock {The Geostrophic Momentum Approximation and the Semi-Geostrophic
   Equations}.
 \newblock {\em Journal of the Atmospheric Sciences}, 32(2):233--242, 1975.
 
-\bibitem{Hoskins1972}
-B.~J. Hoskins and F.~P. Bretherton.
-\newblock {Atmospheric Frontogenesis Models: Mathematical Formulation and
-  Solution}.
-\newblock {\em Journal of the Atmospheric Sciences}, 29(1):11--37, jan 1972.
+\bibitem{Shutts1987}
+G.~J. Shutts and M.~J.~P. Cullen.
+\newblock {Parcel Stability and its Relation to Semigeostrophic Theory}.
+\newblock {\em Journal of Atmospheric Sciences}, 44:1318--1330, may 1987.
+
+\bibitem{Cullen2006a}
+Michael J~P Cullen.
+\newblock {\em {A Mathematical Theory of Large-scale Atmosphere/ocean Flow}}.
+\newblock Imperial College Press, jan 2006.
+
+\bibitem{Kitagawa2016}
+Jun Kitagawa, Quentin M{\'{e}}rigot, and Boris Thibert.
+\newblock {Convergence of a Newton algorithm for semi-discrete optimal
+  transport}.
+\newblock 2016.
+
+\bibitem{Merigot2017a}
+Quentin M{\'{e}}rigot.
+\newblock {PyMongeAmpere, python}, 2017.
+
+\bibitem{Golding2004}
+Brian Golding, Kenneth Mylne, and Peter Clark.
+\newblock {The history and future of numerical weather prediction in the Met
+  Office}.
+\newblock {\em Weather}, 59(11):299--306, nov 2004.
+
+\bibitem{Weisheimer}
+Antje Weisheimer.
+\newblock {Antje Weisheimer Exploring and extending the limits of weather
+  predictability?}
+
+\bibitem{Hoskins1982}
+B~J Hoskins.
+\newblock {The Mathematical Theory of Frontogenesis}.
+\newblock {\em Annual Review of Fluid Mechanics}, 14(1):131--151, 1982.
 
 \bibitem{Yamazaki2017}
 Hiroe Yamazaki, Jemma Shipton, Michael~J.P. Cullen, Lawrence Mitchell, and
@@ -29,11 +49,46 @@ Hiroe Yamazaki, Jemma Shipton, Michael~J.P. Cullen, Lawrence Mitchell, and
   finite element method}.
 \newblock {\em Journal of Computational Physics}, 343:130--149, aug 2017.
 
-\bibitem{Bannon1988}
-Peter~R. Bannon.
-\newblock {Linear Baroclinic instability with the Geostrophic Momentum
-  Approximation}.
-\newblock {\em Journal of Atmospheric Sciences}, feb 1988.
+\bibitem{Cullen2008}
+Mike~J.P. Cullen.
+\newblock {A comparison of numerical solutions to the Eady frontogenesis
+  problem}.
+\newblock In {\em Quarterly Journal of the Royal Meteorological Society},
+  volume 134, pages 2143--2155. Wiley-Blackwell, oct 2008.
+
+\bibitem{Rotunno1994}
+Richard Rotunno, William~C. Skamarock, and Chris Snyder.
+\newblock {An Analysis of Frontogenesis in Numerical Simulations of Baroclinic
+  Waves}, dec 1994.
+
+\bibitem{Nakamura1988}
+Noboru Nakamura.
+\newblock {Scale Selection of Baroclinic Instability - Effects of
+  Stratification and Nongeostrophy}.
+\newblock {\em Journal of Atmospheric Sciences}, 45:3253--3267, 1988.
+
+\bibitem{Nakamura1994}
+N.~Nakamura.
+\newblock {Nonlinear Equilibriation of Two-Dimensional Eady Waves: Simulations
+  with Viscous Geostrophic Momentum Equations}.
+\newblock {\em Journal of the Atmospheric Sciences}, 51:1023--1035, 1994.
+
+\bibitem{Eady}
+E~T Eady.
+\newblock {Long Waves and Cyclone Waves}.
+\newblock {\em Tellus}, 1(3):33--52, 1949.
+
+\bibitem{Hoskins1972}
+B.~J. Hoskins and F.~P. Bretherton.
+\newblock {Atmospheric Frontogenesis Models: Mathematical Formulation and
+  Solution}.
+\newblock {\em Journal of the Atmospheric Sciences}, 29(1):11--37, jan 1972.
+
+\bibitem{Merigot2017}
+Quentin M{\'{e}}rigot, Jocelyn Meyron, and Boris Thibert.
+\newblock {An algorithm for optimal transport between a simplex soup and a
+  point cloud}.
+\newblock 2017.
 
 \bibitem{Cullen1993}
 M.~J.P. Cullen and I~Roulstone.
@@ -41,18 +96,36 @@ M.~J.P. Cullen and I~Roulstone.
   two-dimensional Eady waves}.
 \newblock {\em Journal of the Atmospheric Sciences}, 50:328--332, 1993.
 
+\bibitem{MetOffice2018}
+{Met Office}.
+\newblock {Weather Fronts}, 2018.
+
+\bibitem{MetOffice2018a}
+{Met Office}.
+\newblock {Surface Pressure Charts}, 2018.
+
+\bibitem{Eliassen1962}
+A.~Eliassen.
+\newblock {On the vertical circulation in the frontal zones}.
+\newblock {\em Geofysiske Publikasjoner}, 4(4):147--160, 1962.
+
+\bibitem{McWilliams2006}
+James C~(UCLA) McWilliams.
+\newblock {Fundamentals of Geophysical Fluid Dynamics}.
+\newblock page 283, 2011.
+
+\bibitem{Bannon1988}
+Peter~R. Bannon.
+\newblock {Linear Baroclinic instability with the Geostrophic Momentum
+  Approximation}.
+\newblock {\em Journal of Atmospheric Sciences}, feb 1988.
+
 \bibitem{Blumen1990}
 William Blumen.
 \newblock {A Semigeostrophic Eady-Wave Frontal Model Incorporating Momentum
   Diffusion. Part I: Model and Solutions}.
 \newblock {\em Journal of the Atmospheric Sciences}, 47(24):2890--2902, dec
   1990.
-
-\bibitem{Nakamura1994}
-N.~Nakamura.
-\newblock {Nonlinear Equilibriation of Two-Dimensional Eady Waves: Simulations
-  with Viscous Geostrophic Momentum Equations}.
-\newblock {\em Journal of the Atmospheric Sciences}, 51:1023--1035, 1994.
 
 \bibitem{Brenier2009}
 Yann Brenier and Mike Cullen.
@@ -69,22 +142,6 @@ J.-D. Benamou and Y.~Brenier.
 Walter Rudin.
 \newblock {\em {Real And Complex Analysis}}.
 \newblock McGraw-Hill, 1986.
-
-\bibitem{Merigot2017}
-Quentin M{\'{e}}rigot, Jocelyn Meyron, and Boris Thibert.
-\newblock {An algorithm for optimal transport between a simplex soup and a
-  point cloud}.
-\newblock 2017.
-
-\bibitem{Kitagawa2016}
-Jun Kitagawa, Quentin M{\'{e}}rigot, and Boris Thibert.
-\newblock {Convergence of a Newton algorithm for semi-discrete optimal
-  transport}.
-\newblock 2016.
-
-\bibitem{Merigot2017a}
-Quentin M{\'{e}}rigot.
-\newblock {PyMongeAmpere, python}, 2017.
 
 \bibitem{Griffiths2010}
 David~F. Griffiths and Desmond~J. Higham.
