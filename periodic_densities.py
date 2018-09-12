@@ -161,12 +161,8 @@ def periodicinx_draw_laguerre_cells_2(pxdens,Y,w):
     y[3*a] = E[:,1]
     y[3*a+1] = E[:,3]
     y[3*a+2] = nan
-    #print(x)
-    #print(y)
-    return E,x,y
-    #plt.plot(Y[:,0],Y[:,1],'.')
-    #plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
-    #plt.savefig('periodic_plot.png')
+    
+    return x,y
 
 #FIX - mirror image output
 def periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,ww,hh):
@@ -176,7 +172,9 @@ def periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,ww,hh):
     v = np.array([[0,0], [x0,0], [-x0,0]])
     Yf = np.zeros((3*N,2))
     wf = np.hstack((w,w,w))
+    
     Cf = np.vstack((C,C,C))
+    
     for i in xrange(0,3):
         Nb = N*i
         Ne = N*(i+1)
@@ -184,3 +182,22 @@ def periodic_laguerre_diagram_to_image(dens,Y,w,C,bbox,ww,hh):
 
     img = ma.laguerre_diagram_to_image(dens,Yf,wf,Cf,bbox,ww,hh)
     return(img)
+
+def periodicinx_rasterization(dens,Y,w,C,bbox,ww,hh):
+    N = Y.shape[0]
+    Y0 = dens.to_fundamental_domain(Y)
+    x0 = dens.u[0]
+    v = np.array([[0,0], [x0,0], [-x0,0]])
+
+    #make copies of points, weights and colours
+    Yf = np.zeros((3*N,2))
+    wf = np.hstack((w,w,w))
+    Cf = np.vstack((C,C,C))
+    
+    for i in xrange(0,3):
+        Nb = N*i
+        Ne = N*(i+1)
+        Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
+        
+    A = ma.ma.rasterize_2(dens, Yf, wf, Cf, bbox[0], bbox[1], bbox[2], bbox[3], 1000, 1000)
+    return(A)
