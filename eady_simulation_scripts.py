@@ -5,14 +5,12 @@ import numpy as np
 import periodic_densities as pdx
 import MongeAmpere as ma
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
 import os
-from eady_initial import initialise_points, eady_OT, forward_euler_sg, heun_sg
+from sg_da import initialise_points, eady_OT, forward_euler_sg, heun_sg
 
 
 def frontogenesis_timestep(N, days, tstepsize, Heun = None):
-    tf = 60*60*24*days
+    tf = 60*60*24*days #final time
     
     #initialise parameters from SG Eady model
     H = 1.e4

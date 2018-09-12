@@ -1,13 +1,14 @@
- import matplotlib
+import matplotlib
 matplotlib.use('Agg')
 
 import numpy as np
 from periodic_densities import Periodic_density_in_x, sample_rectangle
 import MongeAmpere as ma
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
+import cProfile
 import os
+
+#pr = cProfile.Profile() #enable for performance testing
 
 def initialise_points(N, bbox, RegularMesh = None):
     '''Function to initialise a mesh over the domain [-L,L]x[0,H]
@@ -27,6 +28,7 @@ def initialise_points(N, bbox, RegularMesh = None):
     H = bbox[3]
     L = bbox[2]
 
+    #set up regular mesh or optimised sample of random points
     if RegularMesh:
         npts = N
         dx = 1./npts
@@ -50,15 +52,15 @@ def initialise_points(N, bbox, RegularMesh = None):
         x = X[:,0]*L - L
         z = (X[:,1]+0.5)*H
         y = np.array([x,z]).T
-
-
+    
+    #define thetap from CULLEN 2006
     Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
     theta0 = 300.
     C = 3e-6
     B = 0.25
-    #B = 1.0e-3* Nsq * theta0 * H / g
+
     thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
     vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
     
@@ -70,23 +72,27 @@ def initialise_points(N, bbox, RegularMesh = None):
     
     return Y, thetap
     
-def eady_OT(Y, bbox, dens, eps_g = 1.e-7,verbose = False):
+def eady_OT(Y, bbox, dens, verbose = False):
     H = bbox[3]
+
+    #initialise discrete target density, uniform over
+    #N points
     nx = Y[:,0].size
     nu = np.ones(nx)
     nu = (dens.mass() / np.sum(nu)) * nu
-    
+
+    #initalise weights to ensure positive cell mass
     w = 0.*Y[:,0]
     Z = Y[:,1]
     mask = Z>0.9*H
     w[mask] = (Z[mask] - 0.9*H)**2
     mask = Z<0.1*H
     w[mask] = (Z[mask] - 0.1*H)**2
-
-    w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g=1.0e-5,verbose=False)
+    
+    w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g = 1.e-5,verbose=False)
     return w
 
-def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
+def forward_euler_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using forward Euler method
@@ -95,6 +101,10 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     
     Y initial data in Geostrophic co-ordinates
     h time step size
+
+    optional args:
+    newdir path to directory to store results
+    add_data enable to store results
     
     returns:
     
@@ -125,11 +135,12 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
         Y.tofile(pointsdir+'/points_'+str(0)+'.txt',sep = " ",format = "%s")
         thetap = Y[:,1]*f*f*theta0/g
         thetap.tofile(thetapdir+'/thetap_'+str(0)+'.txt',sep=" ",format="%s")
-        
+
+    #pr.enable()  #enable for performance testing
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-        
+            
         if add_data:
             w.tofile(weightsdir+'/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
@@ -150,10 +161,10 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
             Y.tofile(pointsdir+'/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
             thetap = Y[:,1]*f*f*theta0/g
             thetap.tofile(thetapdir+'/thetap_'+str(n+1)+'.txt',sep=" ",format="%s")
-
+    #pr.disable() #enable for performance testing
     return Y, w, t
 
-def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
+def heun_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = None):
     '''
     Function that finds time evolution of semi-geostrophic equations
     using Heun's order 2 method
@@ -166,10 +177,15 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
     bbox domain over which equations are being solved
     h time step size
     
+    optional args:
+    newdir path to directory to store results
+    add_data enable to store results
+    
     returns:
     
     Y numpy array solution in geostrophic co-ordinates at time tf
     w numpy array of weights associated with Y
+    
     '''
     H = bbox[3]
     L = bbox[2]
@@ -197,11 +213,12 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
         Y.tofile(pointsdir+'/points_'+str(0)+'.txt',sep = " ",format = "%s")
         thetap = Y[:,1]*f*f*theta0/g
         thetap.tofile(thetapdir+'/thetap_'+str(0)+'.txt',sep=" ",format="%s")
-    
+
+    #pr.enable() #enable for performance testing
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-
+        
         #find centroids of laguerre cells for use in time-stepping
         [Yc, m] = dens.lloyd(Y, w)
 
@@ -227,5 +244,5 @@ def heun_sg(Y, dens, tf, bbox, newdir, h=1800, t0=0., add_data = None):
             Y.tofile(pointsdir+'/points_'+str(n+1)+'.txt',sep = " ",format = "%s")
             thetap = Y[:,1]*f*f*theta0/g
             thetap.tofile(thetapdir+'/thetap_'+str(n+1)+'.txt',sep=" ",format="%s")
-
+    #pr.disable() #enable for performance testing
     return Y, w, t
