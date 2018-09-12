@@ -90,15 +90,13 @@ This inclusion of periodic boundary conditions allows Laguerre cells to cover ar
 	\caption[Optimal Transport with Periodic Boundary Conditions]{The solution to the optimal transport of the same points shown in figure \ref{fig:laguerrediagramotw}, however with the density initialised with periodic boundary conditions in $x$. The area shaded in grey represents a single Laguerre cell.}
 	\label{fig:laguerrediagramotpw}
 \end{figure}
-\subsection{Definitions of Mass with Periodic Boundary Conditions}
-\begin{figure}[h]
+\subsection{Calculating Moments of a cell with Periodic Boundary Conditions}
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\linewidth]{project/laguerre_diagram_OTPw_periodic}
-	\caption[Periodic boundary conditions with 'ghost' points]{The image above shows how the Laguerre diagram for periodic boundary conditions is created with 'ghost' points on either side of the domain. Arrows show where ghost points contribute to Laguerre cells of positive mass in the domain $\Gamma$}
+	\caption[Periodic boundary conditions with 'ghost' points]{The image above shows how the Laguerre diagram for periodic boundary conditions is created with 'ghost' points on either side of the domain. Arrows show where ghost points contribute to Laguerre cells with positive mass in the domain $\Gamma$}
 \end{figure}
 
-\comments{include the definition of mass of a cell and a better written description of the partition given by a laguerre diagram (tesselation/zero measure sets)}
-\comments{include definition of the fundamental domain}
 \subsection{Mapping to the Fundamental Domain}
 Under the geostrophic transformation \ref{transformation} and also in time-stepping points in geostrophic space it is possible for points to travel exterior the boundaries of the domain $\Gamma$. In the $x$ direction the boundary conditions imposed are periodic. If points are mapped so that their $x$-co-ordinates are exterior to the interval $[-L,L]$, they can be mapped to the domain $\Gamma$, the \textquoteleft fundamental domain\textquoteright, using the periodicity, without affecting the result. \comments{better phrasing please} In fact, in the implementation of DA this is necessary at every time step to ensure that the mass of cells remains positive. This is implemented by the function \textquoteleft to\_fundamental\_domain\textquoteright \ adapted from DA \cite{Merigot2017a} to treat periodic boundary conditions in $x$. An example of this is shown in figure \ref{fundamental domain} below, where the fundamental domain being considered is $[0,1]\times[0,1]$.
 \begin{figure}[h!]
@@ -120,8 +118,14 @@ The mapping is performed by first finding the distance of the point from the lef
 \end{equation*}
 This is implemented as:
 \comments{insert to\_fundamental\_domain code}
-\section{Validate applying DA to SG}
-\comments{sparse matrix etc}
+\section{Validating the application of DA to the system SG/EM}
+In the sections above we have described how the system of equations SG/EM can be reformulated as an optimal transport problem and how the target set of points in geostrophic space can be discretised by the use of Dirac masses to define a probability density. Defining a continuous uniform density on the domain $\Gamma$ we see that finding a transport map which takes geostrophic points to areas in the physical domain whilst minimising the energy \ref{energy1} is an optimal transport problem.
+\\
+\linebreak
+In this chapter the application of DA to solving semi-discrete optimal transport through the use of Laguerre cells in \cite{Merigot2017,Kitagawa2016} was described.  By viewing the source density as a tesselation of fluid \textquoteleft parcels\textquoteright. Viewed as Laguerre cells the transport of geostrophic points to fluid parcels in the physical domain minimising a quadratic cost function is a form of semi-discrete optimal transport problem solved by DA. We showed by lemma \ref{energy lemma} that minimising the energy was equivalent to minimising a quadratic cost function.
+\\
+\linebreak
+In Kitawaga et al. \cite{Kitagawa2016} and M\'{e}rigot el al. \cite{Merigot2017} showed that the algorithm DA exhibits global linear convergence, which is much better than other algorithms for semi-discrete optimal transport where convergence is typically $O\left(\frac{N^3}{\epsilon}\right)$ where $N$ is the number of points in the discrete target set and $\epsilon$ is the desired error \cite{Kitagawa2016}. In fact in their own experiments the algorithm exhibited even better convergence than this! \comments{Sparsity??} Such an efficient algorithm is particularly attractive for solving SG/EM as the optimal transport problem will need to be solved at each time step for the set of geostrophic points generated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{A Numerical Solution to the Eady Model for Frontogenesis \label{algorithm}}
 In this section the numerical implementation including the use of the Damped Newton Algroithm developed by \cite{Merigot2017} is explained in detail. 
