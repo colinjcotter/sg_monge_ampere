@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Semi-discrete Optimal Transport \label{OptimalTransport}}
-The Damped Newton algorithm, hereafter DA, developed by M\'{e}rigot et al. \cite{Merigot2017} solves a semi-discrete Monge-Amp\`{e}re type optimal transport problem. It's efficiency in exploiting the properties of sparse matrices and linear convergence \cite{Merigot2017} make it practical for implementation in the solution for equations \ref{EadyGC}. Further detail describing the application of the algorithm in the solution to the Eady Model is given in chapter \ref{algorithm}. In this chapter an overview of semi-discrete optimal transport is given using definitions given in \cite{Kitagawa2016, Merigot2017} as well as a comparison to the energy minimisation to which it is applied. A rigorous proof of the formulation of \ref{EadyModel} as a Monge-Amp\`{e}re type optimal transport problem is given in Cullen, 2006 \cite{Cullen2006a}.
+\chapter{Using Semi-discrete Optimal Transport to solve the Semi-Geostrophic Equations \label{OptimalTransport}}
+The Damped Newton algorithm, hereafter DA, developed by M\'{e}rigot et al. \cite{Merigot2017} solves a semi-discrete Monge-Amp\`{e}re type optimal transport problem. It's efficiency (linear convergence) \cite{Kitagawa2016} make it practical for implementation in the solution for equations \ref{EadyGC}. Further detail describing the application of the algorithm in the solution to the Eady Model is given in chapter \ref{algorithm}. In this chapter an overview of semi-discrete optimal transport is given using definitions given in \cite{Kitagawa2016, Merigot2017} its application to the energy minimisation problem described in \ref{Chapter3}.
 \section{Semi-discrete Optimal Transport}
 \begin{figure}[h]
 	\centering
@@ -8,9 +8,12 @@ The Damped Newton algorithm, hereafter DA, developed by M\'{e}rigot et al. \cite
 	\caption[Semi-discrete Optimal Transport]{A discrete (target) set $Y \subseteq \mathbb{R}^2$ represented by blue points in a compact domain (source) $\Gamma \subseteq \mathbb{R}^2 $}
 	\label{fig:probmeasure}
 \end{figure}
-Optimal transport problems describe the problem of finding a map between two sets, a target set and a source set, each with an associated density, in such a way that the "cost" associated with the mapping is minimised. In semi-discrete optimal transport the target set is a finite set.\\
+Optimal transport problems describe the problem of finding a map between two sets, a target set and a source set, each with an associated density, in such a way that the \textquoteleft cost\textquoteright associated with the mapping is minimised. In semi-discrete optimal transport the target set is a finite set.\\
 \linebreak
-In Kitagawa et al. \cite{Kitagawa2016} a wonderful analogy with travel distance to bakeries in a city is made, where the source set is considered as a city and the discrete target set is the locations of bakeries in the city. In this report the problem will be explained in the context in which it will subsequently be implemented. Namely, the source set is the domain $\Gamma$, the physical space described in section \ref{Chapter3} and the target set, the set of points in geostrophic space. The optimal transport problem finds a partition of the domain, up to sets of measure zero, such that every point in a region of the partion is closest to the point at the centre of that region. In this analogy the cost being minimised is the travel distance to the point $\bm{Y}_i$, $c(\bm{x},\bm{Y}_i) = \|\bm{x}-\bm{Y}_i \|^2$, where $\bm{x} \in \Gamma$. This is illustrated in figure \ref{fig:laguerrediagram0w}  below
+In Kitagawa et al. \cite{Kitagawa2016} a wonderful analogy with travel distance to bakeries in a city is made, where the source density is considered as the distribution of population in a city and the discrete target set is the locations of bakeries in the city. The cost to be minimised is travel distance to the bakeries. 
+\\
+\linebreak
+In this report the problem will be explained in the context in which it will subsequently be implemented. Namely, the source set is the domain $\Gamma$, the physical space described in section \ref{Chapter3} and the target set, the set of points in geostrophic space. The optimal transport problem finds a partition of the domain, up to sets of measure zero, such that every point in a region of the partition is closest to the point at the centre of that region. In this analogy the cost being minimised is the travel distance to the point $\bm{Y}_i$, $c(\bm{x},\bm{Y}_i) = \|\bm{x}-\bm{Y}_i \|^2$, where $\bm{x} \in \Gamma$. This is illustrated in figure \ref{fig:laguerrediagram0w}  below
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=8cm]{project/laguerre_diagram_0w}
@@ -23,21 +26,21 @@ To put this into a more rigorous mathematical setting, given a domain  $\Gamma\s
 	\textbf{Source measure} \\ Defined on the domain $\Gamma$. $\mu(A) = \textrm{Area}(\Gamma)^{-1}\int_A \ dxdz$, $A \subseteq \Gamma$. Note this defines a probability measure with a uniform probability density on $\Gamma$.
 \end{definition}
 \begin{definition}
-	\textbf{Target measure} \\Defined on $\mathbb{R}^2$ $\sigma((X,Z)) = \sum_{i=1}^{N}\sigma_i \delta\left(\bm{Y}-\bm{Y}_i\right)$, with finite support on $\mathbb{R}^2$. Note this defines a discrete probability measure when $\sigma(\mathbb{R}^2) = 1$, for appropriate choice of $\sigma_i$.
+	\textbf{Target measure} \\Defined on $\mathbb{R}^2$ $\nu(X,Z) = \sum_{i=1}^{N}\sigma_i \delta\left(\bm{Y}-\bm{Y}_i\right)$, with finite support on $\mathbb{R}^2$. Note this defines a discrete probability measure when $\nu(\mathbb{R}^2) = 1$, for appropriate choice of $\sigma_i$.
 	\label{target measure}
 \end{definition}
 \begin{definition}
 	\textbf{Voronoi Cells} \\ The regions enclosed by the red lines and boundaries of the domain in \ref{fig:laguerrediagram0w} are defined as Voronoi cells, $\text{Vor}(\bm{Y}_i) := \left\lbrace \bm{x} \in \Gamma \; \text{st} \; \forall \ Y_j \in Y \; c(\bm{x},\bm{Y}_i) \leq c(\bm{x},\bm{Y}_j) \right\rbrace$. The diagram is referred to as a Voronoi tesselation.
 \end{definition} 
 \begin{definition} 
-	\textbf{Transport map} \\ $T: \Gamma \rightarrow Y$ between the source measure $\mu$ and the target measure on $Y$, $\mu$ if $T_{\#}\mu = \sigma$.\\
+	\textbf{Transport map} \\ $T: \Gamma \rightarrow Y$ between the source measure $\mu$ and the target measure on $Y$, $\mu$ if $T_{\#}\mu = \nu$.\\
 \end{definition}
 \begin{definition}
 	\textbf{Pushforward} of a measure $\mu$ by a map $T: \Gamma \rightarrow Y$ is $T_{\#}\mu = \sum_{\bm{Y}_i \in Y} \mu \left( T^{-1}(\bm{Y}_i) \right) \delta(\bm{Y}-{\bm{Y}_i})$, the sum of the measures of the sets mapped to the points $\bm{Y}_i$ under $T$
 \end{definition}
 From these definitions we can see that the optimal transport map is given by,
 \begin{equation}
-	T(\bm{x}) = \arg\min_{\bm{Y}_i\in Y}\left(c(\bm{x},\bm{Y}_i)\right) \iff \sigma(\bm{Y}_i) = \mu\left(\text{Vor}(\bm{Y}_i)\right)
+	T(\bm{x}) = \arg\min_{\bm{Y}_i\in Y}\left(c(\bm{x},\bm{Y}_i)\right) \iff \nu(\bm{Y}_i) = \mu\left(\text{Vor}(\bm{Y}_i)\right)
 \end{equation}
 \section{Laguerre Cells and the Inclusion of weights}
  \begin{figure}[h]
@@ -55,10 +58,10 @@ Considering again figure \ref{fig:laguerrediagram0w} it is clear that if the den
 In this case, the optimal transport map is given by \\
 $T_\psi: x \rightarrow \text{argmin}_i\| x - y_i \|^2 + \psi_i$, where $\psi_i$ is a family of weights on $Y$ \cite{Merigot2017}.\\
 \linebreak
- The problem is then finding the weights $\psi_i$ associated to the points $\bm{Y}_i$ such that $\mu (\text{Lag}_{\bm{Y}_i}(\psi)) = \sigma(\bm{Y}_i) = \sigma_i$. The Damped Newton's Algorithm from M\'{e}rigot, Meyron and Thibert (2017) \cite{Merigot2017} finds such $\psi_i$.
+ The problem is then finding the weights $\psi_i$ associated to the points $\bm{Y}_i$ such that $\mu (\text{Lag}_{\bm{Y}_i}(\psi)) = \nu(\bm{Y}_i) = \sigma_i$. The Damped Newton's Algorithm from M\'{e}rigot, Meyron and Thibert (2017) \cite{Merigot2017} finds such $\psi_i$.
  \\
  \linebreak 
- Supposing that both the source density and target density are uniform, (ie) in definition \ref{target measure} the Laguerre cells as found by the DA code developed in \cite{Merigot2017} are shown in figure \ref{fig:laguerrediagramotw}. The Laguerre diagram highlights the fact that the densities are both specified to be uniform probability densities. In figure \ref{fig:laguerrediagram0w} the target density was not specified. This means that points are not necessarily interior to their corresponding Laguerre cells, however the cells have equal area. The cells in this case are the Laguerre cells defined above, and the weights that define the optimal transport map was found by \cite{Merigot2017} as
+ Supposing that both the source density and target density are uniform, (ie) in definition \ref{target measure} the Laguerre cells as found by DA developed in \cite{Merigot2017} are shown in figure \ref{fig:laguerrediagramotw}. The Laguerre diagram highlights the fact that the densities are both specified to be uniform probability densities. In figure \ref{fig:laguerrediagram0w} the target density was not specified. This means that points are not necessarily interior to their corresponding Laguerre cells, however the cells have equal area. The cells in this case are the Laguerre cells defined above, and the weights that define the optimal transport map was found by \cite{Merigot2017} as
  \begin{equation*}
  T(x) = \arg\min_{\bm{Y}_i\in Y}\left(c(\bm{x},\bm{Y}_i) + \psi_i\right)
  \end{equation*}
@@ -80,10 +83,10 @@ E = \frac{f^2}{2} \iint \left(\left(X-x\right)^2 + \left(Z - z\right)^2\right)\t
 \end{equation}
 Considering the geostrophic co-ordinates as the target set of finite set of points for the optimal transport problem from the domain $\Gamma = [-L,L] \times [0,H]$. The DA Algorithm finds the weights such that the area of each Laguerre cell is preserved. Physically, this amounts to the condition that the volume is conserved.
 \section{Extension for Periodic Boundary Conditions}
-As stated in Chapter \ref{governingequations} in the model for frontogenesis boundary conditions consider periodicity in $x$. This must be accounted for in the implementation of the Damped Newton Algorithm.
+As stated in Chapter \ref{governingequations} in the model for frontogenesis boundary conditions consider periodicity in $x$. This must be accounted for in the implementation of the Damped Newton Algorithm. A significant proportion of work in developing an accurate algorithm for SG/EM was to implement the functions in DA to correctly treat the periodic boundary conditions. 
 \\
 \linebreak
-This inclusion of periodic boundary conditions allows Laguerre cells to cover areas over the right and left boundaries. This means that the Laguerre edges must be continuous across the boundaries if copies of the Laguerre diagram were placed on each boundary. The Laguerre cells must have the same mass, for example, in figure \ref{fig:laguerrediagramotpw} below the top right cell extends to the left of the domain. The sum of the areas of each component of the cell must be the same as a cell in the centre of the diagram. The area of each cell remains the same as in \ref{fig:laguerrediagramotw} however the boundaries of the Laguerre cells are continuous across the left and right boundaries of the domain.
+This inclusion of periodic boundary conditions allows Laguerre cells to cover areas over the right and left boundaries. This means that the Laguerre edges must be continuous across the boundaries if copies of the Laguerre diagram were placed on each boundary. This is illustrated in figure \ref{laguerre diagram copies}. The Laguerre cells must have the same mass, for example, in figure \ref{fig:laguerrediagramotpw} below the top right cell extends to the left of the domain. The sum of the areas of each component of the cell must be the same as a cell in the centre of the diagram. The area of each cell remains the same as in \ref{fig:laguerrediagramotw} however the boundaries of the Laguerre cells are continuous across the left and right boundaries of the domain.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=8cm]{project/laguerre_diagram_OTPw}
@@ -94,10 +97,32 @@ This inclusion of periodic boundary conditions allows Laguerre cells to cover ar
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\linewidth]{project/laguerre_diagram_OTPw_periodic}
-	\caption[Periodic boundary conditions with 'ghost' points]{The image above shows how the Laguerre diagram for periodic boundary conditions is created with 'ghost' points on either side of the domain. Arrows show where ghost points contribute to Laguerre cells with positive mass in the domain $\Gamma$}
+	\caption[Periodic boundary conditions with 'ghost' points]{The image above shows how the Laguerre diagram for periodic boundary conditions is created with 'ghost' points on either side of the domain. Arrows show where ghost points contribute to Laguerre cells with positive mass in the domain $\Gamma = [-L,L]\times [0,H]$ \comments{more labelling of domains}}
+	\label{laguerre diagram copies}
 \end{figure}
+In applying the time stepping of for solving \ref{EadyGC} we will require the moments of the Laguerre cells specifically to calculate the mass and centroids of the cells. Again this requires an extension for periodic boundary conditions as we see in figure \ref{fig:laguerrediagramotpw} the area of the cell is split in the domain. Again this is treated by making copies of the points to the right $-2L$ and left $+2L$ of the domain, as seen in figure \ref{laguerre diagram copies}. The moments of cells when the density isn't periodic for the Laguerre cell $C_n$ of point $n$  are given by,
+\begin{description}
+	\item [$\bm{O^{th}}$ Moment] 
+	\begin{equation}
+	M_0 = \int_{C_n} dxdz
+	\end{equation}
+	\item[$\bm{1^{st}}$ Moment]
+	\begin{equation}
+	M_{1x} = \int_{C_n} x \ dxdz, \qquad M_{1z} = \int_{C_n} z \ dxdz
+	\end{equation}
+	\item[$\bm{2^{nd}}$ Moment]
+	\begin{equation}
+	M_{2x} = \int_{C_n} x^2 \ dxdz, \qquad M_{2z} = \int_{C_n} z^2 \ dxdz, \qquad M_{2xz} = \int_{C_n} xz \ dxdz
+	\end{equation}	
+\end{description}
+To extend this for periodic boundaries we sum the contribution to the moment for each copy of the point separately and sum the results. For example in the case of mass where the points $n, n_{-2L}, n_{2L}$ represent the points in the domain $\Gamma,\Gamma -2L, \Gamma +2L$ respectively the mass of the cell is given by,
+\begin{equation}
+	M_0 = \int_{C_n} dxdz + \int_{C_{n_{-2L}}} dxdz + \int_{C_{n_{2L}}} dxdz
+\end{equation}
+Note for each point only two of the quantities in the sum above will return a value greater than zero. The first and second moments are found similarly.
 
 \subsection{Mapping to the Fundamental Domain}
+
 Under the geostrophic transformation \ref{transformation} and also in time-stepping points in geostrophic space it is possible for points to travel exterior the boundaries of the domain $\Gamma$. In the $x$ direction the boundary conditions imposed are periodic. If points are mapped so that their $x$-co-ordinates are exterior to the interval $[-L,L]$, they can be mapped to the domain $\Gamma$, the \textquoteleft fundamental domain\textquoteright, using the periodicity, without affecting the result. \comments{better phrasing please} In fact, in the implementation of DA this is necessary at every time step to ensure that the mass of cells remains positive. This is implemented by the function \textquoteleft to\_fundamental\_domain\textquoteright \ adapted from DA \cite{Merigot2017a} to treat periodic boundary conditions in $x$. An example of this is shown in figure \ref{fundamental domain} below, where the fundamental domain being considered is $[0,1]\times[0,1]$.
 \begin{figure}[h!]
 	\centering
@@ -153,7 +178,7 @@ Together with a baroclinic instability described by \ref{thetap} as
 \theta' = \frac{N^2\theta_0 z}{g} + B\sin\left(\pi\left(x/L + z/H\right)\right)
 \end{equation}
 The steps involved in solving the Eady Model for frontogenesis described above are detailed below,
-\subsection{Algorithm for solving the semi-geostrophic Eady model for Frontogenesis \label{Algorithm}}
+\section{Algorithm for solving the semi-geostrophic Eady model for Frontogenesis \label{Algorithm}}
 \begin{description}
 	\setlength{\parskip}{0pt}
 	\setlength{\itemsep}{0pt}
@@ -286,14 +311,15 @@ Where again, $\hat{x}_i^n$ and $\hat{z}_i^n$ represent the centroids of the Lagu
 \comments{include map back to fundamental domain explanation and why this isn't done for centroids}
 A comparison of results using Heun's method and the forward-Euler scheme for timestepping is detailed in Chapter \ref{results}.
 \section{Visualising the Output \label{plotting}}
-Given the Geostrophic points and the associated weights which solve the optimal transport problem a Laguerre diagram satisfying \ref{def: laguerre cell} can be constructed. In the Monge-Amp\`{e}re library of DA \cite{Merigot2017,Merigot2017a} the function \textquoteleft rasterization\_2\textquoteright \ rasterizes a Laguerre diagram to a array of pixels of a specified size. The function \textquoteleft pcolormesh\textquoteright \ in the matplotlib is then used to visualise these results. To create this plot the periodic boundary conditions must again be considered carefully. This is done in a similar manner to the how they are treated for the application of DA. Copies of the points, weights and now colour values (in this case $\theta '$) are made and the \textquoteleft rasterization\_2\textquoteright \ function is called with these inputs as well as the boundaries of the original domain.\\
-\comments{inline code?}
-For example, in the images below the Laguerre cells are coloured according to the value of $\theta '$ given by, $\theta ' = \frac{f^2\theta_0 Z}{g}$
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{project/laguerre_diagram_colour}
 	\caption[Coloured Laguerre Diagram of Cells]{Laguerre Diagram of cells $(24\times 12)$ found by finding the weights associated with the optimal transport of points initialised in geostrophic space to cells in the physical domain under the constraint of volume conservation. The cells are coloured accoring to the value of $\theta '$ given by the $Z$ co-ordinate of the corresponding point in geostrophic space}
 	\label{fig:laguerrediagramcolour}
 \end{figure}
+Given the Geostrophic points and the associated weights which solve the optimal transport problem a Laguerre diagram satisfying \ref{def: laguerre cell} can be constructed. In the Monge-Amp\`{e}re library of DA \cite{Merigot2017,Merigot2017a} the function \textquoteleft rasterization\_2\textquoteright \ rasterizes a Laguerre diagram to a array of pixels of a specified size. The function \textquoteleft pcolormesh\textquoteright \ in the matplotlib is then used to visualise these results. To create this plot the periodic boundary conditions must again be considered carefully. This is done in a similar manner to the how they are treated for the application of DA. Copies of the points, weights and now colour values (in this case $\theta '$) are made and the \textquoteleft rasterization\_2\textquoteright \ function is called with these inputs as well as the boundaries of the original domain.\\
+\comments{inline code?}
+For example, in the images below the Laguerre cells are coloured according to the value of $\theta '$ given by, $\theta ' = \frac{f^2\theta_0 Z}{g}$
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,27 +1,59 @@
 \babel@toc {english}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Cold Front}}{8}{figure.caption.6}
+\contentsline {figure}{\numberline {2}{\ignorespaces Surface Pressure Chart from 12/09/2018}}{8}{figure.caption.7}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Local Cartesian co-ordinates $\left (x,y,z\right )$ on Earth\relax }}{9}{figure.caption.8}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Local cartesian co-ordinates $\left (x,y,z\right )$ on Earth\relax }}{6}{figure.caption.4}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Map from geostrophic points to fluid 'parcels'}}{19}{figure.caption.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Map from geostrophic points to fluid 'parcels'}}{16}{figure.caption.5}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Semi-discrete Optimal Transport}}{22}{figure.caption.10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The partitioning of a Domain}}{23}{figure.caption.11}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Laguerre diagram produced by finding weights using DA for optimal transport}}{24}{figure.caption.12}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Optimal Transport with Periodic Boundary Conditions}}{27}{figure.caption.13}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Periodic boundary conditions with 'ghost' points}}{27}{figure.caption.14}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Plots of a random set of points initialised in $[0,2]\times [0,2]$ before (a) and after (b) being mapped to the fundamental domain $[0,1]\times [0,1]$\relax }}{28}{figure.caption.15}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{28}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{28}{subfigure.6.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Semi-discrete Optimal Transport}}{19}{figure.caption.6}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The partitioning of a Domain}}{20}{figure.caption.7}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Laguerre diagram produced by finding weights using DA for optimal transport}}{21}{figure.caption.8}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Optimal Transport with Periodic Boundary Conditions}}{23}{figure.caption.9}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Periodic boundary conditions with 'ghost' points}}{24}{figure.caption.10}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Plots of a random set of points initialised in $[0,2]\times [0,2]$ before (a) and after (b) being mapped to the fundamental domain $[0,1]\times [0,1]$\relax }}{24}{figure.caption.11}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{24}{subfigure.6.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{24}{subfigure.6.2}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Plot of Points in Geostrophic Space}}{33}{figure.caption.16}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Coloured Laguerre Diagram of Cells}}{35}{figure.caption.17}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Plot of Points in Geostrophic Space}}{28}{figure.caption.12}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces \relax }}{33}{figure.caption.13}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces \relax }}{33}{figure.caption.14}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces \relax }}{33}{figure.caption.15}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces \relax }}{34}{figure.caption.16}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces \relax }}{34}{figure.caption.17}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Linear stability analysis results for the semi-geostrophic equations}}{38}{figure.caption.18}
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Plots of Laguerre Diagrams shaded according to the value of $\theta '$ using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $0$ days, (b) $2.5$ days (c) $6$ days and (d) $9$ days, $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{39}{figure.caption.19}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{39}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{39}{subfigure.1.2}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Plots of Laguerre Diagrams shaded according to the value of $\theta '$ using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $6$ days, (b) $9$ days, $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{40}{figure.caption.20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{40}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{40}{subfigure.2.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Plots of Laguerre Diagrams shaded according to the value of $\theta '$ using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $11$ days, (b) $12.5$ days (c) $14.5$ days, $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{42}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{42}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{42}{subfigure.3.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{42}{subfigure.3.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Plot of Geostrophic points at $11$ days\relax }}{43}{figure.caption.22}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Plot of Geostrophic points at $12.5$ days\relax }}{43}{figure.caption.22}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Plot of Geostrophic points at $14.5$ days\relax }}{43}{figure.caption.22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{43}{subfigure.4.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{43}{subfigure.5.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{43}{subfigure.6.1}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Plot of Laguerre Diagrams shaded according to the value of $v_g$ using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $0$ days and (b) $2.5$ days , $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{44}{figure.caption.23}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{44}{subfigure.7.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{44}{subfigure.7.2}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Plots of Laguerre Diagrams shaded according to the value of $v_g$ using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $6$ days (b) $9$ days $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{45}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{45}{subfigure.8.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{45}{subfigure.8.2}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Plot of Laguerre Cells generated using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $0$ days and (b) $2.5$ days , $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{46}{figure.caption.25}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{46}{subfigure.9.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{46}{subfigure.9.2}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Plots of Laguerre Cells generated using a random mesh of $80 \times 40$ points initialised in geostrophic space using \ref {Initpoints} at (a) $6$ days (b) $9$ days $\Gamma = [-L,L]\times [0,H]$, where $L = 1\times 10^6$ and $H = 1\times 10^4$\relax }}{47}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{47}{subfigure.10.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{47}{subfigure.10.2}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Energy Error from implementation of SG/DA via Forward Euler timestepping method for 5 days}}{48}{figure.caption.27}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{48}{subfigure.11.1}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Energy Error from implementation of SG/DA via Heun timestepping method for 5 days}}{49}{figure.caption.28}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{49}{subfigure.12.1}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Energy Error from implementation of SG/DA via Forward Euler timestepping method for 10 days}}{49}{figure.caption.29}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Energy Error from implementation of SG/DA via Heun timestepping method for 10 days}}{50}{figure.caption.30}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Energy evolution for SG/DA with Euler time step scheme}}{50}{figure.caption.31}
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Energy evolution for SG/DA with Heun time step scheme}}{51}{figure.caption.32}
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Comparison of Energy Evolution for SG/DA with Heun/Forward Euler Time Stepping Schemes}}{52}{figure.caption.33}
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Time stepping performance based on number of points initialised in the domain}}{53}{figure.caption.35}
 \addvspace {10\p@ }

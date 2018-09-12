@@ -4,6 +4,6 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Table of parameter values used in numerical implementation of SG/DA}}{38}{table.caption.18}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Comparison of Runtime by Forward Euler and Heun's time step methods}}{52}{table.caption.34}
 \addvspace {10\p@ }

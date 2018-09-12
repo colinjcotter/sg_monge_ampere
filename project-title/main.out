@@ -1,37 +1,33 @@
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [0][-]{chapter.2}{The Governing Equations }{}% 2
-\BOOKMARK [1][-]{section.2.1}{The Semi-Geostrophic Equations }{chapter.2}% 3
-\BOOKMARK [2][-]{subsection.2.1.1}{The 3D Incompressible Boussinesq Equations}{section.2.1}% 4
-\BOOKMARK [2][-]{subsection.2.1.2}{The Vertical Slice Model}{section.2.1}% 5
-\BOOKMARK [2][-]{subsection.2.1.3}{The Geostrophic Momentum Approximation }{section.2.1}% 6
-\BOOKMARK [0][-]{chapter.3}{The Frontogenesis Model as an Optimal Transport Problem }{}% 7
-\BOOKMARK [1][-]{section.3.1}{Transformation to Geostrophic Co-ordinates }{chapter.3}% 8
-\BOOKMARK [1][-]{section.3.2}{Energy Minimisation as an Optimal Transportation Problem}{chapter.3}% 9
-\BOOKMARK [2][-]{subsection.3.2.1}{Finding an Inverse Transformation}{section.3.2}% 10
-\BOOKMARK [2][-]{subsection.3.2.2}{The Monge Amp\350re equation and Optimal Transportation}{section.3.2}% 11
-\BOOKMARK [0][-]{chapter.4}{Semi-discrete Optimal Transport}{}% 12
-\BOOKMARK [1][-]{section.4.1}{Semi-discrete Optimal Transport}{chapter.4}% 13
-\BOOKMARK [1][-]{section.4.2}{Laguerre Cells and the Inclusion of weights}{chapter.4}% 14
-\BOOKMARK [1][-]{section.4.3}{Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.4}{Extension for Periodic Boundary Conditions}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.4.1}{Definitions of Mass with Periodic Boundary Conditions}{section.4.4}% 17
-\BOOKMARK [2][-]{subsection.4.4.2}{Mapping to the Fundamental Domain}{section.4.4}% 18
-\BOOKMARK [0][-]{chapter.5}{A Numerical Solution to the Eady Model for Frontogenesis }{}% 19
-\BOOKMARK [1][-]{section.5.1}{Initialisation of Points in Geostrophic Space }{chapter.5}% 20
-\BOOKMARK [1][-]{section.5.2}{Choice of Initial Weights }{chapter.5}% 21
-\BOOKMARK [1][-]{section.5.3}{Time Stepping }{chapter.5}% 22
-\BOOKMARK [2][-]{subsection.5.3.1}{Forward-Euler Scheme}{section.5.3}% 23
-\BOOKMARK [2][-]{subsection.5.3.2}{Heun's Method}{section.5.3}% 24
-\BOOKMARK [1][-]{section.5.4}{Visualising the Output }{chapter.5}% 25
-\BOOKMARK [0][-]{chapter.6}{Numerical Simulations and Results }{}% 26
-\BOOKMARK [1][-]{section.6.1}{Validating Results}{chapter.6}% 27
-\BOOKMARK [2][-]{subsection.6.1.1}{Evolution of Average Kinetic Energy}{section.6.1}% 28
-\BOOKMARK [1][-]{section.6.2}{Error Analysis of the numerical Solution}{chapter.6}% 29
-\BOOKMARK [1][-]{section.6.3}{Computational Performance}{chapter.6}% 30
-\BOOKMARK [0][-]{chapter.7}{Unsorted}{}% 31
-\BOOKMARK [1][-]{section.7.1}{Linear Stability Analysis}{chapter.7}% 32
-\BOOKMARK [1][-]{section.7.2}{Calculation of Moments}{chapter.7}% 33
-\BOOKMARK [2][-]{subsection.7.2.1}{Considerations for Periodic Boundary Conditions}{section.7.2}% 34
-\BOOKMARK [1][-]{section.7.3}{Ideas for extension}{chapter.7}% 35
-\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 36
-\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 37
+\BOOKMARK [0][-]{chapter*.5}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.1}{The Governing Equations }{}% 2
+\BOOKMARK [1][-]{section.1.1}{The 3D Incompressible Boussinesq Equations}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{The Vertical Slice Model}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{The Geostrophic Momentum Approximation }{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{The Frontogenesis Model as an Optimal Transport Problem }{}% 6
+\BOOKMARK [1][-]{section.2.1}{The Semi-Geostrophic Equations }{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Energy Minimisation as an Optimal Transportation Problem}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.1}{Finding an Inverse Transformation}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.2}{The Monge-Amp\350re equation and Optimal Transportation}{section.2.2}% 10
+\BOOKMARK [0][-]{chapter.3}{Using Semi-discrete Optimal Transport to solve the Semi-Geostrophic Equations }{}% 11
+\BOOKMARK [1][-]{section.3.1}{Semi-discrete Optimal Transport}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Laguerre Cells and the Inclusion of weights}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Applying semi-discrete optimal transport to solving the semi-geostrophic equations}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Extension for Periodic Boundary Conditions}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.4.1}{Calculating Moments of a cell with Periodic Boundary Conditions}{section.3.4}% 16
+\BOOKMARK [2][-]{subsection.3.4.2}{Mapping to the Fundamental Domain}{section.3.4}% 17
+\BOOKMARK [1][-]{section.3.5}{Validating the application of DA to the system SG/EM}{chapter.3}% 18
+\BOOKMARK [0][-]{chapter.4}{A Numerical Solution to the Eady Model for Frontogenesis }{}% 19
+\BOOKMARK [1][-]{section.4.1}{Algorithm for solving the semi-geostrophic Eady model for Frontogenesis }{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Initialisation of Points in Geostrophic Space }{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{Choice of Initial Weights }{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.4}{Time Stepping }{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.4.1}{Forward-Euler Scheme}{section.4.4}% 24
+\BOOKMARK [2][-]{subsection.4.4.2}{Heun's Method }{section.4.4}% 25
+\BOOKMARK [1][-]{section.4.5}{Visualising the Output }{chapter.4}% 26
+\BOOKMARK [0][-]{chapter.5}{Numerical Simulations and Results }{}% 27
+\BOOKMARK [1][-]{section.5.1}{Physical interpretation of Results }{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.2}{Total Energy as a Measurement of Error }{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.3}{A Comparison of Time Stepping Methods }{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.4}{Computational Performance}{chapter.5}% 31
+\BOOKMARK [0][-]{chapter*.36}{Conclusion}{}% 32
+\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 33

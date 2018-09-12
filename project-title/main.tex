@@ -13,13 +13,13 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{setspace}
-\usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{color}
 \usepackage{bm}
 \usepackage{amsthm}
 \usepackage{subfig}
 \usepackage{mathtools}
+\usepackage{makecell}
 
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
@@ -31,6 +31,11 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
 \title{An Advanced Numerical Algorithm for the Simulation of Weather Fronts}
 \author{Chloe Raymont}
 \newcommand{\comments}[1]{{\bfseries \color{red} Comment: #1 }}
@@ -38,12 +43,13 @@
 \input{title/title.tex}
 \onehalfspacing
 \begin{abstract}
-This project studies the Eady Model for the formation of weather fronts in the atmosphere. Using the semi-geostrophic equations introduced by Hoskins \cite{Hoskins1975} by means of co-ordinate transform. A development to the transformation by Shutts and Cullen \cite{Shutts1987} leads to a form of the semi-geostrophic equations which can be reformulated as an optimal transport problem where the energy is the cost to be minimised \cite{Cullen2006a}. This is shown to be equivalent to an optimal transport problem minimising a quadratic cost. In this form we show that the Damped Newton Algorithm developed by Kitawaga et al. \cite{Kitagawa2016,Merigot2017a} for solving such problems can be applied. Numerical error and performance are subsequently analysed to validate results.
+This project studies the growth of a baroclinic instability responsible for the formation of weather fronts in the atmosphere. A model is developed using the semi-geostrophic equations introduced by Hoskins \cite{Hoskins1975} by means of co-ordinate transform. A development of the transformation by Shutts and Cullen \cite{Shutts1987} leads to a form of the semi-geostrophic equations which can be reformulated as an optimal transport problem where the energy is the cost to be minimised \cite{Cullen2006a}. This is shown to be equivalent to an optimal transport problem minimising a quadratic cost. In this form we show that the Damped Newton Algorithm developed by Kitawaga et al. \cite{Kitagawa2016,Merigot2017a},  and shown to be particularly efficient for solving such problems, can be applied. Numerical error and performance are subsequently analysed to validate results.
 \end{abstract}
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
-
+I would like to thank my supervisor Dr Colin Cotter for his valuable support and guidance throughout this project. Particularly for proposing such an enjoyable and compelling subject area to study. I would also like to thank his colleagues for their suggestions and advice.
+I would also like to acknowledge the support of my friends and family throughout my studies. 
 \end{abstract}
 \renewcommand{\abstractname}{Declaration}
 \begin{abstract}
@@ -57,7 +63,7 @@ This project studies the Eady Model for the formation of weather fronts in the a
 
 \tableofcontents
 \listoffigures
-%\listoftables
+\listoftables
 \input{introduction/introduction.tex}
 \input{background/background.tex}
 \input{project/project.tex}
