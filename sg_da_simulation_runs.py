@@ -12,7 +12,7 @@ from sg_da_simulation_scripts import frontogenesis_timestep, validity_analysis_r
 #set conditions for simulation
 add_data = True   # save point and weight values
 Heun = True       # use Heun's method for time integration
-days = 22         # number of days 
+days = 1          # number of days 
 N = 60            # grid points
 tstepsize = 1800. # stepsize
 
