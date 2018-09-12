@@ -25,12 +25,12 @@ tstepsize = 1800. # stepsize
 #initialise image directory and set path of results directory
 if Heun:
     resultsdir = "/scratchcomp04/cvr12/B25_results/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun"
-    imgdir = resultsdir+'/laguerre_diagrams_newvg'
-    os.mkdir(imgdir)
+    imgdir = resultsdir+'/laguerre_diagrams_vgrescale'
+    #os.mkdir(imgdir)
 else:
     resultsdir = "/scratchcomp04/cvr12/B25_results/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler"
-    imgdir = resultsdir+'/laguerre_diagrams_newvg'
-    os.mkdir(imgdir)
+    imgdir = resultsdir+'/laguerre_diagrams_vgrescale'
+    #os.mkdir(imgdir)
 
 #create triangulation with random vertices - fix for miscolouring
 #of pixels on diagonal as suggested by Q.MERIGOT
@@ -90,7 +90,7 @@ while n <= M:
 
     #plot raserized laguerre diagram,thetap
     plt.figure(figsize=(6,4))
-    plt.pcolormesh(A[0].T,vmin = np.min(thetap),vmax = np.max(thetap),cmap = "plasma")
+    plt.pcolormesh(A[0].T,vmin = np.min(thetap)/2.,vmax = np.max(thetap)/2.,cmap = "plasma")
     plt.colorbar()
     plt.axis('off')
     plt.xlabel('x')
@@ -99,7 +99,7 @@ while n <= M:
 
     #plot raserized laguerre diagram, vg
     plt.figure(figsize=(6,4))
-    plt.pcolormesh(B[0].T,vmin = np.min(vg),vmax = np.max(vg),cmap = "plasma")
+    plt.pcolormesh(B[0].T,vmin = np.min(vg)/2.,vmax = np.max(vg)/2.,cmap = "plasma")
     plt.colorbar()
     plt.axis('off')
     plt.xlabel('x')
@@ -114,12 +114,12 @@ while n <= M:
     plt.ylabel('Z')
     plt.savefig(imgdir+'/laguerre_tesselation_'+str(int(count))+'.png')
 
-    #plot points in geostrophic space
+    # #plot points in geostrophic space
     plt.figure(figsize=(6,4))
     plt.plot(Y[:,0],Y[:,1],'.')
     plt.xticks(np.array([-1000000,-500000,0,500000,1000000]))
     plt.savefig(imgdir+'/Gpoints_'+str(int(count))+'.png')
 
-    n += 24
-    count += 1
+    n += 24 #skip time steps
+    count += 1 #count number of images
 
