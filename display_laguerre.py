@@ -37,7 +37,7 @@ T = ma.delaunay_2(Xdens,rho)
 pdens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
 
 #initialise points
-N = 15
+N = 20
 Y = np.random.rand(N,2)
 
 #initialise discrete target density
@@ -66,7 +66,7 @@ plt.savefig('laguerre_diagram_OTw.png')
 
 #draw laguerre cells with periodic density in x
 w = ma.optimal_transport_2(pdens,Y,nu)
-x,y = pdx.periodicinx_draw_laguerre_cells_2(dens,Y,w)
+x,y = pdx.periodicinx_draw_laguerre_cells_2(pdens,Y,w)
 plt.figure()
 plt.xlim(0,1)
 plt.ylim(0,1)
@@ -74,4 +74,15 @@ plt.plot(Y[:,0],Y[:,1],'.')
 plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
 plt.savefig('laguerre_diagram_OTPw.png')
 
+#draw laguerre cells with periodic density in x
+w = ma.optimal_transport_2(pdens,Y,nu)
+[Yc, m] = pdens.lloyd(Y,w)
+x,y = pdx.periodicinx_draw_laguerre_cells_2(pdens,Y,w)
+plt.figure()
+plt.xlim(-0.2,1.2)
+plt.ylim(0,1)
+plt.plot(Yc[:,0],Yc[:,1],'.')
+#plt.plot(Y[:,0],Y[:,1],'.')
+plt.plot(x,y,color=[1,0,0],linewidth=1,aa=True)
+plt.savefig('laguerre_diagram_OTPw_centroids.png')
 
