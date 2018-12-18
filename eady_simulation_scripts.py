@@ -1,13 +1,10 @@
-import matplotlib
-matplotlib.use('Agg')
-
 import numpy as np
 import periodic_densities as pdx
 import MongeAmpere as ma
 import matplotlib.pyplot as plt
 import os
 from sg_da import initialise_points, eady_OT, forward_euler_sg, heun_sg
-
+from plotting_tools import periodic_laguerre_diagram_to_image
 
 def frontogenesis_timestep(N, days, tstepsize, Heun = None):
     tf = 60*60*24*days #final time
@@ -21,9 +18,9 @@ def frontogenesis_timestep(N, days, tstepsize, Heun = None):
     
     #create new directory to store results
     if Heun:
-        newdir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun"
+        newdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun"
     else:
-        newdir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler"
+        newdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler"
 
     os.mkdir(newdir)
 
@@ -62,14 +59,17 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
 
     if Heun:
         print('heun')
-        datadir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun/data"
-        resultdir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun"
+        datadir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun/data"
+        resultdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun"
+        plotsdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_heun/plots"
     else:
         print('euler')
-        datadir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler/data"
-        resultdir = "/scratchcomp04/cvr12/Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler"
+        datadir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler/data"
+        resultdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler"
+        plotsdir = "Results_"+str(days)+"D_"+str(N)+"N_"+str(int(tstepsize))+"_euler/plots"
         
     os.mkdir(datadir)
+    os.mkdir(plotsdir)
     
     #set up uniform density for domain Gamma
     bbox = np.array([-L, 0., L, H])
@@ -78,6 +78,18 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
     rho = np.zeros(Xdens.shape[0])
     T = ma.delaunay_2(Xdens,rho)
     dens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
+
+    #set up plotting uniform density for domain Gamma
+    bbox = np.array([-L, 0., L, H])
+    Xdens = pdx.sample_rectangle(bbox)
+    npts = 100
+    Xrnd = 2*L*(np.random.rand(npts)-0.5)
+    Zrnd = H*np.random.rand(npts)
+    Xdens = np.concatenate((Xdens, np.array((Xrnd, Zrnd)).T))
+    f0 = np.ones(npts+4)/2/L/H
+    rho = np.zeros(Xdens.shape[0])
+    T = ma.delaunay_2(Xdens,rho)
+    pdens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
 
     #set final time(t), step size (h) and total number of time steps(N)
     tf = 60*60*24*days
@@ -98,10 +110,21 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
     t = np.array([t0 + n*h for n in range(N+1)])
     
     for n in range(0,N+1):
-        Y = np.fromfile(resultdir+'/points_results_'+str(int(h))+'/points_'+str(n)+'.txt', sep = " ")
-        w = np.fromfile(resultdir+'/weights_results_'+str(int(h))+'/weights_'+str(n)+'.txt', sep = " ")
-        l = int(w.size)
-        Y = Y.reshape((l,2))
+        print(n,N)
+        try:
+            Y = np.fromfile(resultdir+'/points_results_'+str(int(h))+'/points_'+str(n)+'.txt', sep = " ")
+            w = np.fromfile(resultdir+'/weights_results_'+str(int(h))+'/weights_'+str(n)+'.txt', sep = " ")
+            l = int(w.size)
+            Y = Y.reshape((l,2))
+        except IOError:
+            break
+        
+        #Plots
+        C = Y[:,0].reshape((l,1))
+        print(C.shape, w.shape)
+        img = periodic_laguerre_diagram_to_image(pdens,Y,w,C,bbox,100,100)
+        plt.pcolor(img.T)
+        plt.savefig(plotsdir+'/c_'+str(n)+'.jpg')
         
         #calculate centroids and mass of cells
         [Yc, m] = dens.lloyd(Y, w)

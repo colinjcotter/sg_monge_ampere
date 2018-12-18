@@ -59,16 +59,15 @@ def initialise_points(N, bbox, RegularMesh = None):
     f = 1.e-4
     theta0 = 300.
     C = 3e-6
-    B = 0.25
+    CP = 8
 
-    thetap = Nsq*theta0*z/g + B*np.sin(np.pi*(x/L + z/H))
-    vg = B*g*H/L/f/theta0*np.sin(np.pi*(x/L + z/H)) - 2*B*g*H/np.pi/L/f/theta0*np.cos(np.pi*x/L)
-    
-    X = vg/f + x
-    Z = g*thetap/f/f/theta0
+    buoyancy_stratification = (z-H/2)*Nsq # b = g*theta/theta_0
+    thetap = bouyancy_stratification/g*theta0 + CP*np.sin(np.pi*(x/L + z/H))
+
+    X = x
+    Z = g*thetap/theta0/f/f
 
     Y = np.array([X,Z]).T
-    thetap = f*f*theta0*Z/g
     
     return Y, thetap
     
@@ -140,7 +139,7 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = N
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
         w = eady_OT(Y, bbox, dens)
-            
+
         if add_data:
             w.tofile(weightsdir+'/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 

@@ -1,0 +1,40 @@
+
+
+PARAMETER (HP=1.E4,LP=2.E6,THETAP=285.,UP=10.,FP=1.E-4)
+      PARAMETER (BP=40.,CP=8.,GP=10.,THETA0P=300.)
+
+
+      PI=ASIN(1.0)*2.
+      ASPECT=(GP*HP/(FP*FP*LP*LP))   !  (GH)/(FL)**2
+      Y1=(Y-YBM)/(YBP-YBM)      ! SCALING SO THAT Y1 IS IN (0,1)
+      XC=X
+      YC=(THETAP+BP*Y1+CP*.2*SIN(PI*(X+Y1)))*ASPECT/THETA0P
+
+THETAP is value of temperature at the bottom (unperturbed) = 285
+BP is the vertical temperature difference = 40 here, 7.5 in assumed value
+
+theta = 285 + 40*z/H + 8*sin(pi*(X/L + Y/H))
+
+N^2 = g \theta'/\theta_0 (which is 300) = 2.5e-5
+
+\theta' = 300*N^2/g = 300*2.5e-5/10 = 0.00075
+temperature difference = \theta'*H = 7.5 OK
+
+d buoyancy/dy = d theta/dy*g/theta_0
+= -3e-6*10/300 = -1.0e-7 OK
+
+There seems to be a discrepancy between the value of BP in the
+geometric model code, which gives a theta difference of 40 degrees
+between top and bottom in the basic state, and that consistent with
+the assumed value of N^2, which would give a difference of 7.5. In
+Nakamura (1994) the vertical difference of theta is consistent with
+the assumed N^2. However, the plots from the geometric model in my
+book look like the value of 40 was used (though I can't be sure, i
+only have the plot after 8 days and the vertical difference increases
+with time.) In Abeed's paper, the quoted constants are the same as in
+my book and in Nakamura (1994), but his plots also looks like the
+larger vertical difference of theta was used. Probably he followed the
+geometric code which I gave you. In Cullen (2008) the compressible
+formulation means that the theta profile has to be computed from the
+assumed N^2, so would presumably give the smaller value.
+
