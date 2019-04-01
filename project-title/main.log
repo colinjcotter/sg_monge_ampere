@@ -1,12 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.6.6)  12 SEP 2018 22:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.30)  1 APR 2019 11:14
 entering extended mode
-**./main.tex
-(main.tex
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\report.cls"
+Babel <3.18> and hyphenation patterns for 7 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -22,46 +24,41 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2018/02/14 3.18 The Babel package
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\babel\switch.def"
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
 File: switch.def 2018/02/14 3.18 Babel switching mechanism
 )
-*************************************
-* Local config file bblopts.cfg used
-*
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2018/02/14 3.18 Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\babel\txtbabel.def")
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@dirlevel=\count89
 )
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\utf8x.def
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
 File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
 ))
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\ucs.sty
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucs.sty
 Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\uni-global.def
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-global.def
 File: uni-global.def 2013/05/13 UCS: Unicode global data
 )
 \uc@secondtry=\count90
@@ -69,28 +66,28 @@ File: uni-global.def 2013/05/13 UCS: Unicode global data
 \uc@combtoksb=\toks17
 \uc@temptokena=\toks18
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count91
@@ -105,26 +102,25 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen110
 \Gm@layoutvoffset=\dimen111
 \Gm@dimlist=\toks20
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks21
 \ex@=\dimen112
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen113
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count94
@@ -165,47 +161,47 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen121
 \Gin@req@width=\dimen122
 )
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
 
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
@@ -244,22 +240,22 @@ Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen123
 \Hy@linkcounter=\count106
 \Hy@pagecounter=\count107
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count108
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 4383.
@@ -272,7 +268,7 @@ Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4762.
 \c@Hy@tempcnt=\count109
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -296,27 +292,27 @@ LaTeX Info: Redefining \pageref on input line 6443.
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
 \Fld@listcount=\count114
 \c@bookmark@seq@number=\count115
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip46
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\tools\bm.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
@@ -324,7 +320,7 @@ Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 207.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2017/10/31 v2.20.4
 \thm@style=\toks26
 \thm@bodyfont=\toks27
@@ -336,15 +332,15 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headsep=\skip49
 \dth@everypar=\toks31
 )
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\subfig\subfig.sty
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
-Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
-Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 64.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
 \captionmargin=\dimen127
 \captionmargin@=\dimen128
 \captionwidth=\dimen129
@@ -370,10 +366,10 @@ Package caption Info: hyperref package is loaded.
 \sf@top=\skip53
 \sf@bottom=\skip54
 )
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\mathtools\mathtools.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count124
 \calc@Bcount=\count125
@@ -386,7 +382,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count126
 \calc@Cskip=\skip57
 )
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\mathtools\mhsetup.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
 )
 LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
@@ -403,10 +399,10 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen142
 \l_MT_below_shortintertext_sep=\dimen143
 )
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\makecell\makecell.sty
+(/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 \col@sep=\dimen144
 \extrarowheight=\dimen145
@@ -421,7 +417,7 @@ Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 \c@theorem=\count129
 \c@corollary=\count130
 \c@definition=\count131
- (main.aux)
+ (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
@@ -439,7 +435,7 @@ LaTeX Font Info:    ... okay on input line 42.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
 LaTeX Font Info:    ... okay on input line 42.
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\latex\ucs\ucsencs.def
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 *geometry* driver: auto-detecting
@@ -477,7 +473,7 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\Chloe\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count132
 \scratchdimen=\dimen147
@@ -490,10 +486,10 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 \MPnumerator=\count136
 \makeMPintoPDFobject=\count137
 \everyMPtoPDFconversion=\toks35
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -502,14 +498,18 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 \AtBeginShipoutBox=\box29
 Package hyperref Info: Link coloring ON on input line 42.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count138
@@ -518,15 +518,15 @@ LaTeX Info: Redefining \ref on input line 42.
 LaTeX Info: Redefining \pageref on input line 42.
 LaTeX Info: Redefining \nameref on input line 42.
 
-(main.out) (main.out)
+(./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
- (title/title.tex
-<title/logo.png, id=135, 1284.8pt x 338.26375pt>
+ (./title/title.tex
+<title/logo.png, id=136, 1284.8pt x 338.26375pt>
 File: title/logo.png Graphic file (type png)
 <use title/logo.png>
 Package pdftex.def Info: title/logo.png  used on input line 9.
@@ -537,18 +537,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
  []
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 44.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 44.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/Chloe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./title/log
-o.png>])pdfTeX warning (ext4): destination with the same identifier (name{page.
-1}) has been already used, duplicate ignored
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./title/logo.png>])pdfTeX 
+warning (ext4): destination with the same identifier (name{page.1}) has been al
+ready used, duplicate ignored
 <to be read again> 
                    \relax 
 l.47 \end{abstract}
@@ -558,7 +558,7 @@ ier (name{page.1}) has been already used, duplicate ignored
                    \relax 
 l.53 \end{abstract}
                     [1]
-<ChloeRaymont_esignature.jpg, id=167, 1624.56938pt x 1082.54437pt>
+<ChloeRaymont_esignature.jpg, id=168, 1624.56938pt x 1082.54437pt>
 File: ChloeRaymont_esignature.jpg Graphic file (type jpg)
 <use ChloeRaymont_esignature.jpg>
 Package pdftex.def Info: ChloeRaymont_esignature.jpg  used on input line 59.
@@ -568,7 +568,7 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.62 \end{abstract}
-                    [1 <./ChloeRaymont_esignature.jpg>] (main.toc
+                    [1 <./ChloeRaymont_esignature.jpg>] (./main.toc
 Overfull \hbox (13.12604pt too wide) in paragraph at lines 12--12
  [] [][][]\T1/cmr/bx/n/12 Using Semi-discrete Op-ti-mal Trans-port to solve the
  Semi-Geostrophic 
@@ -586,37 +586,38 @@ ing the semi-geostrophic
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [3] (main.lof [4
+ [3] (./main.lof [4
 
 ])
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [5] (main.lot)
+ [5] (./main.lot)
 \tf@lot=\write6
 \openout6 = `main.lot'.
 
- (introduction/introduction.tex [6
+ (./introduction/introduction.tex
+[6
 
 ]
 
 LaTeX Warning: Citation `fig:surfacepressure' on page 7 undefined on input line
  7.
 
-<introduction/figure-8-cold-front(image).jpg, id=362, 451.6875pt x 287.57437pt>
+<introduction/figure-8-cold-front(image).jpg, id=365, 451.6875pt x 287.57437pt>
 
 File: introduction/figure-8-cold-front(image).jpg Graphic file (type jpg)
 <use introduction/figure-8-cold-front(image).jpg>
 Package pdftex.def Info: introduction/figure-8-cold-front(image).jpg  used on i
 nput line 22.
 (pdftex.def)             Requested size: 213.39568pt x 135.86205pt.
-<introduction/surface_pressure.png, id=365, 599.74063pt x 395.97937pt>
+<introduction/surface_pressure.png, id=368, 599.74063pt x 395.97937pt>
 File: introduction/surface_pressure.png Graphic file (type png)
 <use introduction/surface_pressure.png>
 Package pdftex.def Info: introduction/surface_pressure.png  used on input line 
 28.
 (pdftex.def)             Requested size: 213.39568pt x 140.89087pt.
-) (background/background.tex
+) (./background/background.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--1
 
  []
@@ -650,7 +651,7 @@ Underfull \vbox (badness 2343) has occurred while \output is active []
 [8 <./introduction/figure-8-cold-front(image).jpg> <./introduction/surface_pres
 sure.png>]
 Chapter 1.
-<background/local_cartesian.png, id=398, 285.065pt x 329.23pt>
+<background/local_cartesian.png, id=401, 285.065pt x 329.23pt>
 File: background/local_cartesian.png Graphic file (type png)
 <use background/local_cartesian.png>
 Package pdftex.def Info: background/local_cartesian.png  used on input line 8.
@@ -733,8 +734,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 277--284
 Overfull \hbox (2.04883pt too wide) in paragraph at lines 277--284
 \T1/cmr/m/n/12 ordinates $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; z\OT1/cmr/m/n/12
  )$ \T1/cmr/m/n/12 we con-sider the scaled Lebesgue mea-sure $\OML/cmm/m/it/12 
-\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 \OT1/cmr/m/n/12 ) = []( )[] [] [][]  \OML/c
-mm/m/it/12 dxdz$\T1/cmr/m/n/12 ,
+^^V\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^M\OT1/cmr/m/n/12 ) = [](^^@)[] [] [][]  
+\OML/cmm/m/it/12 dxdz$\T1/cmr/m/n/12 ,
  []
 
 
@@ -755,7 +756,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 290--299
 
  []
 
-<background/gpoints_mapping.png, id=562, 589.20125pt x 215.80624pt>
+<background/gpoints_mapping.png, id=566, 589.20125pt x 215.80624pt>
 File: background/gpoints_mapping.png Graphic file (type png)
 <use background/gpoints_mapping.png>
 Package pdftex.def Info: background/gpoints_mapping.png  used on input line 305
@@ -771,14 +772,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 347--351
 
  []
 
-[20]) (project/project.tex [21]
+[20]) (./project/project.tex [21]
 Chapter 3.
-<project/probmeasure.png, id=601, 289.08pt x 187.70125pt>
+<project/probmeasure.png, id=606, 289.08pt x 187.70125pt>
 File: project/probmeasure.png Graphic file (type png)
 <use project/probmeasure.png>
 Package pdftex.def Info: project/probmeasure.png  used on input line 7.
 (pdftex.def)             Requested size: 156.49014pt x 101.60919pt.
-<project/laguerre_diagram_0w.png, id=605, 321.2pt x 240.9pt>
+<project/laguerre_diagram_0w.png, id=610, 321.2pt x 240.9pt>
 File: project/laguerre_diagram_0w.png Graphic file (type png)
 <use project/laguerre_diagram_0w.png>
 Package pdftex.def Info: project/laguerre_diagram_0w.png  used on input line 19
@@ -801,7 +802,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
-<project/laguerre_diagram_OTw.png, id=621, 321.2pt x 240.9pt>
+<project/laguerre_diagram_OTw.png, id=626, 321.2pt x 240.9pt>
 File: project/laguerre_diagram_OTw.png Graphic file (type png)
 <use project/laguerre_diagram_OTw.png>
 Package pdftex.def Info: project/laguerre_diagram_OTw.png  used on input line 4
@@ -836,7 +837,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--77
 Underfull \vbox (badness 4608) has occurred while \output is active []
 
  [25]
-<project/laguerre_diagram_OTPw.png, id=657, 321.2pt x 240.9pt>
+<project/laguerre_diagram_OTPw.png, id=662, 321.2pt x 240.9pt>
 File: project/laguerre_diagram_OTPw.png Graphic file (type png)
 <use project/laguerre_diagram_OTPw.png>
 Package pdftex.def Info: project/laguerre_diagram_OTPw.png  used on input line 
@@ -850,7 +851,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 86--96
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<project/laguerre_diagram_OTPw_periodic.png, id=660, 498.86375pt x 134.5025pt>
+<project/laguerre_diagram_OTPw_periodic.png, id=665, 498.86375pt x 134.5025pt>
 File: project/laguerre_diagram_OTPw_periodic.png Graphic file (type png)
 <use project/laguerre_diagram_OTPw_periodic.png>
 Package pdftex.def Info: project/laguerre_diagram_OTPw_periodic.png  used on in
@@ -861,12 +862,12 @@ Underfull \vbox (badness 2564) has occurred while \output is active []
 
  [27 <./project/laguerre_diagram_OTPw.png> <./project/laguerre_diagram_OTPw_per
 iodic.png>]
-<project/fund_domain_out.png, id=684, 462.528pt x 338.2236pt>
+<project/fund_domain_out.png, id=690, 462.528pt x 338.2236pt>
 File: project/fund_domain_out.png Graphic file (type png)
 <use project/fund_domain_out.png>
 Package pdftex.def Info: project/fund_domain_out.png  used on input line 129.
 (pdftex.def)             Requested size: 199.16928pt x 145.64491pt.
-<project/fund_domain_in.png, id=685, 462.528pt x 338.2236pt>
+<project/fund_domain_in.png, id=691, 462.528pt x 338.2236pt>
 File: project/fund_domain_in.png Graphic file (type png)
 <use project/fund_domain_in.png>
 Package pdftex.def Info: project/fund_domain_in.png  used on input line 130.
@@ -891,7 +892,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 147--155
 Chapter 4.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 172.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
@@ -910,7 +911,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [31]
-<project/gpoints.png, id=729, 602.25pt x 401.5pt>
+<project/gpoints.png, id=735, 602.25pt x 401.5pt>
 File: project/gpoints.png Graphic file (type png)
 <use project/gpoints.png>
 Package pdftex.def Info: project/gpoints.png  used on input line 250.
@@ -937,14 +938,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-<project/laguerre_diagram_colour.png, id=766, 578.16pt x 385.44pt>
+<project/laguerre_diagram_colour.png, id=772, 578.16pt x 385.44pt>
 File: project/laguerre_diagram_colour.png Graphic file (type png)
 <use project/laguerre_diagram_colour.png>
 Package pdftex.def Info: project/laguerre_diagram_colour.png  used on input lin
 e 316.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
 
-[35 <./project/laguerre_diagram_colour.png>]) (evaluation/evaluation.tex
+[35 <./project/laguerre_diagram_colour.png>]) (./evaluation/evaluation.tex
 [36]
 Chapter 5.
 
@@ -960,25 +961,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--28
 [37
 
 ] [38]
-<evaluation/laguerre_diagram_thetap_0.png, id=800, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_thetap_0.png, id=807, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_thetap_0.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_0.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_0.png  used on inpu
 t line 31.
 (pdftex.def)             Requested size: 384.10962pt x 256.07324pt.
-<evaluation/laguerre_diagram_thetap_5.png, id=801, 602.25pt x 401.5pt>
+<evaluation/laguerre_diagram_thetap_5.png, id=808, 602.25pt x 401.5pt>
 File: evaluation/laguerre_diagram_thetap_5.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_5.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_5.png  used on inpu
 t line 32.
 (pdftex.def)             Requested size: 384.10962pt x 256.08304pt.
-<evaluation/laguerre_diagram_thetap_12.png, id=804, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_thetap_12.png, id=811, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_thetap_12.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_12.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_12.png  used on inp
 ut line 38.
 (pdftex.def)             Requested size: 384.10962pt x 256.07324pt.
-<evaluation/laguerre_diagram_thetap_18.png, id=805, 602.25pt x 401.5pt>
+<evaluation/laguerre_diagram_thetap_18.png, id=812, 602.25pt x 401.5pt>
 File: evaluation/laguerre_diagram_thetap_18.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_18.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_18.png  used on inp
@@ -986,19 +987,19 @@ ut line 39.
 (pdftex.def)             Requested size: 384.10962pt x 256.08304pt.
  [39 <./evaluation/laguerre_diagram_thetap_0.png> <./evaluation/laguerre_diagra
 m_thetap_5.png>]
-<evaluation/laguerre_diagram_thetap_22.png, id=817, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_thetap_22.png, id=824, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_thetap_22.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_22.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_22.png  used on inp
 ut line 47.
 (pdftex.def)             Requested size: 256.07742pt x 170.71745pt.
-<evaluation/laguerre_diagram_thetap_25.png, id=818, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_thetap_25.png, id=825, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_thetap_25.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_25.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_25.png  used on inp
 ut line 48.
 (pdftex.def)             Requested size: 256.07742pt x 170.71745pt.
-<evaluation/laguerre_diagram_thetap_29.png, id=819, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_thetap_29.png, id=826, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_thetap_29.png Graphic file (type png)
 <use evaluation/laguerre_diagram_thetap_29.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_thetap_29.png  used on inp
@@ -1012,41 +1013,41 @@ am_thetap_18.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<evaluation/Gpoints_22.png, id=829, 578.16pt x 385.44pt>
+<evaluation/Gpoints_22.png, id=836, 578.16pt x 385.44pt>
 File: evaluation/Gpoints_22.png Graphic file (type png)
 <use evaluation/Gpoints_22.png>
 Package pdftex.def Info: evaluation/Gpoints_22.png  used on input line 57.
 (pdftex.def)             Requested size: 256.07742pt x 170.71745pt.
-<evaluation/Gpoints_25.png, id=830, 578.16pt x 385.44pt>
+<evaluation/Gpoints_25.png, id=837, 578.16pt x 385.44pt>
 File: evaluation/Gpoints_25.png Graphic file (type png)
 <use evaluation/Gpoints_25.png>
 Package pdftex.def Info: evaluation/Gpoints_25.png  used on input line 59.
 (pdftex.def)             Requested size: 256.07742pt x 170.71745pt.
-<evaluation/Gpoints_29.png, id=831, 578.16pt x 385.44pt>
+<evaluation/Gpoints_29.png, id=838, 578.16pt x 385.44pt>
 File: evaluation/Gpoints_29.png Graphic file (type png)
 <use evaluation/Gpoints_29.png>
 Package pdftex.def Info: evaluation/Gpoints_29.png  used on input line 61.
 (pdftex.def)             Requested size: 256.07742pt x 170.71745pt.
 [41]
-<evaluation/laguerre_diagram_vg_0.png, id=838, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_vg_0.png, id=845, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_vg_0.png Graphic file (type png)
 <use evaluation/laguerre_diagram_vg_0.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_vg_0.png  used on input li
 ne 69.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_diagram_vg_5.png, id=839, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_vg_5.png, id=846, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_vg_5.png Graphic file (type png)
 <use evaluation/laguerre_diagram_vg_5.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_vg_5.png  used on input li
 ne 70.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_diagram_vg_12.png, id=842, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_vg_12.png, id=849, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_vg_12.png Graphic file (type png)
 <use evaluation/laguerre_diagram_vg_12.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_vg_12.png  used on input l
 ine 77.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_diagram_vg_18.png, id=843, 578.16pt x 385.44pt>
+<evaluation/laguerre_diagram_vg_18.png, id=850, 578.16pt x 385.44pt>
 File: evaluation/laguerre_diagram_vg_18.png Graphic file (type png)
 <use evaluation/laguerre_diagram_vg_18.png>
 Package pdftex.def Info: evaluation/laguerre_diagram_vg_18.png  used on input l
@@ -1056,25 +1057,25 @@ ine 78.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<evaluation/laguerre_tesselation_0.png, id=846, 578.16pt x 385.44pt>
+<evaluation/laguerre_tesselation_0.png, id=853, 578.16pt x 385.44pt>
 File: evaluation/laguerre_tesselation_0.png Graphic file (type png)
 <use evaluation/laguerre_tesselation_0.png>
 Package pdftex.def Info: evaluation/laguerre_tesselation_0.png  used on input l
 ine 84.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_tesselation_5.png, id=847, 578.16pt x 385.44pt>
+<evaluation/laguerre_tesselation_5.png, id=854, 578.16pt x 385.44pt>
 File: evaluation/laguerre_tesselation_5.png Graphic file (type png)
 <use evaluation/laguerre_tesselation_5.png>
 Package pdftex.def Info: evaluation/laguerre_tesselation_5.png  used on input l
 ine 85.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_tesselation_12.png, id=850, 578.16pt x 385.44pt>
+<evaluation/laguerre_tesselation_12.png, id=857, 578.16pt x 385.44pt>
 File: evaluation/laguerre_tesselation_12.png Graphic file (type png)
 <use evaluation/laguerre_tesselation_12.png>
 Package pdftex.def Info: evaluation/laguerre_tesselation_12.png  used on input 
 line 92.
 (pdftex.def)             Requested size: 298.75264pt x 199.16547pt.
-<evaluation/laguerre_tesselation_18.png, id=851, 578.16pt x 385.44pt>
+<evaluation/laguerre_tesselation_18.png, id=858, 578.16pt x 385.44pt>
 File: evaluation/laguerre_tesselation_18.png Graphic file (type png)
 <use evaluation/laguerre_tesselation_18.png>
 Package pdftex.def Info: evaluation/laguerre_tesselation_18.png  used on input 
@@ -1083,7 +1084,7 @@ line 93.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<evaluation/energy_5D_euler.png, id=854, 1387.584pt x 651.8754pt>
+<evaluation/energy_5D_euler.png, id=861, 1387.584pt x 651.8754pt>
 File: evaluation/energy_5D_euler.png Graphic file (type png)
 <use evaluation/energy_5D_euler.png>
 Package pdftex.def Info: evaluation/energy_5D_euler.png  used on input line 101
@@ -1092,7 +1093,7 @@ Package pdftex.def Info: evaluation/energy_5D_euler.png  used on input line 101
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<evaluation/energy_5D_heun.png, id=855, 1387.584pt x 651.8754pt>
+<evaluation/energy_5D_heun.png, id=862, 1387.584pt x 651.8754pt>
 File: evaluation/energy_5D_heun.png Graphic file (type png)
 <use evaluation/energy_5D_heun.png>
 Package pdftex.def Info: evaluation/energy_5D_heun.png  used on input line 104.
@@ -1134,7 +1135,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [47 <./evaluation/laguerre_tesselation_12.png> <./evaluation/laguerre_tesselat
 ion_18.png>] [48 <./evaluation/energy_5D_euler.png>]
-<evaluation/energy_10D_euler.png, id=916, 1387.584pt x 651.8754pt>
+<evaluation/energy_10D_euler.png, id=923, 1387.584pt x 651.8754pt>
 File: evaluation/energy_10D_euler.png Graphic file (type png)
 <use evaluation/energy_10D_euler.png>
 Package pdftex.def Info: evaluation/energy_10D_euler.png  used on input line 12
@@ -1145,7 +1146,7 @@ Overfull \hbox (42.68173pt too wide) in paragraph at lines 129--130
  [][] 
  []
 
-<evaluation/energy_10D_heun.png, id=917, 1387.584pt x 651.8754pt>
+<evaluation/energy_10D_heun.png, id=924, 1387.584pt x 651.8754pt>
 File: evaluation/energy_10D_heun.png Graphic file (type png)
 <use evaluation/energy_10D_heun.png>
 Package pdftex.def Info: evaluation/energy_10D_heun.png  used on input line 134
@@ -1163,7 +1164,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [49 <./evaluation/energy_5D_heun.png> <./evaluation/energy_10D_euler.png>]
-<evaluation/Energy_evolution_euler.png, id=925, 1387.584pt x 651.8754pt>
+<evaluation/Energy_evolution_euler.png, id=933, 1387.584pt x 651.8754pt>
 File: evaluation/Energy_evolution_euler.png Graphic file (type png)
 <use evaluation/Energy_evolution_euler.png>
 Package pdftex.def Info: evaluation/Energy_evolution_euler.png  used on input l
@@ -1171,13 +1172,13 @@ ine 144.
 (pdftex.def)             Requested size: 341.43439pt x 160.40216pt.
  [50 <./evaluation/energy_10D_heun.png> <./evaluation/Energy_evolution_euler.pn
 g>]
-<evaluation/Energy_evolution_heun.png, id=938, 1387.584pt x 651.8754pt>
+<evaluation/Energy_evolution_heun.png, id=946, 1387.584pt x 651.8754pt>
 File: evaluation/Energy_evolution_heun.png Graphic file (type png)
 <use evaluation/Energy_evolution_heun.png>
 Package pdftex.def Info: evaluation/Energy_evolution_heun.png  used on input li
 ne 174.
 (pdftex.def)             Requested size: 341.43439pt x 160.40216pt.
-<evaluation/energy_euler_heun_comparison.png, id=943, 1387.584pt x 643.203pt>
+<evaluation/energy_euler_heun_comparison.png, id=951, 1387.584pt x 643.203pt>
 File: evaluation/energy_euler_heun_comparison.png Graphic file (type png)
 <use evaluation/energy_euler_heun_comparison.png>
 Package pdftex.def Info: evaluation/energy_euler_heun_comparison.png  used on i
@@ -1192,7 +1193,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--190
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [51 <./evaluation/Energy_evolution_heun.png>]
-<evaluation/performance_loglog_plot.png, id=954, 1387.584pt x 651.8754pt>
+<evaluation/performance_loglog_plot.png, id=962, 1387.584pt x 651.8754pt>
 File: evaluation/performance_loglog_plot.png Graphic file (type png)
 <use evaluation/performance_loglog_plot.png>
 Package pdftex.def Info: evaluation/performance_loglog_plot.png  used on input 
@@ -1205,7 +1206,7 @@ Underfull \hbox (badness 1142) in paragraph at lines 226--226
 [])$ \T1/cmr/m/n/12 for $\OML/cmm/m/it/12 N \OT1/cmr/m/n/12 =
  []
 
-) (conclusion/conclusion.tex
+) (./conclusion/conclusion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 219--1
 
  []
@@ -1221,7 +1222,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 219--1
  []
 
 [52 <./evaluation/energy_euler_heun_comparison.png>] [53 <./evaluation/performa
-nce_loglog_plot.png>] [54]) (appendix/appendix.tex
+nce_loglog_plot.png>] [54]) (./appendix/appendix.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--1
 
  []
@@ -1264,7 +1265,7 @@ Underfull \vbox (badness 2343) has occurred while \output is active []
 ]
 [56]
 Appendix A.
-) (main.bbl [57
+) (./main.bbl [57
 
 ] [58
 
@@ -1272,11 +1273,11 @@ Appendix A.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 77.
  [60]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 77.
- (main.aux)
+ (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 77.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 77.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 251B24E8CCBAF4CE7773BA43099F215E;2796.
+(rerunfilecheck)             Checksum: 03D9AE6998EAFBE1394F40BAA36B6799;2763.
 
 
 LaTeX Warning: There were undefined references.
@@ -1284,45 +1285,44 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 77.
  ) 
 Here is how much of TeX's memory you used:
- 10159 strings out of 493305
- 156534 string characters out of 3138875
- 276908 words of memory out of 3000000
- 13219 multiletter control sequences out of 15000+200000
- 24967 words of font info for 60 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 44i,11n,49p,1305b,459s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecrm0800.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
-ec\dpi600\ecrm1000.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
-\jknappen\ec\dpi600\ecti1200.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX
-\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Chloe\AppData\Lo
-cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Chloe\
-AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Us
-ers\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.
-pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
-\ecti1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
-\ec\dpi600\ecbx2488.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
-r\jknappen\ec\dpi600\eccc1440.pk> <C:\Users\Chloe\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\eccc1728.pk> <C:\Users\Chloe\AppData\Local\MiKTe
-X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-symbols/msbm10.pfb>
-Output written on main.pdf (63 pages, 4258308 bytes).
+ 10121 strings out of 494847
+ 154102 string characters out of 6179080
+ 272116 words of memory out of 5000000
+ 12965 multiletter control sequences out of 15000+600000
+ 24967 words of font info for 60 fonts, out of 8000000 for 9000
+ 59 hyphenation exceptions out of 8191
+ 44i,11n,49p,1303b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1440.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1728.600p
+k> </home/cjc1/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc2074.600p
+k></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (63 pages, 4118506 bytes).
 PDF statistics:
- 1592 PDF objects out of 1728 (max. 8388607)
+ 1602 PDF objects out of 1728 (max. 8388607)
+ 1007 compressed objects within 11 object streams
  236 named destinations out of 1000 (max. 500000)
  470 words of extra memory for PDF output out of 10000 (max. 10000000)
 

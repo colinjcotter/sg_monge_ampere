@@ -65,14 +65,15 @@ class Periodic_density_in_x (ma.ma.Density_2):
 
         # create copies of the points, so as to cover the neighborhood
         # of the fundamental domain.
-        x = self.u[0]
-        y = self.u[1]
-        v = np.array([[0,0], [x,0], [-x,0]]);
-        Yf = np.zeros((3*N,2))
-        wf = np.hstack((w,w,w));
+        x = self.u[0] #the amount we shift by in x
+        y = self.u[1] # the amount we shift by in y
+        v = np.array([[0,0], [x,0], [-x,0]]) #all the shifts
+        Yf = np.zeros((3*N,2)) #where we will keep the first moments in
+                               #extended set
+        wf = np.hstack((w,w,w)); #the weights for the extended set
         for i in xrange(0,3):
             Nb = N*i; Ne = N*(i+1)
-            Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1))
+            Yf[Nb:Ne,:] = Y0 + np.tile(v[i,:],(N,1)) #build extended pt set
 
         # sum the moments and masses of each "piece" of the Voronoi
         # cells

@@ -49,29 +49,30 @@ def initialise_points(N, bbox, RegularMesh = None):
         T = ma.delaunay_2(Xdens,w);
         Sdens = Periodic_density_in_x(Xdens,f0,T,bbox)
         X = ma.optimized_sampling_2(Sdens,npts,niter=5)
+        X = Sdens.to_fundamental_domain(X)
         x = X[:,0]*L - L
         z = (X[:,1]+0.5)*H
         y = np.array([x,z]).T
     
     #define thetap from CULLEN 2006
-    Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
     theta0 = 300.
     C = 3e-6
-    CP = 8
+    CP = 0.1
+    Nsq = 40/H*g/theta0
 
     buoyancy_stratification = (z-H/2)*Nsq # b = g*theta/theta_0
-    thetap = bouyancy_stratification/g*theta0 + CP*np.sin(np.pi*(x/L + z/H))
+    thetap = buoyancy_stratification/g*theta0 + CP*np.sin(np.pi*(x/L + z/H))
 
     X = x
     Z = g*thetap/theta0/f/f
 
     Y = np.array([X,Z]).T
-    
+
     return Y, thetap
     
-def eady_OT(Y, bbox, dens, verbose = False):
+def eady_OT(Y, bbox, dens, verbose = False, w = np.array([])):
     H = bbox[3]
 
     #initialise discrete target density, uniform over
@@ -80,15 +81,25 @@ def eady_OT(Y, bbox, dens, verbose = False):
     nu = np.ones(nx)
     nu = (dens.mass() / np.sum(nu)) * nu
 
-    #initalise weights to ensure positive cell mass
-    w = 0.*Y[:,0]
-    Z = Y[:,1]
-    mask = Z>0.9*H
-    w[mask] = (Z[mask] - 0.9*H)**2
-    mask = Z<0.1*H
-    w[mask] = (Z[mask] - 0.1*H)**2
-    
-    w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g = 1.e-5,verbose=False)
+    if len(w)>0:
+        print('trying guess')
+        [f,m,g,Hs] = dens.kantorovich(Y, nu, w)
+        eps0 = np.min(m)
+        if eps0 < 1e-10:
+            w = np.array([])
+
+    if len(w)==0:
+        print(w,'making standard guess')
+        #initalise weights to ensure positive cell mass
+        w = 0.*Y[:,0]
+        Z = Y[:,1]
+        mask = np.where(Z>0.9999*H)
+        w[mask] = (Z[mask] - 0.9999*H)**2
+        mask = np.where(Z<0.0001*H)
+        w[mask] = (Z[mask] - 0.0001*H)**2
+
+    print(w)
+    w = ma.optimal_transport_2(dens,Y,nu, w0=w, eps_g = 1.e-7,verbose=True)
     return w
 
 def forward_euler_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = None):
@@ -112,10 +123,10 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = N
     
     H = bbox[3]
     L = bbox[2]
-    Nsq = 2.5e-5
     g = 10.
     f = 1.e-4
     theta0 = 300
+    Nsq = 40/H*g/theta0
     C = 3e-6
 
     N = int(np.ceil((tf-t0)/h))
@@ -145,7 +156,7 @@ def forward_euler_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = N
 
         #find centroids of laguerre cells for use in time-stepping
         [Yc, m] = dens.lloyd(Y, w)
-
+        
         if n == N:
             break
         
@@ -214,13 +225,14 @@ def heun_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = None):
         thetap.tofile(thetapdir+'/thetap_'+str(0)+'.txt',sep=" ",format="%s")
 
     #pr.enable() #enable for performance testing
+    w = np.array([])
     for n in range(0,N+1):
         #find weights (psi) that solve OT problem
-        w = eady_OT(Y, bbox, dens)
+        w = eady_OT(Y, bbox, dens, w=w)
         
         #find centroids of laguerre cells for use in time-stepping
         [Yc, m] = dens.lloyd(Y, w)
-
+        print(np.abs((m-np.mean(m))).max(), 'masses 1')        
         if add_data:
             w.tofile(weightsdir+'/weights_'+str(n)+'.txt',sep = " ",format = "%s")
 
@@ -231,8 +243,9 @@ def heun_sg(Y, dens, tf, bbox, newdir=None, h=1800, t0=0., add_data = None):
         Yn[:,1] = Y[:,1] + h*C*g/f/theta0*(Y[:,0] - Yc[:,0])
         Yn[:,0] = Y[:,0] + h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.)
         Yn = dens.to_fundamental_domain(Yn)
-        w = eady_OT(Yn, bbox, dens)
+        w = eady_OT(Yn, bbox, dens, w=w)
         [Ycent, m] = dens.lloyd(Yn, w)
+        print(np.abs((m-np.mean(m))).max(), 'masses 2')
         Y[:,1] = Y[:,1] + 0.5*h*C*g/f/theta0*(Y[:,0] - Yc[:,0]) + 0.5*h*C*g/f/theta0*(Yn[:,0] - Ycent[:,0])
         Y[:,0] = Y[:,0] + 0.5*h*C*g/f/theta0*(Yc[:,1] - H*np.ones(Yc[:,1].size)/2.) + 0.5*h*C*g/f/theta0*(Ycent[:,1] - H*np.ones(Ycent[:,1].size)/2.)
 

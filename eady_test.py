@@ -16,6 +16,6 @@ days = 22         # number of days
 N = 60            # grid points
 tstepsize = 1800. # stepsize
 
-#print(frontogenesis_timestep(N, days, tstepsize, Heun))
+print(frontogenesis_timestep(N, days, tstepsize, Heun))
 
 print(validity_analysis_results(N, days, tstepsize, 0., Heun))

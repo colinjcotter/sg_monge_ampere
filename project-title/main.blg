@@ -1,4 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
 The style file: unsrt.bst
 Database file #1: bibs/MSc_Project.bib
 Warning--I didn't find a database entry for "fig:surfacepressure"
@@ -8,4 +10,45 @@ Warning--empty journal in Merigot2017
 Warning--empty journal in McWilliams2006
 Warning--can't use both volume and number fields in Griffiths2010
 Warning--empty publisher in Griffiths2010
+You've used 27 entries,
+            1791 wiz_defined-function locations,
+            631 strings with 7394 characters,
+and the built_in function-call counts, 5516 in all, are:
+= -- 511
+> -- 173
+< -- 4
++ -- 72
+- -- 45
+* -- 352
+:= -- 847
+add.period$ -- 77
+call.type$ -- 27
+change.case$ -- 24
+chr.to.int$ -- 0
+cite$ -- 33
+duplicate$ -- 245
+empty$ -- 588
+format.name$ -- 45
+if$ -- 1221
+int.to.chr$ -- 0
+int.to.str$ -- 27
+missing$ -- 25
+newline$ -- 133
+num.names$ -- 27
+pop$ -- 90
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 115
+stack$ -- 0
+substring$ -- 414
+swap$ -- 46
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 6
+while$ -- 59
+width$ -- 29
+write$ -- 276
 (There were 7 warnings)

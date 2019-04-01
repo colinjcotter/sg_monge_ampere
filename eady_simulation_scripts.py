@@ -33,7 +33,7 @@ def frontogenesis_timestep(N, days, tstepsize, Heun = None):
     dens = pdx.Periodic_density_in_x(Xdens,f0,T,bbox)
     
     #initialise points in geostrophic space
-    [Y, thetap] = initialise_points(N, bbox, RegularMesh = True)
+    [Y, thetap] = initialise_points(N, bbox, RegularMesh = False)
     Y = dens.to_fundamental_domain(Y)
     
     if Heun:
@@ -108,8 +108,10 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
     ke = np.zeros((int(w.size),2))
     vg = np.zeros((int(w.size),2))
     t = np.array([t0 + n*h for n in range(N+1)])
+
+    Ndump = 100
     
-    for n in range(0,N+1):
+    for n in range(0,N+1, Ndump):
         print(n,N)
         try:
             Y = np.fromfile(resultdir+'/points_results_'+str(int(h))+'/points_'+str(n)+'.txt', sep = " ")
@@ -120,19 +122,24 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
             break
         
         #Plots
-        C = Y[:,0].reshape((l,1))
+        C = Y[:,1].reshape((l,1))
         print(C.shape, w.shape)
         img = periodic_laguerre_diagram_to_image(pdens,Y,w,C,bbox,100,100)
-        plt.pcolor(img.T)
+        plt.pcolor(img)
         plt.savefig(plotsdir+'/c_'+str(n)+'.jpg')
-        
+
+        plt.clf()
+        plt.plot(Y[:,0], Y[:,1], '.')
+        plt.savefig(plotsdir+'/Y_'+str(n)+'.jpg')
+        plt.clf()
+
         #calculate centroids and mass of cells
         [Yc, m] = dens.lloyd(Y, w)
         mtile = np.tile(m,(2,1)).T
-        
+
         #calculate second moments to find KE and maximum of vg
         [m1, I] = dens.moments(Y, w)
-        
+
         #find kinetic energy, maximum value of vg and total energy
         ke[:,0] = 0.5*f*f*(m*Y[:,0]**2 - 2*Y[:,0]*m1[:,0] + I[:,0])
         vg[:,0] = f*(Y[:,0] - Yc[:,0])
@@ -151,13 +158,13 @@ def validity_analysis_results(N, days, tstepsize, t0 = 0., Heun = None):
         PE[n] = np.sum(pe)
         vgmax[n] = np.amax(vg[:,0])
         
-        energy.tofile(datadir+'/energy.txt',sep = " ",format = "%s")
-        KEmean.tofile(datadir+'/KEmean.txt',sep = " ",format = "%s")
-        vgmax.tofile(datadir+'/vgmax.txt',sep = " ",format = "%s")
-        t.tofile(datadir+'/time.txt',sep = " ",format = "%s")
-        PE.tofile(datadir+'/PE.txt',sep = " ",format = "%s")
-        KE.tofile(datadir+'/KE.txt',sep = " ",format = "%s")
-        rmsv.tofile(datadir+'/rmsv.txt',sep = " ",format = "%s")
+    energy.tofile(datadir+'/energy.txt',sep = " ",format = "%s")
+    KEmean.tofile(datadir+'/KEmean.txt',sep = " ",format = "%s")
+    vgmax.tofile(datadir+'/vgmax.txt',sep = " ",format = "%s")
+    t.tofile(datadir+'/time.txt',sep = " ",format = "%s")
+    PE.tofile(datadir+'/PE.txt',sep = " ",format = "%s")
+    KE.tofile(datadir+'/KE.txt',sep = " ",format = "%s")
+    rmsv.tofile(datadir+'/rmsv.txt',sep = " ",format = "%s")
         
     return('complete results '+str(days)+'D_'+str(N)+'N_'+str(int(tstepsize)))
         
